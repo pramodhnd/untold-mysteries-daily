@@ -1,0 +1,231 @@
+{
+ "id": "roopkund_long",
+ "format": "landscape",
+ "title": "The Lake of Skeletons: What DNA Revealed About Roopkund",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "scenes": [
+  {
+   "scene": "cold_open_storm",
+   "recon": true,
+   "lines": [
+    "Somewhere above five thousand metres, a long line of travellers is climbing towards a sacred mountain.",
+    "The air is thin. The path is narrow. And the sky is turning black.",
+    "Within minutes, hailstones the size of cricket balls begin to fall.",
+    "There is nowhere to hide.",
+    "At least, that's how the legend goes."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo": "lake",
+   "chapter": "The Lake of Skeletons",
+   "label": "ROOPKUND, UTTARAKHAND",
+   "lines": [
+    "This is Roopkund, a small glacial lake in the Indian state of Uttarakhand, high in the Himalayas.",
+    "It lies at the foot of two giant peaks, Trishul and Nanda Ghunti, on the edge of one of India's most remote mountain regions.",
+    "It sits at about five thousand and twenty metres, and it's only around forty metres across.",
+    "For most of the year, it is frozen solid and buried under snow."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo": "skeletons",
+   "lines": [
+    "But for about a month, when the ice melts, something appears in the water and along the shore.",
+    "Human bones. Skulls. Leather shoes, rings and glass bangles.",
+    "The remains of more than three hundred people have been found here.",
+    "Some researchers think hundreds more may still lie buried in the ice.",
+    "So who were they? And how did they all end up here?"
+   ]
+  },
+  {
+   "scene": "ranger_1942",
+   "recon": true,
+   "chapter": "The Discovery",
+   "label": "1942",
+   "lines": [
+    "In 1942, a forest ranger named Hari Kishan Madhwal was patrolling this remote part of the mountains.",
+    "When he reached the lake, he found bones everywhere, some of them still frozen into the ice.",
+    "It would take the world more than seventy years, and the tools of modern genetics, to begin to understand what he had found."
+   ]
+  },
+  {
+   "scene": "ww2_theory",
+   "label": "WORLD WAR II",
+   "lines": [
+    "At the time, the world was at war.",
+    "British officials feared these were Japanese soldiers who had secretly crossed into India and died in the mountains.",
+    "But the bones were far too old for that. These people had died centuries earlier."
+   ]
+  },
+  {
+   "scene": "pilgrim_caravan",
+   "recon": true,
+   "chapter": "The Legend",
+   "lines": [
+    "The villagers in the valleys below already had an explanation.",
+    "Their songs tell of King Jasdhaval of Kannauj, who set out on a pilgrimage to the shrine of the goddess Nanda Devi.",
+    "He travelled with his pregnant queen, Balampa, and with servants, musicians and dancers.",
+    "But, the story says, they treated the holy journey like a royal parade. Music, drinking, and dancing on sacred ground."
+   ]
+  },
+  {
+   "scene": "hail_strike",
+   "recon": true,
+   "lines": [
+    "The goddess was angered.",
+    "She sent a storm of iron-hard hail onto the mountain.",
+    "And every member of the royal party died beside the lake."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo": "trek",
+   "label": "THE PILGRIM ROUTE",
+   "lines": [
+    "For centuries, that was the story. And the pilgrimage itself is very real.",
+    "Every twelve years, the Nanda Devi Raj Jat crosses these mountains, a journey of around two hundred and eighty kilometres, led by a sacred four-horned ram.",
+    "Roopkund is one of its stops."
+   ]
+  },
+  {
+   "scene": "skull_evidence",
+   "chapter": "The Science",
+   "label": "SKULL STUDY",
+   "lines": [
+    "Then scientists took a closer look.",
+    "Researchers studying skulls from the lake found short, deep cracks on the top of several heads.",
+    "The injuries looked like blows from round, hard objects, falling from directly above.",
+    "Something like very large hail.",
+    "If this was true, the legend might be more than a legend."
+   ]
+  },
+  {
+   "scene": "carbon_date",
+   "label": "RADIOCARBON DATING",
+   "lines": [
+    "Radiocarbon dating at Oxford University placed the deaths at around 850 AD.",
+    "A hailstorm. A group of travellers. One terrible night. The legend seemed to be true.",
+    "Case closed. Or so everyone thought."
+   ]
+  },
+  {
+   "scene": "dna_lab_wide",
+   "chapter": "The DNA Twist",
+   "label": "2019 STUDY",
+   "lines": [
+    "In 2019, an international team of scientists, including researchers from Harvard and from the Centre for Cellular and Molecular Biology in Hyderabad, published the most detailed study yet.",
+    "They sequenced the DNA of thirty-eight skeletons from the lake.",
+    "And the results surprised everyone."
+   ]
+  },
+  {
+   "scene": "groups_chart",
+   "label": "38 SKELETONS",
+   "lines": [
+    "Twenty-three of them had ancestry typical of people from South Asia today.",
+    "Fourteen had ancestry typical of the eastern Mediterranean, closest to people from mainland Greece and Crete.",
+    "And one individual had ancestry linked to Southeast Asia."
+   ]
+  },
+  {
+   "scene": "two_eras",
+   "label": "RADIOCARBON DATES",
+   "lines": [
+    "Then came the dates.",
+    "The South Asian group died around 800 AD, and perhaps not all at once.",
+    "But the Mediterranean group, and the Southeast Asian individual, died around 1800.",
+    "A thousand years later.",
+    "So this was never one disaster. Different people died here, at different times, a thousand years apart.",
+    "For a thousand years, the same frozen lake kept collecting the dead."
+   ]
+  },
+  {
+   "scene": "diet_cards",
+   "label": "CHEMICAL CLUES",
+   "lines": [
+    "Chemical traces in their bones even showed they ate differently.",
+    "The Mediterranean group lived mostly on crops like wheat and barley, while the South Asian group had a more varied diet."
+   ]
+  },
+  {
+   "scene": "route_map_wide",
+   "chapter": "Who Were They?",
+   "lines": [
+    "Which leaves the strangest question of all.",
+    "What were people with Greek and Cretan ancestry doing at a remote Himalayan lake, around the year 1800?",
+    "The researchers suggest they may have been born in the eastern Mediterranean, during the period of Ottoman rule.",
+    "But no record has ever been found of such a group travelling here."
+   ]
+  },
+  {
+   "scene": "theories",
+   "lines": [
+    "Were they travellers who joined a Hindu pilgrimage?",
+    "Traders lost on a mountain crossing?",
+    "Or a community that had settled in the region, and was simply never written about?",
+    "Nobody knows. And the scientists admit it."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo": "lake_today",
+   "chapter": "The Lake Today",
+   "lines": [
+    "Today, the evidence itself is disappearing.",
+    "For decades, trekkers and visitors carried bones away as souvenirs.",
+    "Local authorities have warned that the remains must be protected, and the trek was closed for years to protect the fragile mountain meadows."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo": "village",
+   "label": "SEPTEMBER 2026",
+   "lines": [
+    "And this month, in September 2026, a Nanda Devi pilgrimage is once again winding through these mountains.",
+    "Walking the same path. Past the same lake.",
+    "The goddess is carried in a decorated palanquin, and villagers walk for weeks, singing the old songs of the goddess."
+   ]
+  },
+  {
+   "scene": "outro_long",
+   "lines": [
+    "So, who really died at Roopkund?",
+    "A proud king and his court? Lost travellers from the Mediterranean? Or people history simply forgot?",
+    "Tell me your theory in the comments.",
+    "And subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "The Lake of Skeletons: What DNA Revealed About Roopkund",
+  "description": "High in the Himalayas, at 5,020 metres, a small frozen lake hides the remains of more than 300 people. For decades, the legend said they all died in one hailstorm. Then, in 2019, DNA told a very different story.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations of events described in local legend and historical accounts.\n\nSOURCES\nHarney et al. (2019), Ancient DNA from the skeletons of Roopkund Lake reveals Mediterranean migrants in India, Nature Communications 10, 3670\nWikipedia: Roopkund; Nanda Devi Raj Jat\nIndiahikes: Roopkund Lake Mystery\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#Roopkund",
+   "#SkeletonLake",
+   "#Mystery",
+   "#Uttarakhand",
+   "#History",
+   "#UnsolvedMysteries"
+  ],
+  "tags": [
+   "roopkund",
+   "skeleton lake",
+   "roopkund documentary",
+   "ancient dna",
+   "himalayas",
+   "nanda devi raj jat",
+   "unsolved mysteries"
+  ],
+  "synthetic": true
+ },
+ "thumbnail": {
+  "line1": "LAKE OF",
+  "line2": "SKELETONS",
+  "badge": "DNA: 1,000 YEARS APART",
+  "sub": "300+ bodies. Who were they?",
+  "scene": "ranger_1942"
+ }
+}

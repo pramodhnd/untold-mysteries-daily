@@ -1,0 +1,753 @@
+"""Illustrated scene library. Every scene is drawn from code: original art, no stock or AI-video costs.
+
+Each builder returns (background RGB image in design space 1080x1920, overlay function).
+overlay(img, draw, t, u, cam, ctx): draws animated parts on the camera-transformed frame.
+  t = seconds into scene, u = 0..1 progress, cam.map(x, y) maps design coords to frame coords,
+  ctx["lines"] = line start times relative to the scene.
+"""
+import math
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+import os as _os
+
+
+def _font_path(name, system_dir):
+    here = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "assets", "fonts", name)
+    return here if _os.path.exists(here) else _os.path.join(system_dir, name)
+
+
+
+W, H = 1080, 1920
+NAVY = (9, 16, 28)
+DEEP = (14, 28, 44)
+TEAL = (26, 60, 74)
+STEEL = (58, 82, 96)
+FOAM = (200, 220, 225)
+AMBER = (255, 184, 82)
+WARM = (255, 214, 150)
+BONE = (232, 224, 204)
+INK = (6, 9, 14)
+RED = (196, 44, 40)
+FONT_BOLD = _font_path("Poppins-Bold.ttf", "/usr/share/fonts/truetype/google-fonts")
+FONT_HAND = _font_path("Lora-Italic-Variable.ttf", "/usr/share/fonts/truetype/google-fonts")
+
+
+# ---------- helpers ----------
+def vgrad(stops, w=W, h=H):
+    ys = np.linspace(0, 1, h)
+    pos = [p for p, _ in stops]
+    cols = np.array([c for _, c in stops], dtype=float)
+    ch = [np.interp(ys, pos, cols[:, i]) for i in range(3)]
+    arr = np.stack(ch, axis=1)[:, None, :].repeat(w, axis=1)
+    return Image.fromarray(arr.astype(np.uint8), "RGB")
+
+
+def radial(img, cx, cy, r, color, strength=0.6):
+    w, h = img.size
+    yy, xx = np.mgrid[0:h, 0:w]
+    d = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2) / r
+    m = np.clip(1 - d, 0, 1) ** 2 * strength
+    a = np.asarray(img).astype(float)
+    a = a * (1 - m[..., None]) + np.array(color, float) * m[..., None]
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8), "RGB")
+
+
+def soft_layer(base, fn, radius):
+    lay = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    fn(ImageDraw.Draw(lay))
+    lay = lay.filter(ImageFilter.GaussianBlur(radius))
+    out = base.convert("RGBA")
+    out.alpha_composite(lay)
+    return out.convert("RGB")
+
+
+def clouds(base, rng, n, y0, y1, color, alpha, radius=40):
+    def fn(d):
+        for _ in range(n):
+            x = rng.uniform(-100, W + 100)
+            y = rng.uniform(y0, y1)
+            rx, ry = rng.uniform(120, 320), rng.uniform(40, 110)
+            d.ellipse([x - rx, y - ry, x + rx, y + ry], fill=color + (alpha,))
+    return soft_layer(base, fn, radius)
+
+
+def stars(base, rng, n, ymax):
+    d = ImageDraw.Draw(base)
+    for _ in range(n):
+        x, y = rng.uniform(0, W), rng.uniform(0, ymax)
+        b = int(rng.uniform(90, 200))
+        r = rng.choice([1, 1, 1.5, 2])
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(b, b, min(255, b + 20)))
+    return base
+
+
+def island(d, rng, cx, top, width, base_y, color):
+    pts = [(cx - width / 2 - 80, base_y)]
+    steps = 14
+    for i in range(steps + 1):
+        x = cx - width / 2 + width * i / steps
+        edge = abs(i - steps / 2) / (steps / 2)
+        y = top + (edge ** 2.2) * (base_y - top) * 0.85 + rng.uniform(-14, 14)
+        pts.append((x, y))
+    pts.append((cx + width / 2 + 80, base_y))
+    d.polygon(pts, fill=color)
+
+
+def lighthouse(d, x, base_y, h, lit=True):
+    """Draw tower; return lamp centre (design coords)."""
+    bw, tw = h * 0.20, h * 0.13
+    top_y = base_y - h
+    d.polygon([(x - bw / 2, base_y), (x + bw / 2, base_y), (x + tw / 2, top_y), (x - tw / 2, top_y)], fill=(210, 205, 195))
+    for k in range(3):  # dark bands
+        y0 = base_y - h * (0.25 + k * 0.27)
+        y1 = y0 - h * 0.11
+        f0 = (base_y - y0) / h
+        f1 = (base_y - y1) / h
+        w0 = bw + (tw - bw) * f0
+        w1 = bw + (tw - bw) * f1
+        d.polygon([(x - w0 / 2, y0), (x + w0 / 2, y0), (x + w1 / 2, y1), (x - w1 / 2, y1)], fill=(60, 64, 72))
+    d.rectangle([x - tw * 0.75, top_y - 8, x + tw * 0.75, top_y + 4], fill=(40, 44, 50))
+    lamp_h = h * 0.12
+    glass = WARM if lit else (70, 80, 88)
+    d.rectangle([x - tw * 0.45, top_y - 8 - lamp_h, x + tw * 0.45, top_y - 8], fill=glass)
+    d.polygon([(x - tw * 0.6, top_y - 8 - lamp_h), (x + tw * 0.6, top_y - 8 - lamp_h), (x, top_y - 8 - lamp_h - h * 0.08)], fill=(40, 44, 50))
+    return (x, top_y - 8 - lamp_h / 2)
+
+
+def keeper_house(d, x, base_y, w, h, color, window=None):
+    d.rectangle([x, base_y - h, x + w, base_y], fill=color)
+    d.polygon([(x - 10, base_y - h), (x + w + 10, base_y - h), (x + w / 2, base_y - h - h * 0.5)], fill=color)
+    if window:
+        d.rectangle([x + w * 0.2, base_y - h * 0.65, x + w * 0.38, base_y - h * 0.35], fill=window)
+
+
+def sea(draw, cam, t, y, amp, wl, speed, color, phase=0.0):
+    pts = []
+    for i in range(-2, 50):
+        x = i * W / 46
+        yy = y + amp * math.sin((x / wl) * 2 * math.pi + t * speed + phase) \
+            + amp * 0.4 * math.sin((x / (wl * 0.37)) * 2 * math.pi - t * speed * 1.7 + phase)
+        pts.append(cam.map(x, yy))
+    pts += [(W + 50, H + 50), (-50, H + 50)]
+    draw.polygon(pts, fill=color)
+
+
+def rain(draw, t, rng_seed, n=140, color=(170, 190, 200), slant=0.28, speed=2600):
+    rng = np.random.default_rng(rng_seed)
+    xs = rng.uniform(-200, W + 200, n)
+    ys = rng.uniform(0, H, n)
+    ls = rng.uniform(30, 70, n)
+    for x, y, l in zip(xs, ys, ls):
+        fall = (y + speed * t) % (H + 100)
+        yy = fall - 50
+        xx = x - slant * fall
+        draw.line([(xx, yy), (xx - slant * l, yy + l)], fill=color + (110,), width=2)
+
+
+def dust(draw, t, seed, n=40, color=(255, 230, 190)):
+    rng = np.random.default_rng(seed)
+    for _ in range(n):
+        x0, y0 = rng.uniform(0, W), rng.uniform(200, 1500)
+        sp = rng.uniform(8, 25)
+        x = x0 + 30 * math.sin(t * 0.4 + x0)
+        y = (y0 - sp * t) % 1500 + 200
+        r = rng.uniform(1.5, 3.5)
+        draw.ellipse([x - r, y - r, x + r, y + r], fill=color + (int(rng.uniform(40, 110)),))
+
+
+def figure_run(draw, x, y, s, color, phase):
+    """Running silhouette; (x, y) = feet level, s = height."""
+    sw = math.sin(phase)
+    head = (x + s * 0.06, y - s * 0.92)
+    r = s * 0.075
+    draw.ellipse([head[0] - r, head[1] - r, head[0] + r, head[1] + r], fill=color)
+    hip = (x, y - s * 0.48)
+    neck = (x + s * 0.05, y - s * 0.82)
+    lw = int(s * 0.07)
+    draw.line([hip, neck], fill=color, width=int(s * 0.14))
+    # legs
+    for k in (1, -1):
+        a = sw * 0.7 * k
+        knee = (hip[0] + math.sin(a) * s * 0.26, hip[1] + math.cos(a) * s * 0.24)
+        foot = (knee[0] + math.sin(a - 0.6 * k * (1 if a > 0 else -1)) * s * 0.24 - s * 0.05 * k, y - max(0, k * sw) * s * 0.05)
+        draw.line([hip, knee, foot], fill=color, width=lw, joint="curve")
+    # arms
+    for k in (1, -1):
+        a = -sw * 0.8 * k
+        elbow = (neck[0] + math.sin(a) * s * 0.2, neck[1] + s * 0.16)
+        hand = (elbow[0] + math.sin(a + 0.8) * s * 0.16, elbow[1] + s * 0.06)
+        draw.line([neck, elbow, hand], fill=color, width=int(lw * 0.8), joint="curve")
+
+
+def figure_stand(draw, x, y, s, color):
+    r = s * 0.08
+    draw.ellipse([x - r, y - s * 0.92 - r, x + r, y - s * 0.92 + r], fill=color)
+    draw.polygon([(x - s * 0.14, y - s * 0.82), (x + s * 0.14, y - s * 0.82), (x + s * 0.18, y - s * 0.35), (x - s * 0.18, y - s * 0.35)], fill=color)
+    draw.rectangle([x - s * 0.12, y - s * 0.36, x - s * 0.02, y], fill=color)
+    draw.rectangle([x + s * 0.02, y - s * 0.36, x + s * 0.12, y], fill=color)
+
+
+def steamship(d, x, y, s, color, smoke=None):
+    d.polygon([(x - s, y - s * 0.12), (x + s, y - s * 0.12), (x + s * 0.85, y + s * 0.1), (x - s * 0.9, y + s * 0.1)], fill=color)
+    d.rectangle([x - s * 0.45, y - s * 0.32, x + s * 0.25, y - s * 0.12], fill=color)
+    d.rectangle([x - s * 0.1, y - s * 0.62, x + s * 0.02, y - s * 0.3], fill=color)
+    d.line([(x + s * 0.55, y - s * 0.12), (x + s * 0.55, y - s * 0.75)], fill=color, width=max(2, int(s * 0.025)))
+    d.line([(x - s * 0.7, y - s * 0.12), (x - s * 0.7, y - s * 0.6)], fill=color, width=max(2, int(s * 0.025)))
+
+
+# ---------- scenes ----------
+def lighthouse_night(rng):
+    bg = vgrad([(0, NAVY), (0.45, DEEP), (0.62, TEAL), (1, DEEP)])
+    bg = stars(bg, rng, 120, 700)
+    bg = clouds(bg, rng, 14, 150, 750, (70, 95, 110), 90, 45)
+    d = ImageDraw.Draw(bg)
+    island(d, rng, 560, 930, 700, 1300, (16, 22, 28))
+    keeper_house(d, 640, 960, 150, 70, (22, 28, 34), window=(120, 90, 50))
+    lamp = lighthouse(d, 520, 975, 330, lit=True)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        lx, ly = cam.map(*lamp)
+        beam = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        bd = ImageDraw.Draw(beam)
+        ang = t * 0.9
+        for wdeg, a in [(0.12, 26), (0.07, 34), (0.03, 60)]:
+            for side in (0, math.pi):
+                a0 = ang + side
+                L = 1600
+                p1 = (lx + L * math.cos(a0 - wdeg), ly + L * 0.28 * math.sin(a0 - wdeg))
+                p2 = (lx + L * math.cos(a0 + wdeg), ly + L * 0.28 * math.sin(a0 + wdeg))
+                bd.polygon([(lx, ly), p1, p2], fill=WARM + (a,))
+        r = 34
+        bd.ellipse([lx - r, ly - r, lx + r, ly + r], fill=WARM + (120,))
+        img.alpha_composite(beam)
+        d2 = ImageDraw.Draw(img)
+        sea(d2, cam, t, 1235, 16, 360, 1.3, (18, 44, 56))
+        sea(d2, cam, t, 1300, 22, 300, 1.7, (12, 30, 42), 1.0)
+        rain(d2, t, 11, n=90)
+    return bg, overlay
+
+
+def ship_passing(rng):
+    bg = vgrad([(0, NAVY), (0.5, (20, 34, 48)), (0.66, (30, 58, 70)), (1, DEEP)])
+    bg = clouds(bg, rng, 16, 100, 900, (60, 80, 92), 110, 50)
+    d = ImageDraw.Draw(bg)
+    island(d, rng, 830, 1030, 360, 1210, (18, 24, 30))
+    lighthouse(d, 820, 1060, 170, lit=False)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        sea(d2, cam, t, 1180, 12, 420, 1.0, (22, 48, 60))
+        sx = -150 + u * 760
+        x, y = cam.map(sx, 1175)
+        steamship(d2, x, y, 150 * cam.k, (8, 12, 18))
+        # ship's lamp + dark question at lighthouse
+        d2.ellipse([x + 60 * cam.k - 6, y - 70 * cam.k - 6, x + 60 * cam.k + 6, y - 70 * cam.k + 6], fill=AMBER)
+        # smoke puffs
+        for i in range(6):
+            px = x - 10 * cam.k - i * 45 * cam.k
+            py = y - 95 * cam.k - i * 22 * cam.k - 8 * math.sin(t * 2 + i)
+            r = (18 + i * 9) * cam.k
+            d2.ellipse([px - r, py - r, px + r, py + r], fill=(40, 52, 62, max(0, 150 - i * 22)))
+        sea(d2, cam, t, 1245, 18, 330, 1.5, (14, 34, 46), 0.7)
+        rain(d2, t, 5, n=60)
+    return bg, overlay
+
+
+def relief_boat(rng):
+    bg = vgrad([(0, (40, 52, 62)), (0.5, (78, 92, 100)), (0.64, (60, 80, 88)), (1, (24, 40, 50))])
+    bg = clouds(bg, rng, 18, 80, 800, (110, 122, 128), 90, 50)
+    d = ImageDraw.Draw(bg)
+    # cliff wall on the right with landing steps
+    d.polygon([(560, 1250), (600, 760), (700, 640), (1080, 600), (1080, 1300)], fill=(26, 32, 36))
+    for i in range(9):
+        y = 1180 - i * 52
+        d.rectangle([610 + i * 16, y, 690 + i * 16, y + 12], fill=(70, 74, 72))
+    lighthouse(d, 900, 650, 230, lit=False)
+    keeper_house(d, 760, 660, 110, 60, (34, 40, 44))
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        sea(d2, cam, t, 1215, 10, 400, 1.1, (40, 66, 76))
+        bx = 120 + u * 260
+        x, y = cam.map(bx, 1210)
+        s = (95 + u * 40) * cam.k
+        steamship(d2, x, y, s, (14, 18, 22))
+        sea(d2, cam, t, 1270, 14, 300, 1.4, (26, 48, 58), 2.0)
+    return bg, overlay
+
+
+def interior(rng):
+    bg = vgrad([(0, (26, 22, 20)), (0.7, (44, 36, 30)), (1, (20, 16, 14))])
+    d = ImageDraw.Draw(bg)
+    # floor
+    d.rectangle([0, 1350, W, H], fill=(30, 24, 20))
+    for i in range(12):
+        d.line([(i * 100, 1350), (i * 100 - 200, H)], fill=(22, 18, 15), width=4)
+    # door (closed)
+    d.rectangle([120, 520, 470, 1350], fill=(62, 44, 32))
+    for yy in (580, 960):
+        d.rectangle([160, yy, 430, yy + 320], outline=(44, 30, 22), width=10)
+    d.ellipse([420, 930, 446, 956], fill=(170, 140, 80))
+    # clock
+    cx, cy, r = 780, 520, 120
+    d.ellipse([cx - r - 14, cy - r - 14, cx + r + 14, cy + r + 14], fill=(70, 48, 30))
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(222, 212, 188))
+    for k in range(12):
+        a = k / 12 * 2 * math.pi
+        d.line([(cx + math.sin(a) * r * 0.82, cy - math.cos(a) * r * 0.82), (cx + math.sin(a) * r * 0.95, cy - math.cos(a) * r * 0.95)], fill=(40, 30, 24), width=6)
+    # stopped hands
+    d.line([(cx, cy), (cx + math.sin(2.2) * r * 0.5, cy - math.cos(2.2) * r * 0.5)], fill=(30, 24, 20), width=10)
+    d.line([(cx, cy), (cx + math.sin(5.6) * r * 0.75, cy - math.cos(5.6) * r * 0.75)], fill=(30, 24, 20), width=6)
+    # bed (unmade)
+    d.rectangle([560, 1060, 1080, 1360], fill=(52, 38, 28))
+    blanket = [(560, 1080)]
+    for i in range(13):
+        x = 560 + i * 45
+        blanket.append((x, 1040 + (22 if i % 2 else -10) + rng.uniform(-8, 8)))
+    blanket += [(1080, 1030), (1080, 1300), (600, 1310), (570, 1200)]
+    d.polygon(blanket, fill=(140, 130, 112))
+    d.ellipse([900, 990, 1060, 1070], fill=(200, 192, 176))
+    bg = radial(bg, 760, 700, 800, (255, 200, 140), 0.18)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        dust(ImageDraw.Draw(img), t, 3)
+    return bg, overlay
+
+
+def coats(rng):
+    bg = vgrad([(0, (22, 20, 20)), (1, (36, 30, 26))])
+    d = ImageDraw.Draw(bg)
+    d.rectangle([140, 560, 940, 620], fill=(70, 50, 34))
+    hooks = [260, 540, 820]
+    for hx in hooks:
+        d.rectangle([hx - 10, 600, hx + 10, 660], fill=(150, 140, 120))
+        d.arc([hx - 30, 630, hx + 10, 690], 0, 180, fill=(150, 140, 120), width=8)
+    # the one coat left behind (yellow oilskin) on the middle hook
+    x = 540
+    coat = [(x - 40, 680), (x + 40, 680), (x + 150, 760), (x + 175, 1180), (x + 110, 1200), (x + 105, 860),
+            (x + 95, 1280), (x - 95, 1280), (x - 105, 860), (x - 110, 1200), (x - 175, 1180), (x - 150, 760)]
+    d.polygon(coat, fill=(214, 160, 40))
+    d.line([(x, 700), (x, 1270)], fill=(160, 110, 24), width=6)
+    for yy in range(760, 1250, 90):
+        d.ellipse([x - 22, yy, x - 8, yy + 14], fill=(120, 84, 20))
+    d.polygon([(x - 40, 680), (x, 760), (x + 40, 680)], fill=(160, 110, 24))
+    # ghost outlines where two coats should be
+    for hx in (260, 820):
+        d.line([(hx - 60, 700), (hx - 110, 1180), (hx + 110, 1180), (hx + 60, 700)], fill=(60, 52, 46), width=4)
+    bg = radial(bg, 540, 900, 700, (255, 220, 160), 0.25)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        dust(ImageDraw.Draw(img), t, 9, n=30)
+    return bg, overlay
+
+
+def running_figure(rng):
+    bg = vgrad([(0, (8, 12, 20)), (0.6, (16, 26, 36)), (1, (10, 16, 22))])
+    bg = clouds(bg, rng, 12, 80, 600, (40, 56, 66), 120, 50)
+    d = ImageDraw.Draw(bg)
+    d.rectangle([0, 1250, W, H], fill=(14, 18, 22))
+    # doorway of the house, left, warm light spilling
+    d.rectangle([40, 600, 360, 1250], fill=(22, 26, 30))
+    d.rectangle([110, 820, 280, 1250], fill=(255, 196, 120))
+    bg = radial(bg, 200, 1200, 520, (255, 190, 110), 0.35)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        # flash of lightning early
+        if 0.9 < t < 1.02:
+            img.alpha_composite(Image.new("RGBA", img.size, (200, 220, 255, 70)))
+        fx = 300 + u * 520
+        x, y = cam.map(fx, 1250)
+        figure_run(d2, x, y, 330 * cam.k, (4, 6, 10), t * 9)
+        rain(d2, t, 21, n=170, speed=3000)
+    return bg, overlay
+
+
+def west_landing(rng):
+    bg = vgrad([(0, (20, 28, 36)), (0.55, (40, 56, 64)), (1, (16, 26, 32))])
+    bg = clouds(bg, rng, 14, 60, 700, (70, 86, 94), 110, 50)
+    d = ImageDraw.Draw(bg)
+    d.polygon([(0, 700), (380, 760), (620, 900), (760, 1260), (0, 1400)], fill=(28, 32, 34))
+    d.polygon([(0, 780), (340, 830), (560, 950), (640, 1100), (0, 1200)], fill=(40, 44, 44))
+    # bent iron railings along the path
+    posts = [(80, 800), (190, 815), (300, 835), (410, 870), (500, 920)]
+    for i, (x, y) in enumerate(posts):
+        lean = [0, 8, 40, 95, 150][i]
+        d.line([(x, y), (x + lean, y - 120 + lean * 0.3)], fill=(110, 110, 104), width=10)
+    rail = [(80, 690), (190, 700), (330, 725), (470, 820), (560, 900)]
+    d.line(rail, fill=(120, 120, 112), width=9, joint="curve")
+    # smashed box: planks scattered
+    for (x, y, a) in [(420, 1010, 0.4), (470, 1060, -0.7), (360, 1080, 1.2), (520, 1000, 2.2)]:
+        L = 110
+        d.line([(x, y), (x + L * math.cos(a), y + L * math.sin(a))], fill=(120, 86, 50), width=22)
+    d.rectangle([250, 1000, 330, 1060], fill=(96, 68, 40))
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        sea(d2, cam, t, 1260, 30, 280, 2.0, (30, 60, 72))
+        # spray bursts against the cliff
+        burst = (t % 2.2) / 2.2
+        for i in range(26):
+            a = -math.pi / 2 + (i - 13) * 0.08
+            rr = burst * (180 + (i % 5) * 50)
+            px, py = cam.map(760 + math.cos(a) * rr * 0.9, 1250 + math.sin(a) * rr)
+            s = 10 + (i % 4) * 5
+            d2.ellipse([px - s, py - s, px + s, py + s], fill=FOAM + (int(180 * (1 - burst)),))
+        sea(d2, cam, t, 1330, 24, 240, 2.4, (18, 40, 52), 1.3)
+    return bg, overlay
+
+
+def giant_wave(rng):
+    bg = vgrad([(0, (10, 14, 22)), (0.6, (24, 38, 48)), (1, (12, 20, 28))])
+    bg = clouds(bg, rng, 10, 60, 500, (50, 64, 74), 100, 50)
+    d = ImageDraw.Draw(bg)
+    d.polygon([(0, 1260), (0, 1120), (260, 1100), (420, 1180), (480, 1300)], fill=(20, 24, 26))
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        # three tiny keepers on the rock
+        for i, fx in enumerate((120, 175, 230)):
+            x, y = cam.map(fx, 1110)
+            figure_stand(d2, x, y, 70 * k, (4, 6, 8))
+        # the wave: rises and curls toward the rock
+        rise = min(1, u * 1.3)
+        base_x = 1180 - rise * 380
+        crest_y = 1300 - rise * 820
+        pts = []
+        for i in range(0, 41):
+            s = i / 40
+            x = base_x - 700 * s
+            y = 1300 - (1300 - crest_y) * math.sin(s * math.pi * 0.62)
+            pts.append((x, y + 10 * math.sin(t * 3 + i)))
+        lip = pts[-1]
+        curl = [(lip[0] - 40 - 140 * rise, lip[1] + 60), (lip[0] - 80 - 160 * rise, lip[1] + 220 * rise)]
+        poly = [(W + 200, 1400), (W + 200, 1300)] + [(p[0], p[1]) for p in pts] + curl + [(lip[0] + 60, lip[1] + 300), (base_x - 100, 1400)]
+        d2.polygon([cam.map(*p) for p in poly], fill=(24, 62, 76))
+        inner = [(p[0] + 40, p[1] + 40) for p in pts[5:]]
+        if len(inner) > 2:
+            d2.line([cam.map(*p) for p in inner], fill=(40, 92, 104), width=int(40 * k))
+        for i, p in enumerate(pts[18:] + curl):
+            fx, fy = cam.map(p[0], p[1])
+            r = (14 + (i % 3) * 8) * k
+            d2.ellipse([fx - r, fy - r, fx + r, fy + r], fill=FOAM + (200,))
+        sea(d2, cam, t, 1330, 20, 260, 2.2, (16, 38, 48))
+        rain(d2, t, 31, n=80)
+    return bg, overlay
+
+
+def logbook(rng):
+    bg = vgrad([(0, (22, 16, 12)), (1, (40, 28, 20))])
+    d = ImageDraw.Draw(bg)
+    for i in range(10):
+        d.line([(0, 300 + i * 150 + rng.uniform(-20, 20)), (W, 320 + i * 150)], fill=(30, 22, 16), width=3)
+    # open book
+    d.polygon([(90, 560), (530, 600), (530, 1330), (70, 1290)], fill=(226, 214, 184))
+    d.polygon([(550, 600), (990, 560), (1010, 1290), (550, 1330)], fill=(232, 220, 190))
+    d.line([(540, 600), (540, 1330)], fill=(160, 144, 116), width=8)
+    font = ImageFont.truetype(FONT_HAND, 40)
+    words = ["Storm", "wind", "never", "seen", "before", "sea", "rough", "Ducat", "quiet", "praying", "God", "over", "all"]
+    for side, x0 in ((0, 120), (1, 590)):
+        for i in range(12):
+            y = 660 + i * 52
+            x = x0
+            while True:
+                w = words[int(rng.integers(len(words)))]
+                if x + font.getlength(w) > x0 + 375:
+                    break
+                d.text((x, y), w, font=font, fill=(60, 50, 44))
+                x += font.getlength(w + " ")
+    bg = radial(bg, 850, 400, 700, (255, 190, 110), 0.3)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        lines = ctx["lines"]
+        show = t >= (lines[2] if len(lines) > 2 else 0.6 * ctx["dur"])
+        if not show:
+            return
+        age = t - (lines[2] if len(lines) > 2 else 0)
+        sc = max(1.0, 1.6 - age * 3)
+        stamp = Image.new("RGBA", (760, 220), (0, 0, 0, 0))
+        sd = ImageDraw.Draw(stamp)
+        sd.rounded_rectangle([8, 8, 752, 212], radius=18, fill=(246, 236, 214, 230), outline=RED + (245,), width=12)
+        f = ImageFont.truetype(FONT_BOLD, 66)
+        sd.text((380, 78), "ADDED DECADES", font=f, fill=RED + (235,), anchor="mm")
+        sd.text((380, 152), "LATER", font=f, fill=RED + (235,), anchor="mm")
+        stamp = stamp.resize((int(760 * sc * cam.k), int(220 * sc * cam.k)))
+        stamp = stamp.rotate(-9, expand=True, resample=Image.BICUBIC)
+        cx, cy = cam.map(540, 930)
+        img.alpha_composite(stamp, (int(cx - stamp.width / 2), int(cy - stamp.height / 2)))
+    return bg, overlay
+
+
+def question(rng):
+    bg = vgrad([(0, (8, 12, 20)), (0.55, (30, 40, 56)), (0.64, (64, 60, 70)), (1, (12, 18, 26))])
+    bg = stars(bg, rng, 90, 600)
+    d = ImageDraw.Draw(bg)
+    island(d, rng, 540, 1170, 520, 1330, (10, 14, 18))
+    lighthouse(d, 520, 1195, 190, lit=False)
+    f = ImageFont.truetype(FONT_BOLD, 460)
+    glow = Image.new("RGBA", bg.size, (0, 0, 0, 0))
+    ImageDraw.Draw(glow).text((540, 560), "?", font=f, fill=AMBER + (160,), anchor="mm")
+    glow = glow.filter(ImageFilter.GaussianBlur(30))
+    bgA = bg.convert("RGBA")
+    bgA.alpha_composite(glow)
+    ImageDraw.Draw(bgA).text((540, 560), "?", font=f, fill=(255, 214, 150, 235), anchor="mm")
+    bg = bgA.convert("RGB")
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        sea(d2, cam, t, 1300, 12, 380, 1.0, (18, 30, 42))
+        lines = ctx["lines"]
+        if len(lines) >= 3 and t >= lines[2]:
+            f2 = ImageFont.truetype(FONT_BOLD, 54)
+            txt = "FOLLOW FOR DAILY MYSTERIES"
+            tw = f2.getlength(txt)
+            x0, y0 = (W - tw) / 2 - 36, 870
+            d2.rounded_rectangle([x0, y0, x0 + tw + 72, y0 + 96], radius=48, fill=(255, 184, 82, 240))
+            d2.text((W / 2, y0 + 48), txt, font=f2, fill=(20, 16, 10), anchor="mm")
+    return bg, overlay
+
+
+SCENES = {f.__name__: f for f in [lighthouse_night, ship_passing, relief_boat, interior, coats,
+                                  running_figure, west_landing, giant_wave, logbook, question]}
+
+
+# ================= Roopkund scenes =================
+ICE = (170, 205, 220)
+SNOW = (225, 234, 240)
+
+
+def mountains(d, rng, base_y, peaks, color, snow=SNOW, height=(350, 600)):
+    xs = np.linspace(-100, W + 100, peaks)
+    pts = [(-100, base_y)]
+    tops = []
+    for i, x in enumerate(xs):
+        top = base_y - rng.uniform(*height)
+        pts.append((x + rng.uniform(-40, 40), top))
+        tops.append((pts[-1][0], top))
+        if i < len(xs) - 1:
+            pts.append(((x + xs[i + 1]) / 2, base_y - rng.uniform(80, 200)))
+    pts.append((W + 100, base_y))
+    d.polygon(pts, fill=color)
+    for (x, top) in tops:
+        h = rng.uniform(70, 120)
+        d.polygon([(x, top), (x - h * 0.8, top + h), (x - h * 0.3, top + h * 0.8), (x, top + h * 1.1),
+                   (x + h * 0.4, top + h * 0.75), (x + h * 0.8, top + h)], fill=snow)
+
+
+def skull(d, x, y, s, col=(222, 214, 196), dark=(30, 30, 34)):
+    d.ellipse([x - s, y - s, x + s, y + s * 0.9], fill=col)
+    d.rounded_rectangle([x - s * 0.55, y + s * 0.5, x + s * 0.55, y + s * 1.2], radius=int(s * 0.2), fill=col)
+    for k in (-1, 1):
+        d.ellipse([x + k * s * 0.42 - s * 0.26, y - s * 0.05, x + k * s * 0.42 + s * 0.26, y + s * 0.42], fill=dark)
+    d.polygon([(x, y + s * 0.45), (x - s * 0.12, y + s * 0.68), (x + s * 0.12, y + s * 0.68)], fill=dark)
+    for k in range(-2, 3):
+        d.line([(x + k * s * 0.18, y + s * 0.85), (x + k * s * 0.18, y + s * 1.15)], fill=dark, width=max(2, int(s * 0.05)))
+
+
+def bone(d, x, y, L, a, col=(214, 206, 188), w=10):
+    x2, y2 = x + L * math.cos(a), y + L * math.sin(a)
+    d.line([(x, y), (x2, y2)], fill=col, width=w)
+    for (px, py) in ((x, y), (x2, y2)):
+        for o in (-1, 1):
+            ox, oy = -math.sin(a) * w * 0.55 * o, math.cos(a) * w * 0.55 * o
+            d.ellipse([px + ox - w * 0.6, py + oy - w * 0.6, px + ox + w * 0.6, py + oy + w * 0.6], fill=col)
+
+
+def snowfall(draw, t, seed, n=110, speed=90):
+    rng = np.random.default_rng(seed)
+    for _ in range(n):
+        x0, y0 = rng.uniform(0, W), rng.uniform(0, H)
+        r = rng.uniform(2, 6)
+        y = (y0 + speed * t * (r / 4)) % H
+        x = x0 + 25 * math.sin(t * 0.8 + y0)
+        draw.ellipse([x - r, y - r, x + r, y + r], fill=(240, 245, 250, int(rng.uniform(120, 220))))
+
+
+def himalaya_lake(rng):
+    bg = vgrad([(0, (12, 20, 40)), (0.4, (40, 60, 92)), (0.55, (120, 130, 150)), (1, (36, 44, 56))])
+    bg = stars(bg, rng, 80, 400)
+    d = ImageDraw.Draw(bg)
+    mountains(d, rng, 1000, 6, (46, 56, 74), height=(380, 620))
+    mountains(d, rng, 1080, 7, (30, 38, 52), snow=(190, 204, 214), height=(200, 380))
+    d.rectangle([0, 1060, W, H], fill=(58, 66, 74))
+    d.ellipse([90, 1080, 990, 1330], fill=ICE)
+    d.ellipse([160, 1110, 920, 1300], fill=(150, 190, 208))
+    for _ in range(26):  # bones on the shore
+        x = rng.uniform(80, 1000)
+        y = rng.choice([rng.uniform(1300, 1420), rng.uniform(1050, 1100)])
+        bone(d, x, y, rng.uniform(26, 50), rng.uniform(0, 3.14), w=7)
+    for _ in range(6):
+        skull(d, rng.uniform(120, 960), rng.uniform(1320, 1430), 16)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        snowfall(ImageDraw.Draw(img), t, 4, n=80)
+    return bg, overlay
+
+
+def bones_close(rng):
+    bg = vgrad([(0, (60, 70, 82)), (1, (30, 36, 44))])
+    d = ImageDraw.Draw(bg)
+    for _ in range(40):  # rocks
+        x, y, r = rng.uniform(-50, W + 50), rng.uniform(500, 1600), rng.uniform(40, 120)
+        g = int(rng.uniform(50, 80))
+        d.ellipse([x - r, y - r * 0.7, x + r, y + r * 0.7], fill=(g, g + 6, g + 12))
+    d.polygon([(0, 1250), (W, 1180), (W, H), (0, H)], fill=(150, 186, 200))
+    for _ in range(18):
+        bone(d, rng.uniform(100, 980), rng.uniform(700, 1150), rng.uniform(60, 140), rng.uniform(0, 3.14), w=16)
+    skull(d, 380, 860, 90)
+    skull(d, 720, 980, 70)
+    skull(d, 560, 640, 55)
+    bg = radial(bg, 540, 850, 700, (255, 240, 220), 0.18)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        snowfall(ImageDraw.Draw(img), t, 8, n=60, speed=60)
+    return bg, overlay
+
+
+def hailstorm(rng):
+    bg = vgrad([(0, (8, 10, 16)), (0.6, (26, 32, 42)), (1, (14, 18, 24))])
+    bg = clouds(bg, rng, 16, 60, 700, (46, 52, 62), 140, 50)
+    d = ImageDraw.Draw(bg)
+    mountains(d, rng, 1150, 5, (22, 26, 34), snow=(120, 130, 140), height=(250, 450))
+    d.polygon([(0, 1250), (W, 1120), (W, H), (0, H)], fill=(30, 34, 40))
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        if 1.2 < t < 1.32 or 3.0 < t < 3.08:
+            img.alpha_composite(Image.new("RGBA", img.size, (220, 230, 255, 80)))
+        for i in range(9):  # line of pilgrims on the ridge
+            fx = 80 + i * 105 + u * 60
+            fy = 1245 - fx * (130 / W)
+            x, y = cam.map(fx, fy)
+            figure_stand(d2, x, y, 110 * cam.k, (6, 8, 10))
+        rng2 = np.random.default_rng(12)
+        for _ in range(120):  # hailstones
+            x0, y0 = rng2.uniform(0, W + 200), rng2.uniform(0, H)
+            y = (y0 + 1500 * t) % H
+            x = x0 - 0.2 * y
+            r = rng2.uniform(4, 9)
+            d2.ellipse([x - r, y - r, x + r, y + r], fill=(230, 238, 245, 220))
+    return bg, overlay
+
+
+def dna_lab(rng):
+    bg = vgrad([(0, (6, 14, 22)), (1, (10, 30, 40))])
+    d = ImageDraw.Draw(bg)
+    for i in range(7):  # lab shelf with test tubes
+        x = 120 + i * 130
+        d.rounded_rectangle([x, 1180, x + 40, 1400], radius=18, outline=(90, 150, 170), width=4)
+        d.rounded_rectangle([x + 4, 1300, x + 36, 1396], radius=14, fill=(40, 190, 170))
+    d.rectangle([60, 1400, 1020, 1420], fill=(60, 80, 90))
+    bg = radial(bg, 540, 700, 600, (40, 200, 190), 0.25)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        cx = W / 2
+        for i in range(22):
+            y = 330 + i * 38
+            ph = t * 2.2 + i * 0.45
+            a = 170 * math.sin(ph)
+            depth = math.cos(ph)
+            x1, x2 = cx + a, cx - a
+            d2.line([(x1, y), (x2, y)], fill=(120, 200, 210, 150), width=5)
+            c1 = (255, 184, 82) if depth > 0 else (180, 120, 60)
+            c2 = (90, 220, 200) if depth < 0 else (50, 130, 120)
+            d2.ellipse([x1 - 13, y - 13, x1 + 13, y + 13], fill=c1)
+            d2.ellipse([x2 - 13, y - 13, x2 + 13, y + 13], fill=c2)
+    return bg, overlay
+
+
+def two_groups(rng):
+    bg = vgrad([(0, (10, 16, 26)), (1, (22, 30, 44))])
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        lines = ctx["lines"]
+        fb = ImageFont.truetype(FONT_BOLD, 50)
+        fs = ImageFont.truetype(FONT_BOLD, 38)
+        # timeline
+        y = 1080
+        d2.line([(90, y), (990, y)], fill=(160, 170, 180), width=6)
+        for x, lab in ((240, "800 AD"), (840, "1800 AD")):
+            d2.ellipse([x - 16, y - 16, x + 16, y + 16], fill=(230, 230, 230))
+            d2.text((x, y + 60), lab, font=fb, fill=(240, 232, 214), anchor="mm")
+        d2.text((540, y - 40), "1,000 YEARS APART", font=fs, fill=(150, 160, 170), anchor="mm")
+        # group A: 23 figures, amber
+        for k in range(23):
+            gx = 110 + (k % 8) * 36
+            gy = 780 + (k // 8) * 90
+            figure_stand(d2, gx, gy, 70, (255, 184, 82))
+        d2.text((240, 590), "23  SOUTH ASIAN", font=fs, fill=(255, 184, 82), anchor="mm")
+        # group B appears with line 2
+        if len(lines) > 1 and t >= lines[1]:
+            a = min(1.0, (t - lines[1]) / 0.4)
+            for k in range(14):
+                gx = 730 + (k % 5) * 44
+                gy = 780 + (k // 5) * 90
+                figure_stand(d2, gx, gy, 70, (90, 200, 220, int(255 * a)))
+            d2.text((840, 590), "14  GREEK & CRETAN", font=fs, fill=(90, 200, 220, int(255 * a)), anchor="mm")
+    return bg, overlay
+
+
+def route_map(rng):
+    bg = vgrad([(0, (12, 18, 28)), (1, (20, 28, 40))])
+    d = ImageDraw.Draw(bg)
+    for i in range(0, W, 60):
+        d.line([(i, 300), (i, 1450)], fill=(22, 32, 44), width=2)
+    for j in range(300, 1450, 60):
+        d.line([(0, j), (W, j)], fill=(22, 32, 44), width=2)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        fb = ImageFont.truetype(FONT_BOLD, 44)
+        p0, p1 = (270, 700), (840, 1000)
+        n = 60
+        prog = min(1, u * 1.6)
+        for i in range(int(n * prog)):
+            s = i / n
+            x = p0[0] + (p1[0] - p0[0]) * s
+            y = p0[1] + (p1[1] - p0[1]) * s - 260 * math.sin(math.pi * s)
+            if i % 2 == 0:
+                d2.ellipse([x - 6, y - 6, x + 6, y + 6], fill=(240, 232, 214))
+        for (px, py), lab, col in ((p0, "GREECE & CRETE", (90, 200, 220)), (p1, "HIMALAYAS", (255, 184, 82))):
+            d2.ellipse([px - 22, py - 22, px + 22, py + 22], fill=col)
+            d2.text((px, py + 70), lab, font=fb, fill=col, anchor="mm")
+        if prog > 0.5:
+            fq = ImageFont.truetype(FONT_BOLD, 150)
+            d2.text((555, 400), "?", font=fq, fill=(255, 214, 150, 230), anchor="mm")
+    return bg, overlay
+
+
+def question_lake(rng):
+    bg = vgrad([(0, (8, 12, 26)), (0.5, (40, 52, 80)), (1, (20, 26, 36))])
+    bg = stars(bg, rng, 100, 600)
+    d = ImageDraw.Draw(bg)
+    mountains(d, rng, 1150, 6, (30, 38, 54), height=(250, 420))
+    d.rectangle([0, 1140, W, H], fill=(44, 52, 60))
+    d.ellipse([200, 1170, 880, 1300], fill=(140, 176, 196))
+    f = ImageFont.truetype(FONT_BOLD, 400)
+    glow = Image.new("RGBA", bg.size, (0, 0, 0, 0))
+    ImageDraw.Draw(glow).text((540, 540), "?", font=f, fill=AMBER + (160,), anchor="mm")
+    glow = glow.filter(ImageFilter.GaussianBlur(30))
+    bgA = bg.convert("RGBA")
+    bgA.alpha_composite(glow)
+    ImageDraw.Draw(bgA).text((540, 540), "?", font=f, fill=(255, 214, 150, 235), anchor="mm")
+    bg = bgA.convert("RGB")
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        snowfall(d2, t, 14, n=60)
+        lines = ctx["lines"]
+        if lines and t >= lines[-1]:
+            f2 = ImageFont.truetype(FONT_BOLD, 54)
+            txt = "FOLLOW FOR DAILY MYSTERIES"
+            tw = f2.getlength(txt)
+            x0, y0 = (W - tw) / 2 - 36, 840
+            d2.rounded_rectangle([x0, y0, x0 + tw + 72, y0 + 96], radius=48, fill=(255, 184, 82, 240))
+            d2.text((W / 2, y0 + 48), txt, font=f2, fill=(20, 16, 10), anchor="mm")
+    return bg, overlay
+
+
+SCENES.update({f.__name__: f for f in [himalaya_lake, bones_close, hailstorm, dna_lab, two_groups, route_map, question_lake]})
