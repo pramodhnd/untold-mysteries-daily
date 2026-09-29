@@ -1,0 +1,109 @@
+{
+ "id": "flannan",
+ "title": "3 men vanished from this lighthouse. One left his coat behind.",
+ "hook": "3 MEN VANISHED",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "lighthouse_night",
+   "label": "FLANNAN ISLES, SCOTLAND",
+   "lines": [
+    "December 1900.",
+    "Three lighthouse keepers vanish from a remote Scottish island.",
+    "And nobody knows why."
+   ]
+  },
+  {
+   "scene": "ship_passing",
+   "label": "15 DECEMBER 1900",
+   "lines": [
+    "On December 15th, a passing ship notices the light is out."
+   ]
+  },
+  {
+   "scene": "relief_boat",
+   "label": "26 DECEMBER 1900",
+   "lines": [
+    "Eleven days later, the relief boat arrives.",
+    "No keepers. No one waiting at the landing."
+   ]
+  },
+  {
+   "scene": "interior",
+   "lines": [
+    "Inside, the gate and door are shut.",
+    "The beds are unmade.",
+    "The clock has stopped."
+   ]
+  },
+  {
+   "scene": "coats",
+   "lines": [
+    "And one set of waterproof coats is still hanging there."
+   ]
+  },
+  {
+   "scene": "running_figure",
+   "lines": [
+    "So one man ran out into a winter storm, without his coat.",
+    "Why?"
+   ]
+  },
+  {
+   "scene": "west_landing",
+   "label": "THE WEST LANDING",
+   "lines": [
+    "At the west landing, iron railings are bent.",
+    "A box one hundred feet above the sea is smashed."
+   ]
+  },
+  {
+   "scene": "giant_wave",
+   "label": "OFFICIAL VERDICT",
+   "lines": [
+    "The official verdict: a giant wave swept all three men away."
+   ]
+  },
+  {
+   "scene": "logbook",
+   "label": "THE TWIST",
+   "lines": [
+    "But here's the twist.",
+    "Those creepy logbook entries you'll find online, about storms and prayers?",
+    "They were invented decades later."
+   ]
+  },
+  {
+   "scene": "question",
+   "lines": [
+    "So the real question is still open.",
+    "Why did the third man run outside?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "3 men vanished from this lighthouse. One left his coat behind. #shorts",
+  "description": "December 1900. Three lighthouse keepers vanish from the Flannan Isles, Scotland. The door is shut, the clock has stopped, and one set of coats is still on the hook.\n\nThe official verdict was a giant wave. But the famous logbook entries you'll find online were invented decades later. So why did the third man run outside without his coat?\n\nSources: Northern Lighthouse Board records; Wikipedia, Flannan Isles Lighthouse; Mike Dash, Fortean Times.\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#truestory",
+   "#history",
+   "#scotland",
+   "#lighthouse",
+   "#shorts"
+  ],
+  "tags": [
+   "unsolved mysteries",
+   "flannan isles",
+   "lighthouse mystery",
+   "true story",
+   "history mystery",
+   "scotland"
+  ],
+  "synthetic": false
+ }
+}

@@ -1,0 +1,88 @@
+{
+ "id": "roopkund",
+ "title": "India's lake full of skeletons. The DNA made it stranger. #shorts",
+ "hook": "LAKE OF SKELETONS",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "himalaya_lake",
+   "label": "UTTARAKHAND, INDIA",
+   "lines": [
+    "High in the Himalayas, at five thousand metres, there's a frozen lake.",
+    "And it's full of human skeletons."
+   ]
+  },
+  {
+   "scene": "bones_close",
+   "label": "300+ PEOPLE",
+   "lines": [
+    "The remains of more than three hundred people."
+   ]
+  },
+  {
+   "scene": "hailstorm",
+   "label": "THE LEGEND",
+   "lines": [
+    "Local legend says a king's pilgrimage was caught in a storm of giant hailstones.",
+    "Everyone died, all at once."
+   ]
+  },
+  {
+   "scene": "dna_lab",
+   "label": "2019",
+   "lines": [
+    "Then, in 2019, scientists tested their DNA."
+   ]
+  },
+  {
+   "scene": "two_groups",
+   "label": "THE DNA RESULT",
+   "lines": [
+    "Most were from South Asia, and died around 800 AD.",
+    "But fourteen of them had ancestry from Greece and Crete.",
+    "And they died a thousand years later, around 1800."
+   ]
+  },
+  {
+   "scene": "route_map",
+   "lines": [
+    "So what were Greek travellers doing on a remote Himalayan pilgrimage route?",
+    "Nobody knows."
+   ]
+  },
+  {
+   "scene": "question_lake",
+   "label": "ROOPKUND LAKE",
+   "lines": [
+    "This is Roopkund, in Uttarakhand.",
+    "Would you go?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "India's lake full of skeletons. The DNA made it stranger. #shorts",
+  "description": "High in the Himalayas, Roopkund lake holds the remains of 300+ people. Legend says a king's pilgrimage died in a hailstorm. Then DNA showed two groups who died 1,000 years apart - one with ancestry from Greece and Crete.\n\nSource: Harney et al. 2019, Nature Communications 10:3670.\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#roopkund",
+   "#skeletonlake",
+   "#himalayas",
+   "#uttarakhand",
+   "#mystery",
+   "#india",
+   "#shorts"
+  ],
+  "tags": [
+   "roopkund",
+   "skeleton lake",
+   "roopkund lake mystery",
+   "himalayas",
+   "uttarakhand",
+   "dna mystery",
+   "india mystery"
+  ],
+  "synthetic": false
+ }
+}
