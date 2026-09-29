@@ -19,5 +19,11 @@ approved. Quick job: finish in a few minutes. Nobody is watching.
 5. If anything changed in git: commit ("Sync approvals") and push. If the push is rejected, pull with rebase and push once more.
 6. Reply with one line: what moved, what was rewritten, what was published.
 
+## Publishing backup
+GitHub's scheduled runs can be skipped or late. If `stories/approved/` has files and the "Publish approved videos"
+workflow has not started a run in the last 60 minutes (GitHub MCP `actions_list`, `list_workflow_runs`, resource
+`publish.yml`), start one with `actions_run_trigger` (`run_workflow`, workflow `publish.yml`, ref `main`).
+Only between 21:00 and 06:00 India time. Never start more than one.
+
 ## Report
 Follow `agents/hq_reporting.md`, including its Videos section.
