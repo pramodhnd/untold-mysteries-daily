@@ -4,9 +4,9 @@ Everything that makes the channel run. Claude writes the stories; GitHub Actions
 
 ## How a day works
 
-1. **6:00 am IST: Trend Scout + Script Writer** (Claude scheduled task) research trending mysteries, write 4 Short scripts and, once a week, one documentary, and save them to `stories/pending/`.
-2. **You approve** on the Approval Board (about 15 minutes on your phone).
-3. Approved stories move to `stories/approved/`. That push starts **GitHub Actions**, which:
+1. **00:52 IST (night): Trend Scout + Script Writer** (Claude scheduled task, backup run 03:52) research trending mysteries, write 4 Shorts and 2 documentaries, and save them to `stories/pending/`.
+2. **Around 21:00 IST, you approve** on the Approval Board (about 15 minutes on your phone). The Approval Sync runs at 21:05, 22:05, 23:05 and 00:05.
+3. Approved stories move to `stories/approved/`. **GitHub Actions** then publishes one per hour from 21:15 to 05:15 IST (all inside 21:15-06:15). Each run:
    - renders each video (free voice, original illustrations and music),
    - makes the thumbnail for documentaries,
    - uploads it to YouTube with title, description, hashtags, chapters and the AI disclosure,

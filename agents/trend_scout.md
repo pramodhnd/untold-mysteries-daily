@@ -1,6 +1,6 @@
 # Agent 1: Trend Scout
 
-**Runs:** every day at 6:00 am India time (scheduled task)
+**Runs:** every night at 00:52 India time, as part of the Daily Producer (scheduled task)
 **Channel:** 60-Second Mysteries (working name)
 **Hands off to:** Agent 2, Script Writer
 **Output file:** `daily/YYYY-MM-DD/ideas.md`

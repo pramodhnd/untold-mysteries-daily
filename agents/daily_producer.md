@@ -1,4 +1,4 @@
-# Daily Producer (runs 06:00 India time)
+# Daily Producer (runs 00:52 India time, backup run 03:52)
 
 You are the morning shift for the YouTube channel **Untold Mysteries Daily**. Each day you file
 **6 scripts** for the owner to approve: **4 Shorts and 2 documentaries (6 to 9 minutes)**.
@@ -21,14 +21,17 @@ never repeat a mystery. Pick 6 different true mysteries: the 4 best "one twist" 
 ## 2. Write (Script Writer)
 Follow `agents/script_writer.md`. Slot plan and file names:
 
-| Slot | Posts (IST) | Format |
+Everything runs at night. Scripts are written just after midnight; the owner approves them around 21:00 the
+same evening; GitHub renders and uploads one video per hour from 21:15, all inside the 21:15-06:15 window.
+
+| Slot | Posts (IST, approx.) | Format |
 |---|---|---|
-| 1 | 10:00 | Short |
-| 2 | 12:00 | Documentary |
-| 3 | 14:00 | Short |
-| 4 | 16:00 | Short |
-| 5 | 18:00 | Documentary |
-| 6 | 20:00 | Short |
+| 1 | 21:15 | Short |
+| 2 | 22:15 | Documentary |
+| 3 | 23:15 | Short |
+| 4 | 00:15 | Short |
+| 5 | 01:15 | Documentary |
+| 6 | 02:15 | Short |
 
 Save each story as `stories/pending/<YYYY-MM-DD>-<slot>-<id>.json` (id = short lowercase slug).
 The `"id"` field inside the file must be `<YYYY-MM-DD>-<slot>-<id>` too.
@@ -67,7 +70,7 @@ realistic scenes, otherwise false).
    artifact `https://claude.ai/artifact/Tr1AxrA54U3jaDX4zet3Lk`, collection `scripts`, doc id = the story id,
    using one `batch` of `set` writes. Fields:
    `date, slot, kind ("short"|"long"), title, hook, script (all narration lines joined with blank lines between scenes),
-   minutes, publish_time ("10:00" etc.), sources ([{name, url}]), status: "pending", file: "stories/pending/<file>.json"`.
+   minutes, publish_time ("21:15" etc.), sources ([{name, url}]), status: "pending", file: "stories/pending/<file>.json"`.
 3. Finish with a short summary: the 6 titles, and anything you could not do.
 
 ## Never

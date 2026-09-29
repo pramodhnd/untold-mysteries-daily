@@ -1,4 +1,4 @@
-# Approval Sync (runs every 2 hours, 07:40 to 19:40 India time)
+# Approval Sync (runs hourly at 21:05, 22:05, 23:05 and 00:05 India time, after the owner approves around 21:00)
 
 Moves the owner's decisions from the approval board into the repository, so GitHub publishes only what was
 approved. Quick job: finish in a few minutes. Nobody is watching.

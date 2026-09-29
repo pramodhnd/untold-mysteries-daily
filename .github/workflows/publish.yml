@@ -2,8 +2,9 @@ name: Publish approved videos
 
 on:
   schedule:
-    # One approved video every two hours: 10:00, 12:00, 14:00, 16:00, 18:00, 20:00 India time
-    - cron: "30 4-14/2 * * *"
+    # Night window only: one approved video per hour, 21:15 to 05:15 India time (15:45-23:45 UTC),
+    # so all 6 are out well before 06:15. Spare runs catch up if an approval arrives late.
+    - cron: "45 15-23 * * *"
   workflow_dispatch: {}
 
 permissions:
