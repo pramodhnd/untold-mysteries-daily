@@ -1,0 +1,289 @@
+{
+ "id": "2026-09-29-2-mary-celeste",
+ "format": "landscape",
+ "title": "The Mary Celeste: The Ghost Ship Mystery, Myths vs. Facts",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "scenes": [
+  {
+   "scene": "night_sea",
+   "recon": true,
+   "label": "ATLANTIC OCEAN, 1872",
+   "lines": [
+    "On the afternoon of December 4th, 1872, sailors on a cargo ship spot another vessel drifting in the Atlantic, hundreds of miles east of the Azores.",
+    "Her sails are torn. Nobody is at the wheel.",
+    "Two men row across and climb aboard.",
+    "There is water in the hold, food and water for six months, and a child's clothes in the cabin.",
+    "But the only lifeboat is gone. And so are all ten people who sailed on her."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "THE MARY CELESTE",
+   "sub": "The ship that sailed on without her crew",
+   "lines": [
+    "This is the Mary Celeste. The most famous ghost ship in history.",
+    "And much of what you've heard about her never happened."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "An Unlucky Ship",
+   "title": "Before she was the Mary Celeste",
+   "events": [
+    {
+     "year": 1861,
+     "label": "Launched as the Amazon"
+    },
+    {
+     "year": 1867,
+     "label": "Driven ashore in a storm"
+    },
+    {
+     "year": 1868,
+     "label": "Renamed Mary Celeste"
+    },
+    {
+     "year": 1872,
+     "label": "Her last voyage with Briggs",
+     "key": true
+    }
+   ],
+   "lines": [
+    "She wasn't born the Mary Celeste. She was launched in Nova Scotia in May 1861, under the name Amazon.",
+    "Her first captain fell ill and died on her maiden voyage.",
+    "In 1867, a storm drove her ashore on Cape Breton Island, and she was sold as a wreck.",
+    "An American bought her, repaired her, and renamed her. Nobody knows why he chose the name Mary Celeste.",
+    "By 1872 she had been rebuilt again, a brigantine about one hundred and three feet long."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "chapter": "Ten Souls",
+   "label": "NEW YORK, NOVEMBER 1872",
+   "lines": [
+    "Her new captain was Benjamin Spooner Briggs, from Massachusetts, the son of a sea captain.",
+    "He brought his wife, Sarah, and their two-year-old daughter, Sophia.",
+    "Their seven-year-old son, Arthur, stayed at home so he could go to school.",
+    "Before leaving, Sarah wrote to Arthur's grandmother: Tell Arthur, I make great dependence on the letters I shall get from him."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "Aboard the Mary Celeste",
+   "facts": [
+    "Captain Benjamin Briggs",
+    "His wife Sarah and daughter Sophia, 2",
+    "Seven crew",
+    "1,701 barrels of industrial alcohol"
+   ],
+   "lines": [
+    "With them were seven crew.",
+    "In the hold were one thousand seven hundred and one barrels of industrial alcohol.",
+    "It was a routine cargo run.",
+    "Nothing about this voyage looked dangerous."
+   ]
+  },
+  {
+   "scene": "route",
+   "from": "NEW YORK",
+   "to": "GENOA",
+   "note": "Sailed 7 November 1872",
+   "lines": [
+    "On November 7th, 1872, the Mary Celeste sailed from New York, bound for Genoa, in Italy.",
+    "Eight days later, another ship left New York for Genoa by way of Gibraltar. The Dei Gratia.",
+    "Neither crew knew their paths were about to cross."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "chapter": "What They Found",
+   "label": "LAST ENTRY: 25 NOV, 8 A.M.",
+   "lines": [
+    "The last entry on the ship's log slate was made at eight in the morning on November 25th, off Santa Maria Island in the Azores.",
+    "Nine days later, the Dei Gratia found her nearly four hundred nautical miles from that spot.",
+    "First mate Oliver Deveau led the boarding party."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "What was missing",
+   "facts": [
+    "The only lifeboat",
+    "The captain's chronometer and sextant",
+    "The ship's register"
+   ],
+   "lines": [
+    "The ship's only lifeboat was gone.",
+    "So were the captain's chronometer and sextant, the tools for finding your position at sea.",
+    "The ship's register was missing too."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "What was left behind",
+   "facts": [
+    "Six months of food and water",
+    "Clothes and belongings",
+    "About 3.5 feet of water in the hold",
+    "One pump taken apart"
+   ],
+   "lines": [
+    "But six months of food and water were still aboard.",
+    "The crew's clothes and belongings were still in their quarters.",
+    "There was about three and a half feet of water in the hold, and one of the two pumps had been taken apart.",
+    "A makeshift sounding rod, used to measure water in the hold, lay abandoned on deck."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "chapter": "The Gibraltar Inquiry",
+   "text": "GIBRALTAR",
+   "sub": "December 1872",
+   "lines": [
+    "The Dei Gratia's crew sailed the ship to Gibraltar and claimed a salvage reward.",
+    "The court hearings began on December 17th.",
+    "Gibraltar's Attorney General, Frederick Solly-Flood, suspected murder.",
+    "His theory: the crew got drunk on the cargo, killed the captain and his family, and escaped in the lifeboat."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "The murder theory fell apart",
+   "facts": [
+    "The alcohol was undrinkable",
+    "The 'blood' stains were not blood",
+    "Marks on the bow came from the sea"
+   ],
+   "lines": [
+    "But the alcohol was industrial. Nobody could drink it.",
+    "Stains found on the captain's sword were tested. They were not blood.",
+    "And a US Navy officer reported that marks on the bow came from the sea, not from any tool.",
+    "In April 1873, the salvors were awarded seventeen hundred pounds, a fraction of the ship's value. Suspicion followed them for years."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "chapter": "The Myth-Maker",
+   "label": "LONDON, JANUARY 1884",
+   "lines": [
+    "Then, in January 1884, a London magazine published an anonymous story about the ship.",
+    "Its author was a young ship's doctor named Arthur Conan Doyle, before he created Sherlock Holmes.",
+    "He renamed the ship Marie Celeste, invented a villain, and kept the lifeboats hanging in place.",
+    "Some readers believed it was true. Even the American consul in Gibraltar looked into it."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "Myth vs fact",
+   "facts": [
+    "Myth: warm tea on the cabin table",
+    "Myth: the lifeboats were still aboard",
+    "Fact: one boat, and it was gone",
+    "Fact: the ship was half-flooded"
+   ],
+   "lines": [
+    "Later retellings added even more: half-eaten breakfasts, and cups of tea still warm on the table.",
+    "None of that is in the record.",
+    "The real ship was waterlogged, her one boat missing.",
+    "As Royal Museums Greenwich puts it, Doyle's story is riddled with factual inaccuracies that are still sometimes taken as fact."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "What Really Happened?",
+   "title": "The main theories",
+   "facts": [
+    "Alcohol fumes scared the crew",
+    "A waterspout hit the ship",
+    "A bad chronometer and a clogged pump",
+    "Mutiny or pirates: no evidence"
+   ],
+   "lines": [
+    "So what did happen? There are three serious theories.",
+    "First, fumes. When the cargo was unloaded in Genoa, nine barrels were empty. Briggs's cousin, Oliver Cobb, believed leaking alcohol vapour frightened the captain into abandoning ship.",
+    "In a television experiment, chemist Andrea Sella ignited gas in a model of the hold. The flame swept through, but left no scorching and no soot.",
+    "Second, a waterspout, which could explain the water below and the damage to the rigging.",
+    "Third, a 2007 Smithsonian Channel investigation argued the chronometer was wrong, putting Briggs about one hundred and twenty miles west of where he thought he was, and that debris from the refit may have clogged the pumps."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "recon": true,
+   "label": "OFF SANTA MARIA, 25 NOV 1872",
+   "lines": [
+    "Put together, the most likely story is quiet and tragic.",
+    "Water in the hold. A pump that won't work. A position he can't trust. And the last land for hundreds of miles in sight.",
+    "Briggs orders everyone into the little boat.",
+    "But the Mary Celeste doesn't sink. She sails on without them, for nine days.",
+    "The ten people in the lifeboat were never seen again."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Last Voyage",
+   "title": "After the mystery",
+   "events": [
+    {
+     "year": 1873,
+     "label": "Delivers cargo to Genoa"
+    },
+    {
+     "year": 1885,
+     "label": "Wrecked on purpose off Haiti",
+     "key": true
+    },
+    {
+     "year": 2001,
+     "label": "A wreck claim, later doubted"
+    }
+   ],
+   "lines": [
+    "The ship herself never escaped her reputation.",
+    "In January 1885, her last captain ran her onto a reef off Haiti on purpose, in an insurance fraud.",
+    "In 2001, an expedition funded by novelist Clive Cussler claimed to have found her remains. But tree-ring dating showed the wood came from trees still growing in 1894, nearly a decade after she was wrecked."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "lines": [
+    "So the ship was found. Twice, maybe.",
+    "Her people never were.",
+    "What do you think made Captain Briggs leave a ship that could still sail? Tell me in the comments.",
+    "And subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "The Mary Celeste: The Ghost Ship Mystery, Myths vs. Facts",
+  "description": "December 1872: the Mary Celeste is found drifting in the Atlantic with food for six months aboard and nobody on her. Ten people are gone. We separate the facts from the famous myths (many born in an 1884 short story by Arthur Conan Doyle), follow the Gibraltar inquiry, and weigh the three serious theories: alcohol fumes, a waterspout, and a faulty chronometer with a clogged pump.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. All illustrations are original artwork.\n\nSOURCES\nWikipedia, Mary Celeste: https://en.wikipedia.org/wiki/Mary_Celeste\nSmithsonian Magazine, Abandoned Ship: The Mary Celeste: https://www.smithsonianmag.com/history/abandoned-ship-the-mary-celeste-174488104/\nRoyal Museums Greenwich, The mystery of the Mary Celeste: https://www.rmg.co.uk/stories/maritime-history/mystery-mary-celeste\nAmerican Heritage, The Mystery of the Mary Celeste (Ormonde De Kay, 1981): https://www.americanheritage.com/mystery-mary-celeste\nWikipedia, J. Habakuk Jephson's Statement: https://en.wikipedia.org/wiki/J._Habakuk_Jephson%27s_Statement\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#MaryCeleste",
+   "#GhostShip",
+   "#Mystery",
+   "#History",
+   "#UnsolvedMysteries",
+   "#Documentary"
+  ],
+  "tags": [
+   "mary celeste",
+   "ghost ship",
+   "mary celeste documentary",
+   "unsolved mysteries",
+   "ship mystery",
+   "arthur conan doyle",
+   "dei gratia",
+   "maritime history"
+  ],
+  "synthetic": true
+ },
+ "thumbnail": {
+  "line1": "THE GHOST",
+  "line2": "SHIP",
+  "badge": "10 PEOPLE VANISHED",
+  "sub": "Food for 6 months. Nobody aboard.",
+  "scene": "night_sea",
+  "skull": false
+ }
+}

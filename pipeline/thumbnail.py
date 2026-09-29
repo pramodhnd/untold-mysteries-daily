@@ -29,7 +29,11 @@ def background(spec):
         im = im.resize((int(im.width * r) + 1, int(im.height * r) + 1), Image.LANCZOS)
         x0, y0 = (im.width - W) // 2, (im.height - H) // 2
         return im.crop((x0, y0, x0 + W, y0 + H)).convert("RGBA")
-    scene = SL.SCENES.get(spec.get("scene", "ranger_1942"), SL.ranger_1942)(np.random.default_rng(5))
+    name = spec.get("scene", "ranger_1942")
+    if name in SL.PARAM_SCENES:  # reusable scenes (night_sea, forest_night, ...) take the spec as their fields
+        scene = SL.PARAM_SCENES[name](np.random.default_rng(5), spec)
+    else:
+        scene = SL.SCENES.get(name, SL.ranger_1942)(np.random.default_rng(5))
     im = None
     for layer, _ in scene["layers"]:
         c = layer.crop((200, 180, 200 + 1920, 180 + 1080))

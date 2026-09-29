@@ -1,0 +1,81 @@
+{
+ "id": "2026-09-29-3-deering",
+ "title": "A ghost ship ran aground in 1921. Only 3 cats were aboard. #shorts",
+ "hook": "NOBODY ABOARD",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "schooner_aground",
+   "label": "CAPE HATTERAS, 1921",
+   "lines": [
+    "January 1921.",
+    "A five-masted schooner is found stuck on Diamond Shoals, off North Carolina.",
+    "Her sails are still set."
+   ]
+  },
+  {
+   "scene": "schooner_aground",
+   "label": "4 FEBRUARY 1921",
+   "lines": [
+    "Rough seas keep rescuers away for four days.",
+    "When they finally climb aboard, there's no crew.",
+    "Just three half-starved cats."
+   ]
+  },
+  {
+   "scene": "interior",
+   "label": "THE CARROLL A. DEERING",
+   "lines": [
+    "The log, the navigation gear and the lifeboats are gone."
+   ]
+  },
+  {
+   "scene": "ship_passing",
+   "label": "CAPE LOOKOUT LIGHTSHIP",
+   "lines": [
+    "Days earlier, a red-haired man had shouted to a lightship that they'd lost their anchors.",
+    "Witnesses said he didn't look or act like an officer."
+   ]
+  },
+  {
+   "scene": "bottle_message",
+   "label": "APRIL 1921",
+   "lines": [
+    "Then a bottle washed up with a note: the Deering had been captured.",
+    "But the man who found it confessed. He wrote it himself."
+   ]
+  },
+  {
+   "scene": "question",
+   "label": "NEVER SOLVED",
+   "lines": [
+    "Pirates? Rum runners? Mutiny? The crew was never found.",
+    "So who was the red-haired man?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "A ghost ship ran aground in 1921. Only 3 cats were aboard. #shorts",
+  "description": "January 1921: the five-masted schooner Carroll A. Deering is found aground on Diamond Shoals, Cape Hatteras, with her sails set. When rescuers finally board on 4 February, the crew, log, navigation equipment and lifeboats are gone. Only three half-starved cats remain. A message in a bottle blaming pirates turned out to be forged by the man who found it. A federal investigation never solved the case.\n\nSources:\n- National Park Service, Cape Hatteras: The Ghost Ship: https://www.nps.gov/caha/learn/historyculture/theghostship.htm\n- National Archives, Hoover Library blog: The Wreck of the Carroll A. Deering: https://hoover.blogs.archives.gov/2016/01/27/the-wreck-of-the-carroll-a-deering\n- Library of Congress, Headlines & Heroes blog: https://blogs.loc.gov/headlinesandheroes/2023/01/the-mysterious-disappearance-of-ghost-ship-carroll-a-deerings-crew/\n- Wikipedia, Carroll A. Deering: https://en.wikipedia.org/wiki/Carroll_A._Deering\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#ghostship",
+   "#outerbanks",
+   "#shorts"
+  ],
+  "tags": [
+   "carroll a deering",
+   "ghost ship",
+   "cape hatteras",
+   "outer banks",
+   "unsolved mysteries",
+   "ship mystery"
+  ],
+  "synthetic": false
+ }
+}

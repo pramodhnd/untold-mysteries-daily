@@ -1,0 +1,74 @@
+{
+ "id": "2026-09-29-1-voynich",
+ "title": "Nobody alive can read this 600-year-old book. #shorts",
+ "hook": "NOBODY CAN READ IT",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "voynich_page",
+   "label": "YALE, BEINECKE MS 408",
+   "lines": [
+    "This book is about six hundred years old.",
+    "And nobody alive can read a single word of it."
+   ]
+  },
+  {
+   "scene": "voynich_page",
+   "label": "THE VOYNICH MANUSCRIPT",
+   "lines": [
+    "It's called the Voynich manuscript.",
+    "About two hundred and forty pages of an unknown script, strange plants and star charts."
+   ]
+  },
+  {
+   "scene": "voynich_page",
+   "label": "RADIOCARBON, 2009",
+   "lines": [
+    "Was it a clever fake?",
+    "In 2009, scientists carbon-dated the vellum.",
+    "It was made between 1404 and 1438."
+   ]
+  },
+  {
+   "scene": "voynich_page",
+   "label": "FIVE SCRIBES",
+   "lines": [
+    "A 2020 handwriting study found five different scribes wrote it.",
+    "Every claimed translation so far has fallen apart."
+   ]
+  },
+  {
+   "scene": "cipher_dice",
+   "label": "THE TWIST",
+   "lines": [
+    "Then, in 2025, a researcher showed that a medieval-style cipher using dice and playing cards can turn Latin into text that looks just like it.",
+    "It doesn't crack the code. But it means the book may not be nonsense.",
+    "So what is it hiding?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Nobody alive can read this 600-year-old book. #shorts",
+  "description": "A book about 600 years old that nobody can read. The Voynich manuscript (Yale, Beinecke MS 408) has about 240 pages of an unknown script, strange plants and star charts. Radiocarbon dating in 2009 put its vellum between 1404 and 1438, and a 2020 study found five scribes wrote it. In 2025 a published study showed a cipher using dice and playing cards can produce text with the same patterns. It does not solve the mystery, but it suggests the book may not be gibberish.\n\nSources:\n- Wikipedia, Voynich manuscript: https://en.wikipedia.org/wiki/Voynich_manuscript\n- Yale Beinecke Library, MS 408 catalog record: https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms408.HTM\n- University of Arizona radiocarbon release (EurekAlert): https://www.eurekalert.org/news-releases/624074\n- Live Science, Voynich may be a cipher (Jan 2026): https://www.livescience.com/archaeology/mysterious-voynich-manuscript-may-be-a-cipher-a-new-study-suggests\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#voynich",
+   "#cipher",
+   "#shorts"
+  ],
+  "tags": [
+   "voynich manuscript",
+   "unsolved mysteries",
+   "undeciphered book",
+   "medieval mystery",
+   "cipher",
+   "history mystery"
+  ],
+  "synthetic": false
+ }
+}

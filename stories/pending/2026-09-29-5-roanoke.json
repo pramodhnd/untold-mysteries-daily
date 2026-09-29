@@ -1,0 +1,261 @@
+{
+ "id": "2026-09-29-5-roanoke",
+ "format": "landscape",
+ "title": "The Lost Colony of Roanoke: What CROATOAN Really Meant",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "scenes": [
+  {
+   "scene": "forest_night",
+   "recon": true,
+   "label": "OUTER BANKS, AUGUST 1590",
+   "lines": [
+    "August 1590. Off the coast of what is now North Carolina, an English ship lies at anchor near a dark island.",
+    "The sailors row toward the shore. They sound a trumpet, and sing familiar English songs into the trees.",
+    "Nobody answers.",
+    "Their leader, Governor John White, has been away for three years. On this island, he left more than a hundred colonists, including his own daughter and his baby granddaughter.",
+    "The next morning, on a post at the gate of the settlement, he finds a single word carved into the wood."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "CROATOAN",
+   "sub": "The Lost Colony of Roanoke",
+   "lines": [
+    "Croatoan.",
+    "Four centuries later, we are still trying to read it."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "Raleigh's Colony",
+   "title": "England's first attempts",
+   "events": [
+    {
+     "year": 1584,
+     "label": "Raleigh's charter"
+    },
+    {
+     "year": 1585,
+     "label": "Lane's soldiers land"
+    },
+    {
+     "year": 1586,
+     "label": "They go home with Drake"
+    },
+    {
+     "year": 1587,
+     "label": "The families arrive",
+     "key": true
+    }
+   ],
+   "lines": [
+    "In March 1584, Queen Elizabeth granted Walter Raleigh a charter to plant an English colony in America.",
+    "The first settlement, in 1585, was a military outpost of about a hundred men under Ralph Lane.",
+    "It went badly. In June 1586, the men sailed home with Sir Francis Drake's fleet.",
+    "Raleigh tried again. This time, not with soldiers, but with families."
+   ]
+  },
+  {
+   "scene": "route",
+   "chapter": "A Colony of Families",
+   "from": "ENGLAND",
+   "to": "ROANOKE",
+   "note": "Arrived 22 July 1587",
+   "lines": [
+    "In 1587, about one hundred and fifteen men, women and children crossed the Atlantic under their governor, the artist John White.",
+    "They were meant to settle on Chesapeake Bay. But the pilot, Simon Fernandes, refused to take them any farther than Roanoke Island.",
+    "They arrived on July 22nd, 1587. Soon after, a colonist named George Howe was ambushed and killed."
+   ]
+  },
+  {
+   "scene": "forest_night",
+   "label": "18 AUGUST 1587",
+   "lines": [
+    "Then, on August 18th, White's daughter Eleanor gave birth to a girl.",
+    "She was named Virginia Dare. The first English child born in the Americas.",
+    "Supplies were short. The colonists asked White to sail back to England for help.",
+    "On August 27th, he left. Before he went, he wrote that they were preparing to move about fifty miles into the mainland."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Long Wait",
+   "title": "Three years away",
+   "events": [
+    {
+     "year": 1587,
+     "label": "White sails for England"
+    },
+    {
+     "year": 1588,
+     "label": "The Spanish Armada"
+    },
+    {
+     "year": 1590,
+     "label": "White finally returns",
+     "key": true
+    }
+   ],
+   "lines": [
+    "White reached England late in 1587. Then history got in the way.",
+    "In 1588, the Spanish Armada threatened England, and every good ship was needed at home.",
+    "White did set out that spring with two small ships. They were attacked and looted at sea, and both turned back.",
+    "It took him until 1590 to get a passage, aboard privateering ships."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "recon": true,
+   "label": "17 AUGUST 1590",
+   "lines": [
+    "When they finally reached the Outer Banks, the sea was rough.",
+    "One boat overturned in the surf. Of the eleven men in it, seven drowned.",
+    "White's crew went on anyway. That night came the trumpet, and the songs, and the silence."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "chapter": "One Word",
+   "text": "C R O",
+   "sub": "Carved on a tree, 18 August 1590",
+   "lines": [
+    "They landed on August 18th, 1590. Virginia Dare's third birthday.",
+    "On a tree, they found three carved letters. C, R, O.",
+    "Then, on a post at the entrance to the settlement, in capital letters, the full word. Croatoan."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "What White found",
+   "facts": [
+    "Houses taken down",
+    "A strong palisade around the site",
+    "Chests dug up and broken open",
+    "No cross carved anywhere"
+   ],
+   "lines": [
+    "The houses had been taken down, and the site was enclosed by a high wooden palisade.",
+    "Chests had been buried and dug up again. White's own books were torn, his maps rotten, his armour rusted through.",
+    "There were no signs of a struggle, and no sign that anyone had left in a hurry.",
+    "But here is the twist. Before he left, White and the colonists had agreed on a code.",
+    "If they moved, they would carve the name of the place they went. If they were in danger, they would carve a cross above it.",
+    "There was no cross."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "Croatoan",
+   "facts": [
+    "An island to the south, today part of Hatteras",
+    "Home of the Croatoan people",
+    "Birthplace of Manteo, the colony's ally"
+   ],
+   "lines": [
+    "Croatoan was an island to the south, home to a Native people friendly to the English.",
+    "It was the birthplace of Manteo, a Croatoan man who had been to England and back, and who had helped the colony.",
+    "White wrote that he greatly joyed to find a certain token of their safe being at Croatoan.",
+    "To him, it was not a mystery. It was a forwarding address."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "chapter": "So Close",
+   "label": "AUGUST 1590",
+   "lines": [
+    "So why didn't he go and get them?",
+    "As the crew hauled up the anchor, the cable broke. They had one anchor left out of four.",
+    "The weather grew fouler and fouler. Food was short, and fresh water had been lost.",
+    "The captain decided to head south to resupply, then come back. But storms drove them toward England instead.",
+    "John White never saw America again."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "Rumours in the Forest",
+   "title": "The clues that followed",
+   "facts": [
+    "Jamestown searches find nothing",
+    "Talk of men in European clothes",
+    "A massacre claim, disputed",
+    "Grey-eyed islanders on Hatteras, 1701"
+   ],
+   "lines": [
+    "When Jamestown was founded in 1607, the English searched again, and found nothing.",
+    "John Smith heard stories from Native leaders about men in European clothes living inland.",
+    "The writer William Strachey later claimed the colonists had been massacred. Historians still dispute it.",
+    "And around 1701, the explorer John Lawson visited Hatteras. The islanders told him some of their ancestors were white, and some of them had grey eyes."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "Digging for Answers",
+   "title": "Modern evidence",
+   "facts": [
+    "1998: the worst drought in 800 years",
+    "2012: a fort hidden under a patch on White's map",
+    "English pottery at 'Site X' inland",
+    "Finds on Hatteras, still debated"
+   ],
+   "lines": [
+    "Science has added new pieces.",
+    "Tree rings show 1587 had the worst growing season in eight hundred years. The colony arrived in a drought.",
+    "In 2012, researchers found that a patch on one of John White's own maps, in the British Museum, hides the symbol of a fort, about fifty miles inland.",
+    "Digs near that spot, called Site X, found sixteenth-century English pottery. Critics say it could come from later settlers.",
+    "On Hatteras, the old Croatoan, archaeologists have found part of a rapier and metal from clothing. Whether colonists lived there is still debated."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "THE DARE STONES",
+   "sub": "A famous hoax, exposed in 1941",
+   "lines": [
+    "And beware of easy answers. In the 1930s, dozens of carved stones appeared, supposedly messages from Eleanor Dare.",
+    "Most were exposed as a hoax in 1941."
+   ]
+  },
+  {
+   "scene": "forest_night",
+   "chapter": "Lost, or Not?",
+   "lines": [
+    "So were they really lost?",
+    "Maybe the colony split. Some went inland, some to Croatoan, and over the years they became part of the Native communities that sheltered them.",
+    "The word on the post was their message, and White understood it. He just couldn't get there.",
+    "Where do you think the colonists went? Tell me in the comments.",
+    "And subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "The Lost Colony of Roanoke: What CROATOAN Really Meant",
+  "description": "In 1590, Governor John White returned to Roanoke Island after three years away and found his colony gone, with one word carved on a post: CROATOAN. We follow the 1587 colony, Virginia Dare's birth, the Armada delays, the secret code White agreed with the colonists, and the modern evidence from a hidden fort on White's own map to digs on Hatteras Island.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. All illustrations are original artwork.\n\nSOURCES\nNational Park Service, Fort Raleigh: 1587 The Lost Colony: https://www.nps.gov/fora/learn/historyculture/1587-the-lost-colony.htm\nNational Park Service, Fort Raleigh: 1590 Rescue Voyage: https://www.nps.gov/fora/learn/historyculture/1590-rescue-voyage.htm\nJohn White's 1590 narrative (Hakluyt), NCpedia/ANCHOR: https://www.ncanchor.org/anchor/primary-source-john-white\nNCpedia, Lost Colony: https://www.ncpedia.org/lost-colony\nWikipedia, Roanoke Colony: https://en.wikipedia.org/wiki/Roanoke_Colony\nFirst Colony Foundation, How First Colony Foundation Found the Lost Colony: https://www.firstcolonyfoundation.org/news/lost-colony-is-found/\nSmithsonian Magazine, The Mystery of Roanoke Endures Yet Another Cruel Twist (2017): https://www.smithsonianmag.com/history/mystery-roanoke-endures-yet-another-cruel-twist-180962837/\nWikipedia, Dare Stones: https://en.wikipedia.org/wiki/Dare_Stones\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#Roanoke",
+   "#LostColony",
+   "#Croatoan",
+   "#History",
+   "#UnsolvedMysteries",
+   "#Documentary"
+  ],
+  "tags": [
+   "roanoke",
+   "lost colony",
+   "croatoan",
+   "roanoke colony documentary",
+   "virginia dare",
+   "john white",
+   "unsolved mysteries",
+   "american history"
+  ],
+  "synthetic": true
+ },
+ "thumbnail": {
+  "line1": "ONE WORD",
+  "line2": "CROATOAN",
+  "badge": "ABOUT 115 COLONISTS GONE",
+  "sub": "And no cross. Why?",
+  "scene": "forest_night",
+  "skull": false
+ }
+}

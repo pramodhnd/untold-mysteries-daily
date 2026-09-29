@@ -1,0 +1,66 @@
+{
+ "id": "2026-09-29-4-tunguska",
+ "title": "A blast flattened a Siberian forest in 1908. It left no crater. #shorts",
+ "hook": "NO CRATER",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "taiga_blast",
+   "label": "SIBERIA, 30 JUNE 1908",
+   "lines": [
+    "June 30th, 1908.",
+    "A fireball streaks over a remote Siberian forest.",
+    "Then the sky explodes."
+   ]
+  },
+  {
+   "scene": "running_figure",
+   "label": "VANAVARA TRADING POST",
+   "lines": [
+    "At a trading post about sixty-five kilometres away, one man said the heat felt like his shirt was on fire."
+   ]
+  },
+  {
+   "scene": "taiga_blast",
+   "label": "ABOUT 2,000 KM²",
+   "lines": [
+    "The blast flattened about two thousand square kilometres of forest.",
+    "Millions of trees, gone in an instant.",
+    "Instruments recorded tremors hundreds of miles away."
+   ]
+  },
+  {
+   "scene": "fallen_forest",
+   "label": "1927 EXPEDITION",
+   "lines": [
+    "In 1927, scientist Leonid Kulik finally reached the site.",
+    "The trees lay flat, pointing away from one centre. But there was no crater, and no meteorite fragments.",
+    "Because it never hit the ground. Scientists think a space rock exploded several kilometres up in the air.",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "A blast flattened a Siberian forest in 1908. It left no crater. #shorts",
+  "description": "30 June 1908: something exploded over the Tunguska region of Siberia and flattened about 2,000 square kilometres of forest. An eyewitness about 65 km away said the heat felt like his shirt was on fire. When Leonid Kulik's expedition reached the site in 1927, there was no crater and no meteorite fragments. Scientists think an asteroid or comet exploded in the air, roughly 5 to 10 km up.\n\nSources:\n- NASA, 115 Years Ago: The Tunguska Asteroid Impact Event: https://www.nasa.gov/history/115-years-ago-the-tunguska-asteroid-impact-event/\n- Britannica, Tunguska event: https://www.britannica.com/event/Tunguska-event\n- Wikipedia, Tunguska event: https://en.wikipedia.org/wiki/Tunguska_event\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#tunguska",
+   "#siberia",
+   "#shorts"
+  ],
+  "tags": [
+   "tunguska event",
+   "tunguska",
+   "siberia 1908",
+   "asteroid",
+   "space mystery",
+   "unsolved mysteries"
+  ],
+  "synthetic": false
+ }
+}

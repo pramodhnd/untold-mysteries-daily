@@ -1,0 +1,67 @@
+{
+ "id": "2026-09-29-6-antikythera",
+ "title": "Divers found a 2,000-year-old computer in a shipwreck. #shorts",
+ "hook": "2,000-YEAR-OLD COMPUTER",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "sponge_divers",
+   "label": "ANTIKYTHERA, GREECE",
+   "lines": [
+    "In 1900, Greek sponge divers found a shipwreck more than two thousand years old.",
+    "Among what they brought up was a lump of corroded bronze.",
+    "It went to the National Archaeological Museum in Athens."
+   ]
+  },
+  {
+   "scene": "gear_mechanism",
+   "label": "17 MAY 1902",
+   "lines": [
+    "In 1902, an archaeologist noticed something inside it.",
+    "A gear wheel."
+   ]
+  },
+  {
+   "scene": "gear_mechanism",
+   "label": "82 FRAGMENTS",
+   "lines": [
+    "Today it survives in eighty-two fragments.",
+    "X-ray scans later revealed about thirty surviving bronze gears.",
+    "It predicted eclipses, the phases of the Moon, the planets, even the dates of the Olympic Games."
+   ]
+  },
+  {
+   "scene": "gear_mechanism",
+   "label": "THE TWIST",
+   "lines": [
+    "Here's the twist.",
+    "Nothing this complex appears again for more than a thousand years, not until the fourteenth century.",
+    "So who built it, and how was that knowledge lost?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Divers found a 2,000-year-old computer in a shipwreck. #shorts",
+  "description": "In 1900, Greek sponge divers found an ancient shipwreck off Antikythera. Among the finds was a corroded bronze lump. In 1902 archaeologist Valerios Stais noticed a gear wheel inside it. Today it survives as 82 fragments with about 30 bronze gears, and scans show it predicted eclipses, Moon phases, planetary positions and the Olympic Games cycle. Nothing this complex is known again until the 14th century.\n\nSources:\n- UCL News, Experts recreate a mechanical Cosmos for the world's first computer (2021): https://www.ucl.ac.uk/news/2021/mar/experts-recreate-mechanical-cosmos-worlds-first-computer\n- Linda Hall Library, The Antikythera Mechanism: https://www.lindahall.org/about/news/scientist-of-the-day/the-antikythera-mechanism/\n- Wikipedia, Antikythera mechanism: https://en.wikipedia.org/wiki/Antikythera_mechanism\n- Wikipedia, Antikythera wreck: https://en.wikipedia.org/wiki/Antikythera_wreck\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#antikythera",
+   "#ancientgreece",
+   "#shorts"
+  ],
+  "tags": [
+   "antikythera mechanism",
+   "ancient computer",
+   "ancient greece",
+   "shipwreck",
+   "unsolved mysteries",
+   "archaeology"
+  ],
+  "synthetic": false
+ }
+}

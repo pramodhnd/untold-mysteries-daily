@@ -751,3 +751,387 @@ def question_lake(rng):
 
 
 SCENES.update({f.__name__: f for f in [himalaya_lake, bones_close, hailstorm, dna_lab, two_groups, route_map, question_lake]})
+
+
+# ================= shared helper =================
+def follow_pill(d2, ctx, t, y0=880):
+    """'Follow' call-to-action pill, shown from the last line of a closing scene (3+ lines)."""
+    lines = ctx["lines"]
+    if len(lines) >= 3 and t >= lines[-1]:
+        f2 = ImageFont.truetype(FONT_BOLD, 54)
+        txt = "FOLLOW FOR DAILY MYSTERIES"
+        tw = f2.getlength(txt)
+        x0 = (W - tw) / 2 - 36
+        d2.rounded_rectangle([x0, y0, x0 + tw + 72, y0 + 96], radius=48, fill=(255, 184, 82, 240))
+        d2.text((W / 2, y0 + 48), txt, font=f2, fill=(20, 16, 10), anchor="mm")
+
+
+def stamp(img, cam, text_lines, cx=540, cy=930, t_age=1.0, rot=-9):
+    sc = max(1.0, 1.6 - t_age * 3)
+    st = Image.new("RGBA", (760, 110 + 80 * len(text_lines)), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(st)
+    sd.rounded_rectangle([8, 8, 752, st.height - 8], radius=18, fill=(246, 236, 214, 230), outline=RED + (245,), width=12)
+    f = ImageFont.truetype(FONT_BOLD, 66)
+    for i, ln in enumerate(text_lines):
+        sd.text((380, st.height / 2 + (i - (len(text_lines) - 1) / 2) * 80), ln, font=f, fill=RED + (235,), anchor="mm")
+    st = st.resize((int(st.width * sc * cam.k), int(st.height * sc * cam.k)))
+    st = st.rotate(rot, expand=True, resample=Image.BICUBIC)
+    x, y = cam.map(cx, cy)
+    img.alpha_composite(st, (int(x - st.width / 2), int(y - st.height / 2)))
+
+
+# ================= Voynich manuscript =================
+VELLUM = (222, 206, 168)
+INKB = (78, 58, 40)
+
+
+def _glyph(d, x, y, s, rng, col=INKB):
+    k = int(rng.integers(6))
+    w = max(2, int(s * 0.12))
+    if k == 0:
+        d.arc([x, y, x + s, y + s], 200, 520, fill=col, width=w)
+    elif k == 1:
+        d.line([(x, y + s), (x + s * 0.3, y), (x + s * 0.6, y + s), (x + s, y + s * 0.2)], fill=col, width=w)
+    elif k == 2:
+        d.ellipse([x, y + s * 0.3, x + s * 0.7, y + s], outline=col, width=w)
+        d.line([(x + s * 0.7, y + s * 0.6), (x + s * 0.7, y - s * 0.3)], fill=col, width=w)
+    elif k == 3:
+        d.arc([x, y, x + s * 0.6, y + s], 90, 270, fill=col, width=w)
+        d.arc([x + s * 0.4, y, x + s, y + s], 270, 450, fill=col, width=w)
+    elif k == 4:
+        d.line([(x, y + s), (x + s * 0.5, y), (x + s, y + s)], fill=col, width=w)
+        d.line([(x + s * 0.2, y + s * 0.6), (x + s * 0.8, y + s * 0.6)], fill=col, width=w)
+    else:
+        d.arc([x, y + s * 0.2, x + s, y + s * 1.2], 180, 360, fill=col, width=w)
+        d.line([(x + s * 0.5, y + s * 0.2), (x + s * 0.5, y + s)], fill=col, width=w)
+
+
+def voynich_page(rng):
+    """An illustrated page in an unknown script: strange plant, glyph lines appear one by one."""
+    bg = vgrad([(0, (20, 14, 10)), (1, (34, 24, 16))])
+    d = ImageDraw.Draw(bg)
+    d.rounded_rectangle([110, 330, 970, 1180], radius=14, fill=VELLUM)
+    for i in range(40):  # foxing spots
+        x, y, r = rng.uniform(130, 950), rng.uniform(350, 1160), rng.uniform(4, 16)
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(208, 188, 146))
+    # the strange plant
+    cx = 540
+    for k in range(7):  # roots
+        a = math.pi * (0.15 + 0.7 * k / 6)
+        d.line([(cx, 1000), (cx + 170 * math.cos(a), 1000 + 110 * math.sin(a))], fill=(150, 104, 60), width=10)
+    d.line([(cx, 1000), (cx - 10, 720), (cx + 6, 560)], fill=(70, 120, 70), width=16, joint="curve")
+    for sgn, y in ((-1, 820), (1, 760), (-1, 690), (1, 640)):
+        d.ellipse([cx + sgn * 20 - (190 if sgn < 0 else 0), y - 40, cx + sgn * 20 + (190 if sgn > 0 else 0), y + 40], fill=(92, 150, 86))
+    d.ellipse([cx - 80, 470, cx + 90, 580], fill=(70, 110, 170))
+    d.ellipse([cx - 40, 440, cx + 50, 520], fill=(170, 60, 60))
+    bg = radial(bg, 540, 700, 800, (255, 200, 130), 0.18)
+    grng = np.random.default_rng(7)
+    rows = []
+    for r in range(4):
+        y = 1040 + r * 34 if r < 2 else 380 + (r - 2) * 34
+        row = []
+        x = 170
+        while x < 900:
+            s = grng.uniform(16, 24)
+            row.append((x, y, s, int(grng.integers(1000))))
+            x += s * 1.25 + (22 if grng.random() < 0.18 else 0)
+        rows.append(row)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        n_total = sum(len(r) for r in rows)
+        shown = int(n_total * min(1, t / max(1.0, ctx["dur"] * 0.8)))
+        c = 0
+        for row in rows:
+            for (x, y, s, seed) in row:
+                if c >= shown:
+                    break
+                px, py = cam.map(x, y)
+                _glyph(d2, px, py, s * cam.k, np.random.default_rng(seed))
+                c += 1
+        dust(d2, t, 4, n=25)
+    return bg, overlay
+
+
+def cipher_dice(rng):
+    """Dice and playing cards turning plain words into strange script (the 2025 Naibbe cipher idea)."""
+    bg = vgrad([(0, (10, 14, 22)), (1, (26, 20, 18))])
+    d = ImageDraw.Draw(bg)
+    d.rectangle([0, 1120, W, H], fill=(40, 26, 18))
+    bg = radial(bg, 540, 760, 700, (255, 190, 110), 0.22)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        # two tumbling dice
+        for i, (dx, dy) in enumerate(((330, 560), (560, 600))):
+            ang = t * (2.4 if i else 1.8) * (1 - min(1, u * 1.4))
+            s = 110 * k
+            x, y = cam.map(dx, dy)
+            pts = [(x + s * math.cos(ang + a), y + s * math.sin(ang + a)) for a in (math.pi / 4, 3 * math.pi / 4, 5 * math.pi / 4, 7 * math.pi / 4)]
+            d2.polygon(pts, fill=(238, 232, 220), outline=(120, 110, 100))
+            n = (int(t * 3) + i * 2) % 6 + 1 if u < 0.7 else 5 - i
+            spots = {1: [(0, 0)], 2: [(-.4, -.4), (.4, .4)], 3: [(-.4, -.4), (0, 0), (.4, .4)], 4: [(-.4, -.4), (.4, -.4), (-.4, .4), (.4, .4)],
+                     5: [(-.4, -.4), (.4, -.4), (0, 0), (-.4, .4), (.4, .4)], 6: [(-.4, -.45), (.4, -.45), (-.4, 0), (.4, 0), (-.4, .45), (.4, .45)]}[n]
+            for sx, sy in spots:
+                rx = sx * math.cos(ang) - sy * math.sin(ang)
+                ry = sx * math.sin(ang) + sy * math.cos(ang)
+                px, py = x + rx * s * 0.95, y + ry * s * 0.95
+                d2.ellipse([px - 11 * k, py - 11 * k, px + 11 * k, py + 11 * k], fill=(30, 26, 22))
+        # fanned cards
+        for j in range(3):
+            a = (j - 1) * 14 - 8
+            card = Image.new("RGBA", (170, 250), (0, 0, 0, 0))
+            cd = ImageDraw.Draw(card)
+            cd.rounded_rectangle([0, 0, 169, 249], radius=14, fill=(246, 240, 226), outline=(150, 40, 36), width=5)
+            cd.text((85, 125), ["I", "V", "X"][j], font=ImageFont.truetype(FONT_BOLD, 90), fill=(150, 40, 36), anchor="mm")
+            card = card.resize((int(170 * k), int(250 * k))).rotate(a, expand=True, resample=Image.BICUBIC)
+            x, y = cam.map(800 + j * 40, 560 + abs(j - 1) * 20)
+            img.alpha_composite(card, (int(x - card.width / 2), int(y - card.height / 2)))
+        # plain word -> strange glyphs
+        f = ImageFont.truetype(FONT_HAND, 64)
+        x, y = cam.map(540, 850)
+        d2.text((x, y), "herba", font=f, fill=(240, 232, 214), anchor="mm")
+        ax, ay = cam.map(540, 930)
+        d2.polygon([(ax - 22 * k, ay - 14 * k), (ax + 22 * k, ay - 14 * k), (ax, ay + 18 * k)], fill=AMBER)
+        grng = np.random.default_rng(3)
+        m = int(9 * min(1, u * 1.8))
+        for g in range(m):
+            gx, gy = cam.map(330 + g * 48, 990)
+            _glyph(d2, gx, gy, 34 * k, grng, col=(255, 214, 150))
+        follow_pill(d2, ctx, t, y0=1150)
+    return bg, overlay
+
+
+# ================= Carroll A. Deering =================
+def schooner(d, x, y, s, hull=(20, 22, 26), sail=(214, 206, 186), masts=5, tilt=0.0):
+    """Five-masted schooner silhouette; (x, y) = waterline centre, s = half length."""
+    hp = [(x - s, y - s * 0.1), (x + s * 1.05, y - s * 0.14), (x + s * 0.9, y + s * 0.06), (x - s * 0.92, y + s * 0.06)]
+    d.polygon(hp, fill=hull)
+    for i in range(masts):
+        mx = x - s * 0.75 + i * (1.5 * s / (masts - 1))
+        top = y - s * 0.95
+        d.line([(mx, y - s * 0.1), (mx + tilt * s, top)], fill=hull, width=max(2, int(s * 0.02)))
+        d.polygon([(mx + 6, y - s * 0.16), (mx + tilt * s * 0.9 + 6, top + s * 0.08), (mx + s * 0.28 + tilt * s * 0.5, y - s * 0.2)], fill=sail)
+    d.line([(x + s * 1.05, y - s * 0.14), (x + s * 1.45, y - s * 0.4)], fill=hull, width=max(2, int(s * 0.02)))
+
+
+def schooner_aground(rng):
+    """A five-masted schooner stuck on the shoals at dawn, sails set, surf breaking, nobody aboard."""
+    bg = vgrad([(0, (26, 30, 44)), (0.45, (120, 96, 96)), (0.6, (180, 140, 110)), (0.66, (60, 84, 96)), (1, (16, 30, 40))])
+    bg = clouds(bg, rng, 16, 250, 950, (150, 130, 130), 90, 50)
+    d = ImageDraw.Draw(bg)
+    schooner(d, 560, 1080, 330, tilt=0.12)
+    bg = radial(bg, 700, 980, 500, (255, 200, 150), 0.25)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        sea(d2, cam, t, 1100, 14, 300, 1.4, (30, 56, 68))
+        burst = (t % 1.8) / 1.8
+        for i in range(30):  # surf breaking on the shoal
+            px, py = cam.map(250 + i * 22, 1105 - burst * (60 + (i % 5) * 30))
+            s = (8 + (i % 4) * 5) * cam.k
+            d2.ellipse([px - s, py - s, px + s, py + s], fill=FOAM + (int(200 * (1 - burst)),))
+        sea(d2, cam, t, 1170, 20, 260, 2.0, (18, 40, 52), 0.8)
+        # a lone gull over the empty ship
+        gx, gy = cam.map(200 + u * 300, 520 + 20 * math.sin(t * 3))
+        d2.line([(gx - 26, gy), (gx, gy + 10 * math.sin(t * 8)), (gx + 26, gy)], fill=(20, 20, 24), width=5)
+    return bg, overlay
+
+
+def bottle_message(rng):
+    """A message in a bottle on the beach; the note is stamped HOAX on the last line."""
+    bg = vgrad([(0, (22, 30, 42)), (0.5, (60, 70, 80)), (0.6, (150, 132, 104)), (1, (120, 100, 76))])
+    d = ImageDraw.Draw(bg)
+    for i in range(8):
+        d.line([(0, 1000 + i * 40), (W, 990 + i * 44)], fill=(132, 112, 86), width=3)
+    # bottle
+    d.rounded_rectangle([160, 960, 560, 1090], radius=60, fill=(60, 110, 80))
+    d.rectangle([540, 995, 680, 1055], fill=(60, 110, 80))
+    d.rectangle([680, 990, 720, 1060], fill=(150, 110, 70))
+    d.line([(200, 985), (500, 985)], fill=(140, 190, 150), width=8)
+    # the note, unrolled
+    d.polygon([(420, 500), (930, 540), (900, 920), (390, 880)], fill=(236, 226, 200))
+    f = ImageFont.truetype(FONT_HAND, 46)
+    for i, ln in enumerate(["Deering captured", "by oil burning", "boat ...", "~~~ ~~ ~~~~"]):
+        d.text((450, 560 + i * 80), ln, font=f, fill=(60, 50, 44))
+    bg = radial(bg, 660, 700, 600, (255, 210, 150), 0.2)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        sea(d2, cam, t, 1180, 10, 360, 0.9, (40, 70, 84, 180))
+        lines = ctx["lines"]
+        if len(lines) >= 2 and t >= lines[1]:
+            stamp(img, cam, ["FORGED"], cx=660, cy=710, t_age=t - lines[1])
+    return bg, overlay
+
+
+# ================= Tunguska =================
+def taiga_blast(rng):
+    """Siberian forest at dawn; a fireball streaks down and bursts in the sky with a white flash."""
+    bg = vgrad([(0, (20, 26, 48)), (0.5, (90, 90, 120)), (0.68, (190, 150, 120)), (0.72, (40, 50, 44)), (1, (16, 22, 18))])
+    d = ImageDraw.Draw(bg)
+    for _ in range(90):
+        x, h = rng.uniform(-40, W + 40), rng.uniform(120, 300)
+        yb = 1150 + rng.uniform(-20, 40)
+        d.polygon([(x, yb - h), (x - h * 0.2, yb), (x + h * 0.2, yb)], fill=(12, 20, 16))
+    d.rectangle([0, 1170, W, H], fill=(12, 18, 14))
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        fly = min(1, t / 2.2)
+        bx, by = 1000 - 460 * fly, 250 + 380 * fly
+        if fly < 1:
+            for i in range(24):  # smoke trail
+                s = i / 24
+                px, py = cam.map(bx + 460 * fly * s * 0.9 + 12 * s, by - 380 * fly * s * 0.9)
+                r = (10 + 30 * s) * k
+                d2.ellipse([px - r, py - r, px + r, py + r], fill=(200, 190, 180, int(160 * (1 - s))))
+            x, y = cam.map(bx, by)
+            r = 38 * k
+            glow = Image.new("RGBA", img.size, (0, 0, 0, 0))
+            ImageDraw.Draw(glow).ellipse([x - r * 3, y - r * 3, x + r * 3, y + r * 3], fill=(255, 190, 90, 110))
+            img.alpha_composite(glow.filter(ImageFilter.GaussianBlur(20)))
+            d2.ellipse([x - r, y - r, x + r, y + r], fill=(255, 244, 210))
+        else:
+            age = t - 2.2
+            a = max(0, 1 - age / 1.2)
+            if a > 0:
+                img.alpha_composite(Image.new("RGBA", img.size, (255, 246, 220, int(230 * a))))
+            x, y = cam.map(540, 630)
+            rr = (80 + age * 260) * k
+            ring = Image.new("RGBA", img.size, (0, 0, 0, 0))
+            ImageDraw.Draw(ring).ellipse([x - rr, y - rr * 0.6, x + rr, y + rr * 0.6], outline=(255, 200, 120, int(200 * max(0.15, 1 - age / 4))), width=int(16 * k))
+            img.alpha_composite(ring.filter(ImageFilter.GaussianBlur(6)))
+            d2.ellipse([x - 60 * k, y - 60 * k, x + 60 * k, y + 60 * k], fill=(255, 220, 160, int(255 * max(0.3, a))))
+    return bg, overlay
+
+
+def fallen_forest(rng):
+    """Aerial view: trees flattened outward in a huge radial pattern around an empty centre - no crater."""
+    bg = vgrad([(0, (34, 40, 30)), (1, (26, 32, 24))])
+    d = ImageDraw.Draw(bg)
+    cx, cy = 540, 760
+    for _ in range(900):
+        a = rng.uniform(0, 2 * math.pi)
+        r = rng.uniform(120, 620)
+        x, y = cx + r * math.cos(a), cy + r * math.sin(a) * 0.95
+        if not (330 < y < 1180):
+            continue
+        L = rng.uniform(26, 50)
+        d.line([(x, y), (x + L * math.cos(a), y + L * math.sin(a))], fill=(92, 74, 52), width=5)
+    for _ in range(40):  # scorched trees still standing in the middle
+        a, r = rng.uniform(0, 2 * math.pi), rng.uniform(0, 100)
+        x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+        d.ellipse([x - 5, y - 5, x + 5, y + 5], fill=(24, 20, 18))
+    bg = radial(bg, cx, cy, 300, (60, 50, 40), 0.4)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        x, y = cam.map(cx, cy)
+        lines = ctx["lines"]
+        if len(lines) > 1 and t < lines[1]:
+            return
+        r = (130 + 12 * math.sin(t * 3)) * k
+        d2.ellipse([x - r, y - r, x + r, y + r], outline=AMBER + (220,), width=int(8 * k))
+        d2.text((x, y - r - 40 * k), "NO CRATER", font=ImageFont.truetype(FONT_BOLD, int(64 * k)), fill=AMBER, anchor="mm",
+                stroke_width=int(4 * k), stroke_fill=(10, 10, 10))
+        follow_pill(d2, ctx, t, y0=1060)
+    return bg, overlay
+
+
+# ================= Antikythera =================
+def gear(d, x, y, r, teeth, ang, col, w=None):
+    pts = []
+    for i in range(teeth * 2):
+        a = ang + i * math.pi / teeth
+        rr = r if i % 2 == 0 else r * 0.88
+        pts.append((x + rr * math.cos(a), y + rr * math.sin(a)))
+    d.polygon(pts, fill=col)
+    d.ellipse([x - r * 0.68, y - r * 0.68, x + r * 0.68, y + r * 0.68], fill=tuple(max(0, c - 40) for c in col[:3]) + col[3:])
+    for s in range(4):
+        a = ang + s * math.pi / 2
+        d.line([(x, y), (x + r * 0.66 * math.cos(a), y + r * 0.66 * math.sin(a))], fill=col, width=max(3, int(r * 0.1)))
+    d.ellipse([x - r * 0.12, y - r * 0.12, x + r * 0.12, y + r * 0.12], fill=(30, 30, 30))
+
+
+def sponge_divers(rng):
+    """Underwater: a diver descends to an ancient wreck, amphorae and a corroded bronze lump on the seabed."""
+    bg = vgrad([(0, (20, 70, 90)), (0.5, (10, 40, 60)), (1, (4, 16, 26))])
+    d = ImageDraw.Draw(bg)
+    d.polygon([(0, 1100), (300, 1060), (700, 1090), (W, 1050), (W, H), (0, H)], fill=(40, 46, 44))
+    d.polygon([(260, 1070), (720, 1040), (800, 1100), (200, 1120)], fill=(46, 34, 26))  # wreck timbers
+    for i in range(6):
+        d.line([(300 + i * 80, 1080), (330 + i * 80, 960 + (i % 2) * 40)], fill=(56, 40, 30), width=14)
+    for (x, y, a) in [(180, 1080, 0.5), (820, 1060, -0.4), (880, 1100, 0.2)]:  # amphorae
+        amph = Image.new("RGBA", (80, 200), (0, 0, 0, 0))
+        ad = ImageDraw.Draw(amph)
+        ad.ellipse([10, 40, 70, 170], fill=(150, 90, 60))
+        ad.rectangle([30, 10, 50, 50], fill=(150, 90, 60))
+        ad.polygon([(30, 170), (50, 170), (40, 198)], fill=(150, 90, 60))
+        amph = amph.rotate(math.degrees(a), expand=True)
+        bg.paste(amph, (int(x - amph.width / 2), int(y - amph.height / 2)), amph)
+    d = ImageDraw.Draw(bg)
+    d.ellipse([500, 1000, 620, 1060], fill=(60, 96, 80))  # the green corroded lump
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        # light rays
+        rays = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        rd = ImageDraw.Draw(rays)
+        for i in range(5):
+            x0 = cam.map(150 + i * 200 + 40 * math.sin(t * 0.6 + i), 0)[0]
+            rd.polygon([(x0, 0), (x0 + 60 * k, 0), (x0 + 240 * k, img.height), (x0 + 120 * k, img.height)], fill=(170, 220, 230, 26))
+        img.alpha_composite(rays)
+        # diver descending, rope above
+        dy = 420 + u * 420
+        x, y = cam.map(560, dy)
+        d2.line([(x, 0), (x, y - 60 * k)], fill=(180, 170, 140), width=int(4 * k))
+        d2.ellipse([x - 26 * k, y - 90 * k, x + 26 * k, y - 38 * k], fill=(10, 16, 20))
+        d2.polygon([(x - 30 * k, y - 40 * k), (x + 30 * k, y - 40 * k), (x + 20 * k, y + 60 * k), (x - 20 * k, y + 60 * k)], fill=(10, 16, 20))
+        for sgn in (-1, 1):
+            d2.line([(x + sgn * 12 * k, y + 55 * k), (x + sgn * (20 + 10 * math.sin(t * 4)) * k, y + 140 * k)], fill=(10, 16, 20), width=int(18 * k))
+            d2.line([(x + sgn * 26 * k, y - 30 * k), (x + sgn * 60 * k, y + 20 * k + sgn * 8 * math.sin(t * 3) * k)], fill=(10, 16, 20), width=int(14 * k))
+        for i in range(8):  # bubbles
+            by = (y - 100 * k) - ((t * 140 + i * 90) % 600) * k
+            bx = x + 14 * k * math.sin(t * 3 + i)
+            r = (4 + i % 3 * 3) * k
+            d2.ellipse([bx - r, by - r, bx + r, by + r], outline=(200, 230, 240, 170), width=2)
+    return bg, overlay
+
+
+def gear_mechanism(rng):
+    """Bronze gears turning inside a shoebox-sized case, with a dial for Sun, Moon and eclipses."""
+    bg = vgrad([(0, (12, 16, 22)), (1, (24, 22, 20))])
+    d = ImageDraw.Draw(bg)
+    d.rounded_rectangle([150, 380, 930, 1140], radius=24, fill=(52, 40, 28), outline=(90, 70, 44), width=10)
+    bg = radial(bg, 540, 760, 600, (255, 190, 110), 0.2)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        specs = [(430, 700, 190, 44, 0.25, (176, 132, 70)), (690, 560, 110, 26, -0.42, (150, 120, 70)),
+                 (720, 870, 130, 30, -0.36, (190, 146, 80)), (330, 990, 90, 20, 0.52, (140, 110, 64)),
+                 (560, 1010, 70, 16, -0.66, (170, 130, 76))]
+        for (x, y, r, n, w, col) in specs:
+            px, py = cam.map(x, y)
+            gear(d2, px, py, r * k, n, t * w, col + (255,))
+        # front pointer with Sun & Moon
+        px, py = cam.map(430, 700)
+        a = t * 0.5 - math.pi / 2
+        d2.line([(px, py), (px + 170 * k * math.cos(a), py + 170 * k * math.sin(a))], fill=(240, 220, 170), width=int(6 * k))
+        d2.ellipse([px + 170 * k * math.cos(a) - 18 * k, py + 170 * k * math.sin(a) - 18 * k,
+                    px + 170 * k * math.cos(a) + 18 * k, py + 170 * k * math.sin(a) + 18 * k], fill=AMBER)
+        b = t * 1.3
+        mx, my = px + 110 * k * math.cos(b), py + 110 * k * math.sin(b)
+        d2.ellipse([mx - 14 * k, my - 14 * k, mx + 14 * k, my + 14 * k], fill=(220, 226, 236))
+        d2.ellipse([mx - 6 * k, my - 14 * k, mx + 16 * k, my + 14 * k], fill=(30, 30, 36))
+        follow_pill(d2, ctx, t, y0=1170)
+    return bg, overlay
+
+
+SCENES.update({f.__name__: f for f in [voynich_page, cipher_dice, schooner_aground, bottle_message,
+                                       taiga_blast, fallen_forest, sponge_divers, gear_mechanism]})
