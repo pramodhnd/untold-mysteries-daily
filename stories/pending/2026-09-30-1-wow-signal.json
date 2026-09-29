@@ -1,0 +1,60 @@
+{
+ "id": "2026-09-30-1-wow-signal",
+ "title": "A signal from space lasted 72 seconds. It never came back. #shorts",
+ "hook": "72 SECONDS",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "big_ear",
+   "label": "OHIO, 15 AUGUST 1977",
+   "lines": [
+    "August 15th, 1977. A radio telescope in Ohio called Big Ear is scanning the sky.",
+    "It picks up something from the direction of Sagittarius."
+   ]
+  },
+  {
+   "scene": "wow_printout",
+   "label": "6EQUJ5",
+   "lines": [
+    "Days later, astronomer Jerry Ehman reads the printout.",
+    "He circles six characters, and writes one word in the margin. Wow!",
+    "The signal stood far above the background noise, and lasted the full seventy-two seconds the telescope could watch that spot."
+   ]
+  },
+  {
+   "scene": "big_ear",
+   "label": "2024",
+   "lines": [
+    "Astronomers have listened again, many times, for decades. It never came back.",
+    "In 2024, a team in Puerto Rico proposed an answer. Not aliens.",
+    "A cold cloud of hydrogen, suddenly brightened by a burst from a magnetar, a kind of dead star. Nobody can prove it yet.",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "A signal from space lasted 72 seconds. It never came back. #shorts",
+  "description": "15 August 1977: the Big Ear radio telescope in Ohio recorded a strong, narrow signal from the direction of Sagittarius. Astronomer Jerry Ehman circled '6EQUJ5' on the printout and wrote 'Wow!' beside it. It lasted the full 72-second window Big Ear could observe and has never been detected again. In 2024, Abel Méndez and colleagues at the Planetary Habitability Laboratory (University of Puerto Rico at Arecibo) proposed that a cold hydrogen cloud was briefly brightened by a strong transient source such as a magnetar flare. It remains a hypothesis. All visuals are original illustrations.\n\nSources:\n- Wikipedia, Wow! signal: https://en.wikipedia.org/wiki/Wow!_signal\n- Phys.org, The Wow! Signal deciphered—it was hydrogen all along, study says (2024): https://phys.org/news/2024-08-wow-deciphered-hydrogen.html\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#wowsignal",
+   "#space",
+   "#shorts"
+  ],
+  "tags": [
+   "wow signal",
+   "big ear",
+   "jerry ehman",
+   "space mystery",
+   "seti",
+   "6EQUJ5",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ }
+}

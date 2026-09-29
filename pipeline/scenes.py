@@ -1135,3 +1135,301 @@ def gear_mechanism(rng):
 
 SCENES.update({f.__name__: f for f in [voynich_page, cipher_dice, schooner_aground, bottle_message,
                                        taiga_blast, fallen_forest, sponge_divers, gear_mechanism]})
+
+
+# ================= Wow! signal =================
+def big_ear(rng):
+    """A flat field radio telescope under a starry Ohio sky; a faint beam pulses while stars drift past."""
+    bg = vgrad([(0, (6, 10, 22)), (0.55, (20, 30, 52)), (0.66, (44, 50, 66)), (0.7, (18, 24, 22)), (1, (10, 14, 14))])
+    bg = stars(bg, rng, 160, 1000)
+    d = ImageDraw.Draw(bg)
+    # tilting flat reflector (back) and parabolic wall (front), seen from the side
+    d.polygon([(90, 1080), (360, 700), (400, 720), (150, 1100)], fill=(70, 82, 96))
+    for i in range(7):
+        y = 740 + i * 52
+        d.line([(360 - i * 38, y - 30), (395 - i * 36, y - 12)], fill=(40, 48, 58), width=4)
+    d.polygon([(700, 1110), (1000, 720), (1040, 740), (760, 1130)], fill=(86, 98, 112))
+    d.rectangle([140, 1110, 1000, 1150], fill=(120, 126, 132))  # aluminium ground plane
+    d.rectangle([0, 1150, W, H], fill=(12, 16, 14))
+    # feed horns in the middle
+    d.rectangle([500, 1000, 560, 1110], fill=(40, 44, 50))
+    d.polygon([(480, 1000), (580, 1000), (560, 960), (500, 960)], fill=(60, 66, 74))
+    bg = radial(bg, 530, 980, 260, (255, 184, 82), 0.18)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        for i in range(30):  # drifting stars (Earth turning)
+            x = (i * 137 + t * 40) % 1080
+            y = 380 + (i * 71) % 520
+            px, py = cam.map(x, y)
+            d2.ellipse([px - 3 * k, py - 3 * k, px + 3 * k, py + 3 * k], fill=(230, 236, 255, 200))
+        # incoming signal: rings travelling down to the feed
+        x, y = cam.map(530, 960)
+        for j in range(3):
+            ph = (t * 0.6 + j / 3) % 1
+            r = (60 + 420 * (1 - ph)) * k
+            d2.arc([x - r, y - r * 1.1, x + r, y + r * 0.2], 200, 340, fill=AMBER + (int(230 * ph),), width=int(6 * k))
+        follow_pill(d2, ctx, t, y0=1180)
+    return bg, overlay
+
+
+def wow_printout(rng):
+    """1977 computer printout of columns of characters; one column 6EQUJ5 gets circled in red and 'Wow!' is written."""
+    bg = vgrad([(0, (20, 18, 16)), (1, (34, 30, 26))])
+    d = ImageDraw.Draw(bg)
+    d.rectangle([150, 360, 930, 1160], fill=(236, 232, 214))
+    for y in range(380, 1160, 60):  # tractor holes & green bars
+        d.ellipse([162, y, 180, y + 18], fill=(40, 36, 32))
+        d.ellipse([900, y, 918, y + 18], fill=(40, 36, 32))
+    for y in range(360, 1160, 120):
+        d.rectangle([190, y, 890, y + 60], fill=(214, 230, 206))
+    f = ImageFont.truetype(FONT_BOLD, 44)
+    cols = [200, 290, 380, 470, 560, 650, 740, 820]
+    wow = "6EQUJ5"
+    for r in range(12):
+        y = 390 + r * 62
+        for ci, x in enumerate(cols):
+            if ci == 4 and 3 <= r < 9:
+                ch = wow[r - 3]
+            else:
+                ch = str(int(rng.integers(0, 4))) if rng.random() < 0.6 else " "
+            d.text((x + 20, y), ch, font=f, fill=(50, 50, 56))
+    bg = radial(bg, 540, 760, 700, (255, 220, 170), 0.15)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        lines = ctx["lines"]
+        t1 = lines[1] if len(lines) > 1 else 1.5
+        if t < t1 * 0.6:
+            return
+        p = min(1, (t - t1 * 0.6) / 0.8)
+        x0, y0 = cam.map(560, 560)
+        x1, y1 = cam.map(640, 960)
+        d2.arc([x0, y0, x1, y1], -90, -90 + 360 * p, fill=RED + (240,), width=int(9 * k))
+        if t >= t1:
+            fh = ImageFont.truetype(FONT_HAND, int(96 * k))
+            x, y = cam.map(770, 700)
+            d2.text((x, y), "Wow!", font=fh, fill=RED + (240,), anchor="mm")
+        follow_pill(d2, ctx, t, y0=1040)
+    return bg, overlay
+
+
+# ================= Jatinga =================
+def jatinga_fog(rng):
+    """A hill village on a foggy moonless night; lanterns glow and dazed birds fly down toward the lights."""
+    bg = vgrad([(0, (8, 12, 18)), (0.5, (30, 40, 44)), (0.75, (46, 56, 56)), (1, (14, 18, 16))])
+    d = ImageDraw.Draw(bg)
+    for layer, (col, base) in enumerate([((22, 30, 30), 900), ((16, 22, 22), 1020)]):
+        pts = [(0, H)]
+        for x in range(0, W + 60, 60):
+            pts.append((x, base - 120 * math.sin(x / 260 + layer) - 50 * math.sin(x / 90)))
+        pts.append((W, H))
+        d.polygon(pts, fill=col)
+    for x in (120, 420, 760):  # bamboo huts
+        d.polygon([(x, 1080), (x + 90, 1010), (x + 180, 1080)], fill=(10, 14, 12))
+        d.rectangle([x + 20, 1080, x + 160, 1150], fill=(12, 16, 14))
+        d.rectangle([x + 70, 1100, x + 100, 1140], fill=(255, 190, 100))
+    d.rectangle([0, 1150, W, H], fill=(10, 12, 10))
+    lamps = [(300, 980), (600, 940), (920, 990)]
+    for (x, y) in lamps:
+        d.line([(x, y), (x, 1150)], fill=(30, 26, 20), width=8)
+        bg = radial(bg, x, y, 200, (255, 190, 100), 0.45)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        for (x, y) in lamps:
+            px, py = cam.map(x, y)
+            r = (16 + 2 * math.sin(t * 9 + x)) * k
+            d2.ellipse([px - r, py - r, px + r, py + r], fill=(255, 226, 160, 255))
+        fog = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        fd = ImageDraw.Draw(fog)
+        for i in range(6):
+            x = ((i * 300 + t * 30) % 1500) - 300
+            px, py = cam.map(x, 700 + i * 70)
+            fd.ellipse([px - 260 * k, py - 50 * k, px + 260 * k, py + 50 * k], fill=(170, 184, 184, 40))
+        img.alpha_composite(fog.filter(ImageFilter.GaussianBlur(28)))
+        for i in range(9):  # birds spiralling toward the lamps
+            lx, ly = lamps[i % 3]
+            ph = ((t * 0.25 + i * 0.11) % 1)
+            a = i * 1.7 + ph * 5
+            rr = 420 * (1 - ph) + 30
+            bx, by = lx + rr * math.cos(a), ly - 40 + rr * 0.6 * math.sin(a)
+            px, py = cam.map(bx, by)
+            s = 30 * k
+            fl = math.sin(t * 14 + i) * s * 0.6
+            d2.line([(px - s, py - fl), (px, py), (px + s, py - fl)], fill=(20, 22, 22, 255), width=int(5 * k))
+        follow_pill(d2, ctx, t, y0=1180)
+    return bg, overlay
+
+
+# ================= Nazca =================
+SAND = (176, 138, 98)
+
+
+def _hummingbird(scale=1.0, cx=540, cy=760):
+    pts = [(0, -380), (8, -210), (40, -180), (40, -120), (60, -90), (300, -200), (280, -160), (310, -150), (270, -110),
+           (300, -90), (240, -60), (60, -20), (50, 80), (90, 260), (40, 200), (0, 300), (-40, 200), (-90, 260), (-50, 80),
+           (-60, -20), (-240, -60), (-300, -90), (-270, -110), (-310, -150), (-280, -160), (-300, -200), (-60, -90),
+           (-40, -120), (-40, -180), (-8, -210), (0, -380)]
+    return [(cx + x * scale, cy + y * scale) for x, y in pts]
+
+
+def nazca_desert(rng):
+    """Aerial view of the reddish Nazca desert; a giant bird figure is traced line by line in amber."""
+    bg = vgrad([(0, (150, 112, 80)), (1, (120, 88, 62))])
+    d = ImageDraw.Draw(bg)
+    for _ in range(1600):
+        x, y = rng.uniform(0, W), rng.uniform(0, H)
+        c = int(rng.uniform(-18, 18))
+        d.point((x, y), fill=(SAND[0] + c, SAND[1] + c, SAND[2] + c))
+    for _ in range(5):  # long straight lines crossing the plain
+        x0, y0 = rng.uniform(0, W), rng.uniform(300, 500)
+        a = rng.uniform(0.9, 2.2)
+        d.line([(x0, y0), (x0 + 1400 * math.cos(a), y0 + 1400 * math.sin(a))], fill=(206, 176, 136), width=6)
+    pts = _hummingbird(1.0, cy=800)
+    d.line(pts, fill=(200, 168, 128), width=10)
+    bg = radial(bg, 540, 760, 700, (40, 26, 18), 0.25)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        p = min(1, t / 3.5)
+        n = len(pts) - 1
+        seg = p * n
+        drawn = [cam.map(*pts[0])]
+        for i in range(1, n + 1):
+            if i <= seg:
+                drawn.append(cam.map(*pts[i]))
+            else:
+                f = seg - (i - 1)
+                if f > 0:
+                    x0, y0 = pts[i - 1]
+                    x1, y1 = pts[i]
+                    drawn.append(cam.map(x0 + (x1 - x0) * f, y0 + (y1 - y0) * f))
+                break
+        if len(drawn) > 1:
+            d2.line(drawn, fill=AMBER + (240,), width=int(9 * k), joint="curve")
+        # a tiny plane shadow crossing, for scale
+        x, y = cam.map(-100 + (t * 90) % 1300, 420)
+        d2.polygon([(x, y), (x - 40 * k, y - 8 * k), (x - 40 * k, y + 8 * k)], fill=(40, 30, 24, 160))
+        d2.line([(x - 20 * k, y - 30 * k), (x - 20 * k, y + 30 * k)], fill=(40, 30, 24, 160), width=int(8 * k))
+        follow_pill(d2, ctx, t, y0=1180)
+    return bg, overlay
+
+
+def ai_scan(rng):
+    """A grid of satellite tiles of desert; a scanner sweeps across and flags faint hidden figures; a counter climbs to 303."""
+    bg = vgrad([(0, (10, 12, 16)), (1, (18, 20, 24))])
+    d = ImageDraw.Draw(bg)
+    tiles = []
+    for r in range(5):
+        for c in range(4):
+            x0, y0 = 120 + c * 215, 380 + r * 150
+            col = (130 + int(rng.uniform(-14, 14)), 100 + int(rng.uniform(-10, 10)), 72)
+            d.rectangle([x0, y0, x0 + 200, y0 + 136], fill=col)
+            for _ in range(60):
+                px, py = x0 + rng.uniform(0, 200), y0 + rng.uniform(0, 136)
+                d.point((px, py), fill=(170, 140, 104))
+            if rng.random() < 0.4:
+                cx, cy = x0 + 100, y0 + 68
+                s = rng.uniform(22, 36)
+                d.ellipse([cx - s, cy - s * 0.7, cx + s, cy + s * 0.7], outline=(158, 126, 92), width=3)
+                d.line([(cx - s, cy), (cx - s - 18, cy + 20)], fill=(158, 126, 92), width=3)
+                tiles.append((x0, y0))
+    fb = ImageFont.truetype(FONT_BOLD, 40)
+    d.text((540, 1150), "SATELLITE + AI SURVEY", font=fb, fill=(140, 150, 160), anchor="mm")
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        sx = 120 + (t * 260) % 860
+        x0, y0 = cam.map(sx, 370)
+        x1, y1 = cam.map(sx, 1130)
+        d2.line([(x0, y0), (x1, y1)], fill=(120, 220, 255, 200), width=int(6 * k))
+        for (tx, ty) in tiles:
+            if t * 260 >= tx - 120:
+                a, b = cam.map(tx + 4, ty + 4)
+                c, e = cam.map(tx + 196, ty + 132)
+                d2.rectangle([a, b, c, e], outline=AMBER + (240,), width=int(6 * k))
+        lines = ctx["lines"]
+        n = int(min(303, 303 * min(1, t / max(1.0, (lines[1] if len(lines) > 1 else 3.0)))))
+        x, y = cam.map(540, 300)
+        d2.text((x, y), f"{n} NEW", font=ImageFont.truetype(FONT_BOLD, int(96 * k)), fill=AMBER, anchor="mm",
+                stroke_width=int(5 * k), stroke_fill=(10, 10, 10))
+    return bg, overlay
+
+
+# ================= Baghdad Battery =================
+def _jar(d, cx, top, s=1.0, clay=(150, 96, 60)):
+    d.ellipse([cx - 150 * s, top + 60 * s, cx + 150 * s, top + 460 * s], fill=clay)
+    d.rectangle([cx - 80 * s, top, cx + 80 * s, top + 120 * s], fill=clay)
+    d.ellipse([cx - 90 * s, top - 20 * s, cx + 90 * s, top + 20 * s], fill=tuple(int(c * 0.8) for c in clay))
+
+
+def clay_jar(rng):
+    """Museum cutaway of a small clay jar: a copper tube inside, an iron rod in the middle, sealed with black bitumen."""
+    bg = vgrad([(0, (14, 14, 18)), (1, (26, 22, 20))])
+    d = ImageDraw.Draw(bg)
+    d.rectangle([220, 1060, 860, 1110], fill=(60, 50, 40))  # museum plinth
+    _jar(d, 540, 520, 1.1)
+    # cutaway window
+    d.rounded_rectangle([440, 560, 640, 1010], radius=30, fill=(40, 26, 20))
+    d.rectangle([470, 640, 610, 960], fill=(184, 110, 60))  # copper tube
+    d.rectangle([490, 660, 590, 950], fill=(90, 54, 34))
+    d.rectangle([530, 560, 550, 930], fill=(120, 124, 130))  # iron rod
+    d.rectangle([462, 600, 618, 650], fill=(18, 16, 14))  # bitumen plug
+    fb = ImageFont.truetype(FONT_BOLD, 34)
+    for (tx, ty, txt, x2, y2) in [(820, 520, "IRON ROD", 548, 600), (840, 800, "COPPER TUBE", 610, 800),
+                                   (250, 560, "BITUMEN", 470, 625)]:
+        d.line([(tx, ty + 20), (x2, y2)], fill=(200, 190, 170), width=3)
+        d.text((tx, ty), txt, font=fb, fill=(230, 220, 200), anchor="mm")
+    bg = radial(bg, 540, 760, 520, (255, 200, 140), 0.22)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        lines = ctx["lines"]
+        if len(lines) > 1 and t >= lines[1]:  # the 'battery' idea: a flickering spark
+            x, y = cam.map(540, 540)
+            if int(t * 8) % 3:
+                pts = [(x, y)]
+                for i in range(5):
+                    pts.append((x + (18 if i % 2 else -18) * k, y - (i + 1) * 22 * k))
+                d2.line(pts, fill=(170, 220, 255, 240), width=int(6 * k))
+        follow_pill(d2, ctx, t, y0=1150)
+    return bg, overlay
+
+
+def scroll_jar(rng):
+    """Lamp-lit shelf: a rolled scroll rises out of the clay jar, hinting at a far older, simpler use."""
+    bg = vgrad([(0, (18, 14, 12)), (1, (36, 26, 18))])
+    d = ImageDraw.Draw(bg)
+    d.rectangle([80, 1060, 1000, 1100], fill=(70, 46, 28))
+    _jar(d, 380, 620, 0.9)
+    _jar(d, 760, 700, 0.7, clay=(130, 84, 52))
+    bg = radial(bg, 540, 700, 560, (255, 190, 110), 0.3)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        rise = min(1, t / 2.5)
+        top = 600 - 220 * rise
+        a, b = cam.map(345, top)
+        c, e = cam.map(415, top + 260)
+        d2.rounded_rectangle([a, b, c, e], radius=int(30 * k), fill=(232, 216, 176, 255))
+        for i in range(4):
+            y = cam.map(0, top + 40 + i * 50)[1]
+            d2.line([(a + 10 * k, y), (c - 10 * k, y)], fill=(120, 96, 70, 255), width=int(4 * k))
+        x, y = cam.map(380, top - 10)
+        d2.ellipse([x - 36 * k, y - 16 * k, x + 36 * k, y + 16 * k], fill=(210, 190, 150, 255))
+        lines = ctx["lines"]
+        if len(lines) >= 2 and t >= lines[-2]:
+            stamp(img, cam, ["NO WIRES FOUND"], cx=560, cy=990, t_age=t - lines[-2])
+        follow_pill(d2, ctx, t, y0=1150)
+    return bg, overlay
+
+
+SCENES.update({f.__name__: f for f in [big_ear, wow_printout, jatinga_fog, nazca_desert, ai_scan, clay_jar, scroll_jar]})

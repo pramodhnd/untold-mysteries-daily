@@ -1,0 +1,261 @@
+{
+ "id": "2026-09-30-2-dyatlov-pass",
+ "format": "landscape",
+ "title": "Dyatlov Pass: The Tent Cut Open From the Inside",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "scenes": [
+  {
+   "scene": "night_mountains",
+   "recon": true,
+   "label": "NORTHERN URALS, 26 FEBRUARY 1959",
+   "lines": [
+    "February 26th, 1959. The northern Ural Mountains, in the Soviet Union.",
+    "A search party climbing a bare, snowy slope finds a tent, half torn down and covered with snow.",
+    "It is empty. The group's belongings are still inside. So are their shoes.",
+    "And the tent has been cut open. From the inside.",
+    "Nine experienced hikers had fled into the freezing night. Most of them were barely dressed."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "DYATLOV PASS",
+   "sub": "Nine hikers. One tent. Sixty years of theories.",
+   "lines": [
+    "What could make nine skilled skiers run from their only shelter?",
+    "For more than sixty years, nobody could agree."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Expedition",
+   "title": "Winter 1959",
+   "events": [
+    {
+     "year": "23 JAN",
+     "label": "Leave Sverdlovsk"
+    },
+    {
+     "year": "27 JAN",
+     "label": "Set off on skis from Vizhai"
+    },
+    {
+     "year": "28 JAN",
+     "label": "Yudin turns back",
+     "key": true
+    },
+    {
+     "year": "1 FEB",
+     "label": "Last camp"
+    }
+   ],
+   "lines": [
+    "The group came from the Ural Polytechnic Institute in Sverdlovsk. Their leader was Igor Dyatlov, a twenty-three-year-old radio engineering student.",
+    "Their goal was Otorten, a mountain in the northern Urals. The route was rated Category Three, the hardest grade at the time.",
+    "They left Sverdlovsk on January 23rd, 1959. After a train and a lorry ride, they set off on skis from the village of Vizhai on the 27th.",
+    "There were ten of them. On January 28th, Yuri Yudin turned back with knee and joint pain. He would be the only one to come home."
+   ]
+  },
+  {
+   "scene": "route",
+   "chapter": "The Last Camp",
+   "from": "VIZHAI",
+   "to": "OTORTEN",
+   "note": "A planned trek of about 300 km",
+   "lines": [
+    "The other nine skied on, keeping diaries and taking photographs along the way.",
+    "Those diaries, and film from their cameras, survived. They still give us a day-by-day picture of the trip, right up to the end.",
+    "On January 31st, they reached the edge of the high ground, and left a cache of spare supplies.",
+    "On February 1st, the weather worsened. They pitched their tent on the open slope of a mountain called Kholat Syakhl, about ten kilometres from Otorten.",
+    "There was no shelter from the wind. Sometime that night, something drove them all out of the tent."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Search",
+   "title": "No word from the mountain",
+   "events": [
+    {
+     "year": "12 FEB",
+     "label": "Due back"
+    },
+    {
+     "year": "20 FEB",
+     "label": "Families demand a search"
+    },
+    {
+     "year": "26 FEB",
+     "label": "Tent found",
+     "key": true
+    },
+    {
+     "year": "4 MAY",
+     "label": "Last four found"
+    }
+   ],
+   "lines": [
+    "They were due back by February 12th. No message came.",
+    "On February 20th, the families demanded a rescue operation.",
+    "Six days later, searchers found the tent, and the footprints.",
+    "The last of the hikers would not be found until May."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "What the searchers saw",
+   "facts": [
+    "Tent cut open from inside",
+    "Shoes and belongings left behind",
+    "Nine sets of footprints",
+    "Socks, one shoe, or bare feet"
+   ],
+   "lines": [
+    "Nine sets of footprints led downhill, away from the tent.",
+    "Some were made in socks. Some in a single shoe. Some by bare feet.",
+    "They headed toward the forest, about one and a half kilometres away, and then disappeared under fresh snow."
+   ]
+  },
+  {
+   "scene": "forest_night",
+   "recon": true,
+   "chapter": "Nine Hikers",
+   "label": "THE PINE TREE",
+   "lines": [
+    "At the edge of the forest, under a large Siberian pine, searchers found the remains of a small fire, and two bodies, dressed only in their underwear.",
+    "Branches had been broken off the tree up to five metres high.",
+    "Between the tree and the tent lay three more, including Igor Dyatlov. They seemed to have died trying to get back to the tent.",
+    "Six of the nine died of hypothermia. But the last four told a different story."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "Found 4 May 1959",
+   "facts": [
+    "Under 4 metres of snow",
+    "Best dressed of the group",
+    "Skull and chest fractures",
+    "Almost no external wounds"
+   ],
+   "lines": [
+    "On May 4th, the last four were found in a ravine, a little deeper into the woods, under four metres of snow.",
+    "They were the best dressed of the group. Some wore clothing taken from friends who had already died.",
+    "And three of them had terrible injuries. A fractured skull. Crushed chests.",
+    "The force was compared to a car crash. Yet there were almost no external wounds."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Theories",
+   "title": "Why the mystery grew",
+   "facts": [
+    "1959 verdict: 'a compelling natural force'",
+    "Files sent to a secret archive",
+    "Orange spheres seen in the sky",
+    "Radiation on one victim's clothing"
+   ],
+   "lines": [
+    "In May 1959, the investigation was closed. The official cause was, in the words of the file, a compelling natural force. The files went into a secret archive.",
+    "That secrecy fed the theories. Another group of hikers, to the south, reported strange orange spheres in the sky that night.",
+    "Some radiation was found on one victim's clothing.",
+    "People blamed weapons tests, wind-made infrasound, even an attack. But investigators found no sign of anyone else on the mountain."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "A Slab of Snow",
+   "title": "The case reopens",
+   "events": [
+    {
+     "year": "2019",
+     "label": "Case reopened"
+    },
+    {
+     "year": "2020",
+     "label": "Verdict: avalanche"
+    },
+    {
+     "year": "2021",
+     "label": "Slab model published",
+     "key": true
+    },
+    {
+     "year": "2022",
+     "label": "Slabs seen near the pass"
+    }
+   ],
+   "lines": [
+    "In 2019, Russian prosecutors reopened the case.",
+    "In July 2020, they announced their conclusion. An avalanche. Many sceptics were not convinced. On average, the slope looked far too gentle.",
+    "Then, in January 2021, two scientists, Alexander Puzrin of ETH Zurich and Johan Gaume of EPFL, published a new model.",
+    "And a year later, the mountain gave them some evidence."
+   ]
+  },
+  {
+   "scene": "night_mountains",
+   "recon": true,
+   "label": "THE SLAB MODEL",
+   "lines": [
+    "Here is the idea. The mountain looks gentle overall, but the tent stood below a locally steep stretch, about twenty-eight degrees.",
+    "Through the night, strong winds piled more and more snow above it.",
+    "Hours later, a small slab of dense snow could break loose and land on the tent. Not a giant avalanche. A small, heavy slab.",
+    "Their simulations suggested it could cause injuries like the ones the hikers suffered.",
+    "In the dark, the group might have cut their way out, and gone downhill to the forest for shelter.",
+    "Russian prosecutors had already described something similar: snow slowly pressing on the tent, and a hurried evacuation without proper clothing, into about minus forty degrees and winds of twenty to thirty metres a second.",
+    "In their words, it was a heroic struggle. There was no panic, but they had no chance to save themselves."
+   ]
+  },
+  {
+   "scene": "night_mountains",
+   "chapter": "Seen Again",
+   "label": "JANUARY 2022",
+   "lines": [
+    "In January 2022, two mountain guides from Yekaterinburg photographed two small slab avalanches near Dyatlov Pass, about three kilometres from the tent site.",
+    "The conditions matched 1959. The same time of year. Low temperatures, strong winds, and lots of wind-blown snow.",
+    "Within about an hour, the wind had hidden most of the evidence."
+   ]
+  },
+  {
+   "scene": "forest_night",
+   "chapter": "Solved?",
+   "label": "DYATLOV PASS",
+   "lines": [
+    "So was it a slab of snow that drove nine people out into the dark?",
+    "It would explain the cut tent, the hurried escape, and the injuries.",
+    "But not everyone accepts it. Some still ask why the group went so far, and how one small slab could lead to so much.",
+    "Today, the pass carries the name of the young man who led them.",
+    "What do you think happened on that slope? Tell us in the comments, and subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "thumbnail": {
+  "line1": "CUT FROM",
+  "line2": "THE INSIDE",
+  "badge": "9 HIKERS · 1959",
+  "sub": "What made them run?",
+  "scene": "night_mountains",
+  "skull": false
+ },
+ "youtube": {
+  "title": "Dyatlov Pass: The Tent Cut Open From the Inside",
+  "description": "In February 1959, searchers in the northern Urals found the tent of nine student hikers cut open from the inside, and footprints leading downhill in socks and bare feet. We follow Igor Dyatlov's group from Sverdlovsk to their last camp on Kholat Syakhl, the search, the injuries that fed six decades of theories, the 2020 avalanche verdict, and the 2021 slab-avalanche model by Alexander Puzrin (ETH Zurich) and Johan Gaume (EPFL), backed by slab avalanches photographed near the pass in January 2022.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. All illustrations are original artwork.\n\nSOURCES\nWikipedia, Dyatlov Pass incident: https://en.wikipedia.org/wiki/Dyatlov_Pass_incident\nGaume & Puzrin (2022), Post-publication careers: follow-up expeditions reveal avalanches at Dyatlov Pass, Communications Earth & Environment: https://www.nature.com/articles/s43247-022-00393-x\nETH Zurich, The Dyatlov Pass mystery and what a research article can trigger (2022): https://ethz.ch/en/news-and-events/eth-news/news/2022/03/the-dyatlov-pass-mystery-and-what-a-research-article-can-trigger.html\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#DyatlovPass",
+   "#UnsolvedMysteries",
+   "#Mystery",
+   "#History",
+   "#Documentary"
+  ],
+  "tags": [
+   "dyatlov pass",
+   "dyatlov pass incident",
+   "dyatlov pass documentary",
+   "ural mountains",
+   "1959 mystery",
+   "slab avalanche",
+   "unsolved mysteries",
+   "history documentary"
+  ],
+  "synthetic": true
+ }
+}

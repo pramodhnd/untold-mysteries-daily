@@ -1,0 +1,59 @@
+{
+ "id": "2026-09-30-4-nazca-ai",
+ "title": "AI just found 303 new Nazca drawings in Peru. #shorts",
+ "hook": "303 NEW",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "nazca_desert",
+   "label": "SOUTHERN PERU",
+   "lines": [
+    "In the desert of southern Peru, giant drawings have sat on the ground for about two thousand years.",
+    "Many are so big, they're best seen from the air."
+   ]
+  },
+  {
+   "scene": "ai_scan",
+   "label": "2024 · AI SURVEY",
+   "lines": [
+    "About four hundred and thirty figures had been found since 1927.",
+    "Then a team from Yamagata University, working with IBM, trained an AI to spot faint outlines in aerial images.",
+    "In a six-month field survey, they confirmed three hundred and three new ones. Nearly double."
+   ]
+  },
+  {
+   "scene": "nazca_desert",
+   "label": "THE NEW FIGURES",
+   "lines": [
+    "Many are smaller, and sit beside ancient footpaths. People, llamas, birds. Even a killer whale holding a knife.",
+    "The team thinks these were meant to be seen by travellers on foot.",
+    "So who were the giant ones made for? Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "AI just found 303 new Nazca drawings in Peru. #shorts",
+  "description": "In September 2024, a team led by Masato Sakai of Yamagata University, working with IBM Research, reported 303 previously unknown figurative Nazca geoglyphs found in a six-month field survey, nearly doubling the roughly 430 known before. An AI model flagged candidates in aerial imagery, which were then checked on the ground. The newly found relief-type figures, mostly showing humans and domesticated animals, tend to lie near footpaths, while the larger line-type figures of wild animals sit along the line networks. All visuals are original illustrations.\n\nSources:\n- Yamagata University, AI-accelerated Nazca survey nearly doubles the number of known figurative geoglyphs (2024): https://www.yamagata-u.ac.jp/en/information/info/20240924/\n- Smithsonian Magazine, See Newly Discovered Nazca Drawings: https://www.smithsonianmag.com/smart-news/see-newly-discovered-nazca-drawings-depict-llamas-human-sacrifices-more-180985133/\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#nazcalines",
+   "#peru",
+   "#archaeology",
+   "#shorts"
+  ],
+  "tags": [
+   "nazca lines",
+   "nazca geoglyphs",
+   "peru",
+   "ai archaeology",
+   "ancient mystery",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ }
+}

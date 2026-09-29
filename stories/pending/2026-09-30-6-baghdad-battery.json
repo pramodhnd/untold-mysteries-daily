@@ -1,0 +1,58 @@
+{
+ "id": "2026-09-30-6-baghdad-battery",
+ "title": "An ancient jar from Iraq can make electricity. So why isn't it a battery? #shorts",
+ "hook": "ANCIENT BATTERY?",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "scenes": [
+  {
+   "scene": "clay_jar",
+   "label": "NEAR BAGHDAD, FOUND 1936",
+   "lines": [
+    "This small clay jar from near Baghdad is up to two thousand years old. Some call it a battery.",
+    "Inside, a copper tube and an iron rod, fixed with asphalt. In 1938, Wilhelm König of the Iraq Museum suggested it was an electric cell."
+   ]
+  },
+  {
+   "scene": "clay_jar",
+   "label": "THE REPLICAS",
+   "lines": [
+    "And copies really can make electricity. Fill one with grape juice or vinegar, and you get a small voltage.",
+    "On television, ten replicas linked together made a few volts."
+   ]
+  },
+  {
+   "scene": "scroll_jar",
+   "label": "THE TWIST",
+   "lines": [
+    "But no wires were ever found. And the copper tube is sealed inside.",
+    "Similar jars from the nearby ancient city of Seleucia seem to have held rolled-up scrolls.",
+    "Most archaeologists think it was a container, not a battery. And since 2003, nobody knows where the jar is. Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "An ancient jar from Iraq can make electricity. So why isn't it a battery? #shorts",
+  "description": "The so-called Baghdad Battery - a clay jar holding a copper tube and an iron rod fixed with bitumen - was found at Khujut Rabu near Baghdad in 1936. Wilhelm König, of the Iraq Museum laboratory, suggested in 1938 that it was a galvanic cell. Replicas filled with an acidic liquid can produce a small voltage, but no wires or connecting parts have ever been found, and most archaeologists think such jars were containers, possibly for sacred scrolls. Its dating (Parthian or Sasanian) is uncertain, and the object's whereabouts have been unknown since 2003. All visuals are original illustrations.\n\nSources:\n- Wikipedia, Baghdad Battery: https://en.wikipedia.org/wiki/Baghdad_Battery\n- IFLScience, Is The 2,000-Year-Old 'Baghdad Battery' Actually A Battery?: https://www.iflscience.com/is-the-2-000-year-old-baghdad-battery-actually-a-battery-67119\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#baghdadbattery",
+   "#archaeology",
+   "#shorts"
+  ],
+  "tags": [
+   "baghdad battery",
+   "parthian battery",
+   "ancient electricity",
+   "iraq",
+   "ancient mystery",
+   "ooparts",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ }
+}

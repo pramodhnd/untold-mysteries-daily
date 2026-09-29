@@ -1,0 +1,231 @@
+{
+ "id": "2026-09-30-5-franklin",
+ "format": "landscape",
+ "title": "The Franklin Expedition: 129 Men Vanished in the Arctic. A Tooth Told Us How It Ended",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "scenes": [
+  {
+   "scene": "night_sea",
+   "recon": true,
+   "label": "KING WILLIAM ISLAND, 5 MAY 1859",
+   "lines": [
+    "May 1859. On a bleak shore in the Canadian Arctic, British searchers take apart a pile of stones.",
+    "Inside the cairn is a note. Two notes, in fact, written on the same sheet of paper, a year apart.",
+    "The first, from May 1847, contains two simple words. All well.",
+    "The second, squeezed around the edges in April 1848, says the ships have been abandoned. Twenty-four men are dead, including the commander, Sir John Franklin.",
+    "It was the last word ever heard from the expedition."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "LOST IN THE ICE",
+   "sub": "The Franklin Expedition, 1845",
+   "lines": [
+    "For a century and a half, the Arctic kept its secret.",
+    "Then the ice began to give it back."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Passage",
+   "title": "A route over the top of the world",
+   "events": [
+    {
+     "year": "1845",
+     "label": "Leave England"
+    },
+    {
+     "year": "1846",
+     "label": "Trapped in ice",
+     "key": true
+    },
+    {
+     "year": "1847",
+     "label": "Franklin dies"
+    },
+    {
+     "year": "1848",
+     "label": "Ships abandoned"
+    }
+   ],
+   "lines": [
+    "On May 19th, 1845, two Royal Navy ships left Greenhithe, in Kent, to find the Northwest Passage, a sea route across the top of North America.",
+    "HMS Erebus, of three hundred and seventy-eight tons, was commanded by Sir John Franklin, with Captain James Fitzjames as his second-in-command. The smaller HMS Terror was under Francis Crozier.",
+    "In Greenland, five sick men were sent home. That left one hundred and twenty-nine.",
+    "What happened to them over the next three years would take more than a century and a half to piece together."
+   ]
+  },
+  {
+   "scene": "route",
+   "from": "ENGLAND",
+   "to": "BAFFIN BAY",
+   "note": "Last seen: late July 1845",
+   "lines": [
+    "In late July 1845, two whaling ships, the Prince of Wales and the Enterprise, met Erebus and Terror in Baffin Bay, waiting for good conditions to cross into Lancaster Sound.",
+    "The whalers were the last Europeans ever to see them."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "chapter": "Into the Ice",
+   "label": "BEECHEY ISLAND, 1845-46",
+   "lines": [
+    "They spent their first winter at Beechey Island.",
+    "Three young crewmen died there, John Torrington, John Hartnell and William Braine, and were buried in the frozen ground.",
+    "In September 1846, off King William Island, both ships became trapped in the ice.",
+    "They are thought never to have sailed again.",
+    "A second winter followed, near King William Island, with both ships still held fast in the ice."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Note",
+   "title": "The Victory Point note",
+   "facts": [
+    "28 May 1847: 'All well'",
+    "11 June 1847: Franklin dies",
+    "22 April 1848: ships deserted",
+    "105 survivors under Crozier"
+   ],
+   "lines": [
+    "In May 1847, a sledge party left the first note in a stone cairn. All well, it said.",
+    "Two weeks later, on June 11th, 1847, Franklin died. Crozier took command.",
+    "Almost a year after that, on April 25th, 1848, the note was taken out again and more was written around its margins.",
+    "The ships had been deserted on April 22nd. Nine officers and fifteen men were already dead.",
+    "One hundred and five survivors, under Crozier, would start the next day for Back's Fish River, far to the south."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Search",
+   "title": "Where are they?",
+   "events": [
+    {
+     "year": "1848",
+     "label": "Search ships sail"
+    },
+    {
+     "year": "1854",
+     "label": "John Rae hears the Inuit",
+     "key": true
+    },
+    {
+     "year": "1859",
+     "label": "Note and lifeboat found"
+    }
+   ],
+   "lines": [
+    "Back in Britain, the silence grew. From 1848, ship after ship and party after party went looking.",
+    "In 1854, the explorer John Rae, surveying for the Hudson's Bay Company, met Inuit who told him a group of thirty-five to forty white men had died of starvation near the mouth of the Back River.",
+    "On May 5th, 1859, Lieutenant William Hobson, of Francis McClintock's expedition, found the Victory Point note, and on the island's western tip, a lifeboat holding skeletons."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "What the Inuit said",
+   "facts": [
+    "Men dying of starvation",
+    "Silverware of Franklin's officers",
+    "Some had eaten the dead"
+   ],
+   "lines": [
+    "Rae bought silverware from the Inuit that had belonged to Franklin, Fitzjames and other officers.",
+    "And the Inuit said something more. In the end, some of the dying sailors had eaten their dead.",
+    "Britain was horrified. Charles Dickens wrote that there was no reason whatever to believe it.",
+    "For well over a century, many preferred his version to theirs. Modern science would eventually test it."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "What Killed Them?",
+   "title": "The suspects",
+   "facts": [
+    "Lead from tinned food?",
+    "Scurvy",
+    "Cold and starvation",
+    "Poor diet"
+   ],
+   "lines": [
+    "In 1984, anthropologist Owen Beattie's team exhumed the sailors buried on Beechey Island. They found high levels of lead.",
+    "The seams of the food tins were thick and sloppily soldered. Perhaps the crew had been slowly poisoned.",
+    "Beattie's work on King William Island also found bone patterns often seen in scurvy, and cut marks on some of the bones.",
+    "Later studies cast doubt on the lead theory. One 2016 study pointed instead to a poor diet.",
+    "Most likely, there was no single killer. Cold, hunger and disease, one after another."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "chapter": "The Ships",
+   "label": "2014 · 2016",
+   "lines": [
+    "For more than a century and a half, nobody could find Erebus or Terror.",
+    "Inuit accounts had always pointed to the waters south of King William Island.",
+    "On September 2nd, 2014, a Parks Canada team found HMS Erebus in about eleven metres of water, in Wilmot and Crampton Bay.",
+    "Two years later, on September 3rd, 2016, HMS Terror was found in Terror Bay, twenty-four metres down, in near pristine condition.",
+    "Parks Canada credits perseverance, technology, and Inuit knowledge."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Captain",
+   "title": "Identified, 2024",
+   "facts": [
+    "451 bones, at least 13 sailors",
+    "DNA from one molar",
+    "Matched to a living relative",
+    "Cut marks on the jaw"
+   ],
+   "lines": [
+    "The biggest twist came from a single tooth.",
+    "DNA had already named one sailor. In 2021, remains found by McClintock's men were identified as John Gregory, an engineer on Erebus.",
+    "At one site on King William Island, archaeologists had recovered four hundred and fifty-one bones from at least thirteen sailors.",
+    "In 2024, researchers from the University of Waterloo and Lakehead University took DNA from a molar in a jawbone, and matched it to a living relative of the Fitzjames family.",
+    "The jaw belonged to Captain James Fitzjames. The man who wrote the note that said, all well. He had been one of the hundred and five who left the ships in 1848.",
+    "And it carried cut marks. The Inuit accounts had been right. As researcher Douglas Stenton put it, neither rank nor status was the governing principle in those final desperate days."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "chapter": "Still Lost",
+   "label": "KING WILLIAM ISLAND",
+   "lines": [
+    "Fitzjames's remains have been returned to a memorial cairn on the island.",
+    "But most of the one hundred and twenty-nine men still have no name and no grave.",
+    "Why did a hundred and five men march south instead of waiting? And how far did the last of them get?",
+    "What do you think happened to Franklin's last survivors? Tell us in the comments, and subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "thumbnail": {
+  "line1": "LOST IN",
+  "line2": "THE ICE",
+  "badge": "129 MEN · 1845",
+  "sub": "A tooth told us how it ended",
+  "scene": "night_sea",
+  "skull": false
+ },
+ "youtube": {
+  "title": "The Franklin Expedition: 129 Men Vanished in the Arctic. A Tooth Told Us How It Ended",
+  "description": "In 1845, HMS Erebus and HMS Terror sailed to find the Northwest Passage with 129 men. None came home. We follow the voyage, the ships trapped off King William Island, the Victory Point note, John Rae's Inuit testimony and the reaction in Britain, the lead-poisoning debate, the discovery of the wrecks in 2014 and 2016, and the 2024 DNA identification of Captain James Fitzjames.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. All illustrations are original artwork.\n\nSOURCES\nWikipedia, Franklin's lost expedition: https://en.wikipedia.org/wiki/Franklin%27s_lost_expedition\nParks Canada, Searching for Franklin - Wrecks of HMS Erebus and HMS Terror: https://parks.canada.ca/lhn-nhs/nu/epaveswrecks/culture/histoire-history/suivant-next\nSmithsonian Magazine, DNA Reveals Identity of Officer on the Lost Franklin Expedition (2024): https://www.smithsonianmag.com/smart-news/dna-reveals-identity-of-officer-on-the-lost-franklin-expedition-and-his-remains-show-signs-of-cannibalism-180985154/\nUniversity of Waterloo, Another Franklin expedition crew member has been identified (2024): https://uwaterloo.ca/news/media/another-franklin-expedition-crew-member-has-been-identified\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#FranklinExpedition",
+   "#Arctic",
+   "#UnsolvedMysteries",
+   "#History",
+   "#Documentary"
+  ],
+  "tags": [
+   "franklin expedition",
+   "hms erebus",
+   "hms terror",
+   "northwest passage",
+   "james fitzjames",
+   "arctic mystery",
+   "lost expedition",
+   "history documentary"
+  ],
+  "synthetic": true
+ }
+}
