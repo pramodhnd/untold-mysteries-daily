@@ -18,3 +18,6 @@ approved. Quick job: finish in a few minutes. Nobody is watching.
    is not `"published"`, update it to `status: "published"` and `video_url: "https://youtu.be/<video_id>"`.
 5. If anything changed in git: commit ("Sync approvals") and push. If the push is rejected, pull with rebase and push once more.
 6. Reply with one line: what moved, what was rewritten, what was published.
+
+## Report
+Follow `agents/hq_reporting.md`, including its Videos section.

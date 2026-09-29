@@ -74,3 +74,6 @@ realistic scenes, otherwise false).
 - Invent facts, quotes or sources. Present a legend as a legend.
 - Cover living private people, recent crimes, health or money claims, or anything aimed at children.
 - Touch GitHub secrets, the workflow file, or anything in `stories/published/`.
+
+## Report
+Follow `agents/hq_reporting.md` at the start (read the owner's instructions) and at the end of the run.
