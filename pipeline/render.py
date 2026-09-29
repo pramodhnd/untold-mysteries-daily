@@ -155,6 +155,25 @@ def fmt_srt(t):
     return f"{int(h):02d}:{int(m):02d}:{int(s):02d},{int((s % 1) * 1000):03d}"
 
 
+def photo_bg(path, credit=None):
+    """Vertical Ken Burns background from a real photo, graded to match the channel look."""
+    im = Image.open(path).convert("RGB")
+    r = max(W / im.width, H / im.height)
+    im = im.resize((int(im.width * r) + 1, int(im.height * r) + 1), Image.LANCZOS)
+    x0, y0 = (im.width - W) // 2, (im.height - H) // 2
+    im = im.crop((x0, y0, x0 + W, y0 + H))
+    a = np.asarray(im).astype(np.float32)
+    lum = a.mean(axis=2, keepdims=True)
+    a = (lum + (a - lum) * 0.85 - 128) * 1.05 + 118
+    im = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+
+    def overlay(img, draw, t, u, cam, ctx):
+        if credit:
+            ImageDraw.Draw(img).text((W - 24, 1600), credit, font=ImageFont.truetype(FONT_BOLD, 22),
+                                     fill=(235, 235, 235, 210), anchor="rs", stroke_width=2, stroke_fill=(0, 0, 0))
+    return im, overlay
+
+
 def main(story_path, out_dir):
     t0 = time.time()
     story = json.load(open(story_path))
@@ -175,7 +194,12 @@ def main(story_path, out_dir):
     built = []
     for i, sc in enumerate(timeline):
         rng = np.random.default_rng(100 + i)
-        bg, ov = SCENES[sc["scene"]](rng)
+        if sc["scene"] == "photo" and sc.get("photo_url"):
+            from render_long import fetch_photo
+            path = fetch_photo(sc["photo_url"], out_dir)
+            bg, ov = (photo_bg(path, sc.get("credit")) if path else SCENES["question"](rng))
+        else:
+            bg, ov = SCENES[sc["scene"]](rng)
         bg = bg.resize((int(W * S), int(H * S)), Image.LANCZOS)
         ctx = {"lines": [ln["start"] - sc["start"] for ln in sc["lines"]], "dur": sc["end"] - sc["start"]}
         built.append((sc, bg, ov, ctx))

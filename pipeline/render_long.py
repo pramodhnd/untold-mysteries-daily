@@ -153,6 +153,25 @@ def ts(t):
     return f"{m:02d}:{s:02d}"
 
 
+def fetch_photo(url, out_dir):
+    """Download an open-license photo (e.g. Wikimedia Commons) once; return the local path or None."""
+    import hashlib
+    import urllib.request
+    os.makedirs(os.path.join(out_dir, "photos"), exist_ok=True)
+    path = os.path.join(out_dir, "photos", hashlib.md5(url.encode()).hexdigest()[:12] + ".jpg")
+    if os.path.exists(path):
+        return path
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "UntoldMysteriesDaily/1.0 (documentary renderer)"})
+        with urllib.request.urlopen(req, timeout=60) as r, open(path, "wb") as fh:
+            fh.write(r.read())
+        Image.open(path).verify()
+        return path
+    except Exception as e:  # noqa: BLE001
+        print(f"   photo download failed: {e}", flush=True)
+        return None
+
+
 def main(story_path, photos_path, out_dir):
     t0 = time.time()
     story = json.load(open(story_path))
@@ -189,13 +208,19 @@ def main(story_path, photos_path, out_dir):
     for i, sc in enumerate(timeline):
         rng = np.random.default_rng(300 + i)
         if sc["scene"] == "photo":
-            ph = photos.get(sc["photo"])
-            builder = SL.photo_scene(ph["path"], ph.get("credit")) if ph and os.path.exists(ph["path"]) else SL.missing_photo(sc["photo"])
-            if not ph:
-                print(f"   (photo '{sc['photo']}' missing, using illustration)", flush=True)
+            ph = photos.get(sc.get("photo", ""))
+            path = ph["path"] if ph else None
+            credit = sc.get("credit") or (ph or {}).get("credit")
+            if sc.get("photo_url"):
+                path = fetch_photo(sc["photo_url"], out_dir)
+            builder = SL.photo_scene(path, credit) if path and os.path.exists(path) else SL.missing_photo(sc.get("photo"))
+            if not (path and os.path.exists(path)):
+                print(f"   (photo for scene {i} unavailable, using illustration)", flush=True)
+            spec = builder(rng)
+        elif sc["scene"] in SL.PARAM_SCENES:
+            spec = SL.PARAM_SCENES[sc["scene"]](rng, sc)
         else:
-            builder = SL.SCENES[sc["scene"]]
-        spec = builder(rng)
+            spec = SL.SCENES[sc["scene"]](rng)
         if sc.get("chapter"):
             chap_n += 1
         ctx = {"lines": [ln["start"] - sc["start"] for ln in sc["lines"]], "dur": sc["end"] - sc["start"], "chapter_n": chap_n}

@@ -696,3 +696,169 @@ def missing_photo(label):
 SCENES = {f.__name__: f for f in [cold_open_storm, ranger_1942, pilgrim_caravan, hail_strike, ww2_theory,
                                   skull_evidence, carbon_date, dna_lab_wide, groups_chart, two_eras, diet_cards,
                                   route_map_wide, theories, outro_long]}
+
+
+# ======================= reusable, parameterised scenes =======================
+# Stories use these with fields on the scene itself, e.g.
+#   {"scene": "title_card", "text": "SEPTEMBER 1872", "sub": "Atlantic Ocean", "lines": [...]}
+#   {"scene": "timeline", "events": [{"year": 1872, "label": "Found adrift"}, ...], "lines": [...]}
+#   {"scene": "route", "from": "NEW YORK", "to": "GENOA", "note": "about 7,000 km", "lines": [...]}
+#   {"scene": "facts", "title": "What was found", "facts": ["Six months of food", "..."], "lines": [...]}
+#   {"scene": "night_sea" | "night_mountains" | "desert_night" | "forest_night" | "city_night", "lines": [...]}
+def _wrap(text, f, width):
+    words, lines, cur = str(text).split(), [], ""
+    for w in words:
+        t = (cur + " " + w).strip()
+        if f.getlength(t) > width and cur:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = t
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def title_card(rng, sc):
+    bg = grad([(0, (8, 12, 20)), (1, (22, 28, 40))])
+    bg = stars(bg, rng, 90, LH)
+    fog = clouds(blank(), rng, 10, LH * 0.5, LH, (60, 70, 84), 70, 70)
+
+    def overlay(img, t, u, cam, ctx):
+        d = ImageDraw.Draw(img)
+        a = int(255 * min(1, t / 0.8))
+        f = font(BOLD, 110 if len(sc.get("text", "")) < 18 else 80)
+        for i, ln in enumerate(_wrap(sc.get("text", ""), f, W - 240)):
+            d.text((W / 2, H / 2 - 40 + i * 110), ln, font=f, fill=AMBER + (a,), anchor="mm")
+        if sc.get("sub"):
+            d.text((W / 2, H / 2 + 110), sc["sub"], font=font(MED, 44), fill=(220, 214, 200, a), anchor="mm")
+    return {"layers": [(bg, 0.15), (fog, 0.5)], "overlay": overlay}
+
+
+def timeline(rng, sc):
+    bg = dark_bg()
+    ev = sc.get("events", [])
+
+    def overlay(img, t, u, cam, ctx):
+        d = ImageDraw.Draw(img)
+        if not ev:
+            return
+        x0, x1, y = 180, 1740, 600
+        d.line([(x0, y), (x1, y)], fill=(150, 160, 170), width=5)
+        lines = ctx["lines"]
+        n = len(ev)
+        for i, e in enumerate(ev):
+            x = x0 + (x1 - x0) * (i / max(1, n - 1) if n > 1 else 0.5)
+            show = t >= (lines[min(i, len(lines) - 1)] if lines else 0) - 0.2 or i == 0
+            if not show:
+                d.ellipse([x - 10, y - 10, x + 10, y + 10], outline=(90, 100, 110), width=3)
+                continue
+            last = i == n - 1
+            col = AMBER if last or e.get("key") else (230, 230, 230)
+            d.ellipse([x - 18, y - 18, x + 18, y + 18], fill=col)
+            up = i % 2 == 0
+            d.text((x, y - 70 if up else y + 70), str(e.get("year", "")), font=font(BOLD, 48), fill=col, anchor="mm")
+            for j, ln in enumerate(_wrap(e.get("label", ""), font(MED, 30), 300)):
+                yy = (y - 130 - 40 * j) if up else (y + 130 + 40 * j)
+                d.text((x, yy), ln, font=font(MED, 30), fill=(210, 216, 222), anchor="mm")
+        if sc.get("title"):
+            d.text((W / 2, 160), sc["title"], font=font(MED, 44), fill=(200, 208, 216), anchor="mm")
+    return {"layers": [(bg, 0.1)], "overlay": overlay}
+
+
+def route(rng, sc):
+    spec = route_map_wide(rng)
+    layers = spec["layers"]
+
+    def overlay(img, t, u, cam, ctx):
+        d = ImageDraw.Draw(img)
+        p0, p1 = (360, 600), (1560, 600)
+        prog = min(1, u * 1.5)
+        for i in range(int(90 * prog)):
+            s = i / 90
+            x = p0[0] + (p1[0] - p0[0]) * s
+            yy = p0[1] - 300 * math.sin(math.pi * s)
+            if i % 2 == 0:
+                d.ellipse([x - 7, yy - 7, x + 7, yy + 7], fill=(240, 232, 214))
+        for (px, py), lab, col in ((p0, sc.get("from", ""), CYAN), (p1, sc.get("to", ""), AMBER)):
+            d.ellipse([px - 24, py - 24, px + 24, py + 24], fill=col)
+            d.text((px, py + 70), str(lab).upper(), font=font(BOLD, 40), fill=col, anchor="mm")
+        if sc.get("note") and prog > 0.6:
+            d.text((W / 2, 170), sc["note"], font=font(BOLD, 52), fill=(240, 232, 214), anchor="mm")
+    return {"layers": layers, "overlay": overlay}
+
+
+def facts(rng, sc):
+    bg = dark_bg()
+    items = sc.get("facts", [])
+
+    def overlay(img, t, u, cam, ctx):
+        d = ImageDraw.Draw(img)
+        if sc.get("title"):
+            d.text((W / 2, 170), sc["title"], font=font(BOLD, 60), fill=AMBER, anchor="mm")
+        lines = ctx["lines"]
+        y = 300
+        for i, f_ in enumerate(items):
+            start = lines[min(i, len(lines) - 1)] if lines else 0
+            if t < start - 0.2 and i > 0:
+                break
+            a = int(255 * min(1, (t - start + 0.2) / 0.4)) if i > 0 else 255
+            d.rounded_rectangle([300, y, 1620, y + 110], radius=20, fill=(18, 26, 38, a), outline=(80, 96, 112, a), width=3)
+            d.ellipse([340, y + 40, 370, y + 70], fill=AMBER + (a,))
+            d.text((400, y + 55), str(f_), font=font(MED, 40), fill=(236, 232, 222, a), anchor="lm")
+            y += 140
+    return {"layers": [(bg, 0.1)], "overlay": overlay}
+
+
+def _landscape(sky_stops, ridge_col, snow_col, ground_col, extra=None):
+    def build(rng, sc=None):
+        sky = grad(sky_stops)
+        sky = stars(sky, rng, 100, 500)
+        sky = clouds(sky, rng, 10, 60, 450, tuple(min(255, c + 30) for c in sky_stops[1][1]), 80, 60)
+        far = ridge(blank(), rng, 800, (220, 420), ridge_col + (255,), peaks=6, snow=(snow_col + (255,)) if snow_col else None)
+        near = blank()
+        ImageDraw.Draw(near).rectangle([-50, 900, LW + 50, LH], fill=ground_col + (255,))
+        if extra:
+            extra(near, rng)
+
+        def overlay(img, t, u, cam, ctx):
+            snow(ImageDraw.Draw(img), t, 40, 3, 30)
+        return {"layers": [(sky, 0.15), (far, 0.4), (near, 0.9)], "overlay": overlay}
+    return build
+
+
+def _sea_extra(img, rng):
+    d = ImageDraw.Draw(img)
+    for i in range(6):
+        y = 910 + i * 45
+        d.line([(0, y), (LW, y + rng.uniform(-10, 10))], fill=(40, 70, 90, 255), width=3)
+
+
+def _forest_extra(img, rng):
+    d = ImageDraw.Draw(img)
+    for _ in range(70):
+        x, h = rng.uniform(-50, LW + 50), rng.uniform(160, 380)
+        d.polygon([(x, 900 - h), (x - h * 0.22, 930), (x + h * 0.22, 930)], fill=(8, 14, 12, 255))
+
+
+def _city_extra(img, rng):
+    d = ImageDraw.Draw(img)
+    x = -40
+    while x < LW:
+        w, h = rng.uniform(80, 180), rng.uniform(150, 420)
+        d.rectangle([x, 920 - h, x + w, 930], fill=(14, 16, 22, 255))
+        for wy in range(int(940 - h), 900, 34):
+            for wx in range(int(x + 12), int(x + w - 12), 28):
+                if rng.random() < 0.3:
+                    d.rectangle([wx, wy, wx + 12, wy + 16], fill=(255, 200, 120, 255))
+        x += w + rng.uniform(4, 20)
+
+
+PARAM_SCENES = {
+    "title_card": title_card, "timeline": timeline, "route": route, "facts": facts,
+    "night_sea": _landscape([(0, (6, 10, 22)), (0.6, (30, 44, 66)), (1, (10, 20, 30))], (20, 28, 40), None, (16, 34, 48), _sea_extra),
+    "night_mountains": _landscape([(0, (8, 12, 26)), (0.55, (40, 52, 80)), (1, (20, 26, 36))], (30, 38, 56), (170, 184, 204), (40, 46, 56)),
+    "desert_night": _landscape([(0, (14, 10, 30)), (0.6, (80, 54, 70)), (1, (40, 28, 30))], (70, 48, 44), None, (96, 70, 52)),
+    "forest_night": _landscape([(0, (6, 12, 14)), (0.6, (24, 44, 44)), (1, (8, 16, 14))], (14, 26, 24), None, (10, 18, 14), _forest_extra),
+    "city_night": _landscape([(0, (10, 10, 24)), (0.6, (50, 40, 70)), (1, (16, 14, 24))], (24, 22, 36), None, (18, 16, 22), _city_extra),
+}

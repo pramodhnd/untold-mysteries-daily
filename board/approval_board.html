@@ -1,0 +1,201 @@
+<title>Untold Mysteries Approvals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column of script cards under a sticky day bar; the case-file look of the channel (ink navy + lamp amber). */
+:root {
+  --bg: #f3f2ee; --surface: #ffffff; --ink: #151a24; --muted: #5d6573; --line: #dcd9d0;
+  --accent: #b86b12; --accent-soft: #f6e6cf;
+  --ok: #2f7a4a; --ok-soft: #dcefe2; --warn: #9a5b00; --warn-soft: #f7ead2; --bad: #a3332c; --bad-soft: #f6dcda;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e131c; --surface: #161d29; --ink: #e9e6de; --muted: #9aa3b2; --line: #273142;
+  --accent: #f0a94a; --accent-soft: #3a2c16;
+  --ok: #6fcf94; --ok-soft: #173424; --warn: #f0b458; --warn-soft: #3a2c14; --bad: #f08a82; --bad-soft: #3c1d1b;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0e131c; --surface: #161d29; --ink: #e9e6de; --muted: #9aa3b2; --line: #273142;
+  --accent: #f0a94a; --accent-soft: #3a2c16;
+  --ok: #6fcf94; --ok-soft: #173424; --warn: #f0b458; --warn-soft: #3a2c14; --bad: #f08a82; --bad-soft: #3c1d1b;
+  color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); padding-inline: 16px; padding-block: 0 48px; }
+.wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+header { padding-top: 28px; display: flex; flex-direction: column; gap: 4px; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 700 30px/1.15 var(--display); margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0; max-width: 62ch; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); padding-block: 10px;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; border-bottom: 1px solid var(--line); }
+.bar select { font: 500 14px var(--body); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.counts { display: flex; gap: 8px; flex-wrap: wrap; font: 500 13px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.spacer { flex: 1; }
+button { font: 600 14px var(--body); border-radius: 8px; padding: 9px 14px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+:root:not([data-theme="light"]) button.primary { color: #1a1206; }
+:root[data-theme="light"] button.primary { color: #fff; }
+button:disabled { opacity: .5; cursor: default; }
+.list { display: flex; flex-direction: column; gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card.st-approved { border-left: 4px solid var(--ok); border-radius: 0 12px 12px 0; }
+.card.st-changes { border-left: 4px solid var(--warn); border-radius: 0 12px 12px 0; }
+.card.st-rejected { opacity: .65; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font: 500 12px var(--mono); color: var(--muted); }
+.pill { padding: 3px 8px; border-radius: 999px; font: 600 11px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.k-short { background: var(--accent-soft); color: var(--accent); }
+.k-long { background: var(--ink); color: var(--bg); }
+.s-pending { background: var(--line); color: var(--ink); }
+.s-approved, .s-published { background: var(--ok-soft); color: var(--ok); }
+.s-changes { background: var(--warn-soft); color: var(--warn); }
+.s-rejected { background: var(--bad-soft); color: var(--bad); }
+h2 { font: 600 20px/1.25 var(--display); margin: 0; text-wrap: balance; }
+.hook { margin: 0; color: var(--muted); }
+details { border-top: 1px solid var(--line); padding-top: 8px; }
+summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+.script { white-space: pre-wrap; margin: 10px 0 0; max-width: 65ch; }
+.sources { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+.sources a { color: var(--accent); overflow-wrap: anywhere; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.note { display: flex; flex-direction: column; gap: 8px; }
+textarea { font: 15px/1.5 var(--body); padding: 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); min-height: 72px; resize: vertical; }
+.feedback { font-size: 14px; color: var(--muted); margin: 0; }
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 28px 20px; text-align: center; color: var(--muted); }
+.empty h2 { margin-bottom: 6px; color: var(--ink); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 14px; }
+.err { color: var(--bad); }
+@media (prefers-reduced-motion: no-preference) { .card { transition: border-color .2s, opacity .2s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Untold Mysteries Daily · script desk</span>
+    <h1>Today's scripts</h1>
+    <p class="lede">Each morning the agents file 4 Shorts and 2 documentaries here. Approve what's ready; approved videos publish one every two hours, starting 10:00 IST.</p>
+  </header>
+
+  <div class="bar" role="toolbar" aria-label="Day and bulk actions">
+    <label for="day" class="eyebrow" style="color:var(--muted)">Day</label>
+    <select id="day" aria-label="Choose day"></select>
+    <div class="counts" id="counts"></div>
+    <span class="spacer"></span>
+    <button id="approveAll" class="primary" disabled>Approve all pending</button>
+  </div>
+
+  <div id="status" class="feedback" role="status"></div>
+  <div class="list" id="list">
+    <div class="empty">
+      <h2>No scripts filed yet</h2>
+      <p>The morning agent posts the day's 6 scripts here around 6:30 am India time. Each card shows the full narration and its sources.</p>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const LABEL = { pending: "Waiting", approved: "Approved", changes: "Changes asked", rejected: "Rejected", published: "Published" };
+  let db = null, docs = [], day = null, busy = new Set(), openNotes = new Set(), readOnly = false;
+
+  function toast(msg) {
+    const t = $("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toast._t); toast._t = setTimeout(() => { t.hidden = true; }, 2200);
+  }
+
+  function days() { return [...new Set(docs.map((d) => d.date))].sort().reverse(); }
+
+  function render() {
+    const ds = days();
+    if (!day || !ds.includes(day)) day = ds[0] || null;
+    const sel = $("day");
+    sel.innerHTML = ds.map((d) => `<option value="${esc(d)}"${d === day ? " selected" : ""}>${esc(d)}</option>`).join("");
+    sel.disabled = ds.length < 2;
+
+    const items = docs.filter((d) => d.date === day).sort((a, b) => (a.slot || 0) - (b.slot || 0));
+    const c = { pending: 0, approved: 0, changes: 0, rejected: 0, published: 0 };
+    items.forEach((d) => { c[d.status || "pending"] = (c[d.status || "pending"] || 0) + 1; });
+    $("counts").innerHTML = items.length
+      ? `<span>${c.pending} waiting</span><span>· ${c.approved + c.published} approved</span><span>· ${c.changes} changes</span>`
+      : "";
+    $("approveAll").disabled = readOnly || !c.pending;
+
+    if (!items.length) return; // keep the designed empty state
+    $("list").innerHTML = items.map((d) => {
+      const st = d.status || "pending";
+      const src = (d.sources || []).map((s) => `<li>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name || s.url)}</a>` : esc(s.name)}</li>`).join("");
+      const noteOpen = openNotes.has(d.id);
+      const dis = busy.has(d.id) || readOnly ? "disabled" : "";
+      const actions = st === "published"
+        ? (d.video_url ? `<a href="${esc(d.video_url)}" target="_blank" rel="noopener">Watch on YouTube</a>` : "")
+        : `<div class="actions">
+             <button class="primary" data-act="approved" data-id="${esc(d.id)}" ${dis}>${st === "approved" ? "Approved ✓" : "Approve"}</button>
+             <button data-act="note" data-id="${esc(d.id)}" ${dis}>Ask for changes</button>
+             <button data-act="rejected" data-id="${esc(d.id)}" ${dis}>Reject</button>
+           </div>`;
+      return `<article class="card st-${esc(st)}">
+        <div class="meta">
+          <span class="pill ${d.kind === "long" ? "k-long" : "k-short"}">${d.kind === "long" ? "Documentary" : "Short"}</span>
+          <span class="pill s-${esc(st)}">${LABEL[st] || esc(st)}</span>
+          ${d.publish_time ? `<span>posts ${esc(d.publish_time)} IST</span>` : ""}
+          ${d.minutes ? `<span>~${esc(d.minutes)} min</span>` : ""}
+        </div>
+        <h2>${esc(d.title)}</h2>
+        ${d.hook ? `<p class="hook">${esc(d.hook)}</p>` : ""}
+        <details><summary>Read the full script</summary><p class="script">${esc(d.script)}</p>${src ? `<ul class="sources">${src}</ul>` : ""}</details>
+        ${d.note && st === "changes" ? `<p class="feedback">Your note: ${esc(d.note)}</p>` : ""}
+        ${actions}
+        <div class="note" ${noteOpen ? "" : "hidden"}>
+          <label for="note-${esc(d.id)}" class="feedback">What should change?</label>
+          <textarea id="note-${esc(d.id)}" placeholder="e.g. Make the hook shorter, or cover a different mystery">${esc(d.note || "")}</textarea>
+          <div class="actions"><button class="primary" data-act="changes" data-id="${esc(d.id)}" ${dis}>Send to the writer</button></div>
+        </div>
+      </article>`;
+    }).join("");
+  }
+
+  async function setStatus(id, status, note) {
+    if (!db || busy.has(id)) return;
+    busy.add(id); render();
+    try {
+      const body = { status, decided_at: new Date().toISOString() };
+      if (note !== undefined) body.note = note;
+      await db.doc("scripts/" + id).update(body);
+      openNotes.delete(id);
+      toast(status === "approved" ? "Approved" : status === "rejected" ? "Rejected" : "Sent to the writer");
+    } catch (e) {
+      if (e && e.code === "invalid_argument") { readOnly = true; $("status").innerHTML = '<span class="err">You can view this board but not change it. Ask the owner for Contributor access.</span>'; }
+      else $("status").innerHTML = '<span class="err">Could not save. Check your connection and try again.</span>';
+    } finally { busy.delete(id); render(); }
+  }
+
+  $("list").addEventListener("click", (ev) => {
+    const b = ev.target.closest("button[data-act]"); if (!b) return;
+    const id = b.dataset.id, act = b.dataset.act;
+    if (act === "note") { openNotes.has(id) ? openNotes.delete(id) : openNotes.add(id); render(); return; }
+    if (act === "changes") {
+      const v = ($("note-" + id) || {}).value || "";
+      if (!v.trim()) { $("status").innerHTML = '<span class="err">Write what should change first.</span>'; return; }
+      $("status").textContent = ""; setStatus(id, "changes", v.trim()); return;
+    }
+    setStatus(id, act);
+  });
+  $("day").addEventListener("change", (e) => { day = e.target.value; render(); });
+  $("approveAll").addEventListener("click", async () => {
+    const ids = docs.filter((d) => d.date === day && (d.status || "pending") === "pending").map((d) => d.id);
+    for (const id of ids) await setStatus(id, "approved");
+  });
+
+  (async () => {
+    db = await (window.claude?.use ? window.claude.use("db") : null);
+    if (!db) { $("status").textContent = "Open this page in Claude to review and approve scripts."; return; }
+    db.collection("scripts").onSnapshot((snap) => {
+      docs = snap.docs.map((s) => ({ id: s.id, ...s.data() }));
+      render();
+    }, () => { $("status").innerHTML = '<span class="err">Lost connection to the board. Reload the page.</span>'; });
+  })();
+})();
+</script>

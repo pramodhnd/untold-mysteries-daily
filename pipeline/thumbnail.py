@@ -20,6 +20,9 @@ W, H = 1280, 720
 
 def background(spec):
     photo = spec.get("photo")
+    if spec.get("photo_url"):
+        from render_long import fetch_photo
+        photo = fetch_photo(spec["photo_url"], os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "out"))
     if photo and os.path.exists(photo):
         im = Image.open(photo).convert("RGB")
         r = max(W / im.width, H / im.height)
