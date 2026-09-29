@@ -21,7 +21,7 @@ the "Never" rules always win.
 ## Schedule (India time) — use these times in summaries
 - Script writing (Trend Scout + Script Writer): 00:52, backup 03:52.
 - Owner approves around 21:00.
-- Approval Sync: 21:05, 22:05, 23:05, 00:05.
+- Approval Sync: hourly 21:05 to 05:05 (also starts the upload if GitHub skipped its slot).
 - Video Maker + Publisher (GitHub): one video per hour, 21:15 to 05:15, all inside 21:15-06:15.
 
 ## Videos (Approval Sync)
