@@ -11,7 +11,7 @@ approved. Quick job: finish in a few minutes. Nobody is watching.
    - `status: "approved"` and its file is in `stories/pending/` → `git mv` it to `stories/approved/`.
    - `status: "rejected"` and its file is in `stories/pending/` → `git rm` it; set the doc's `status` to `"rejected"` (unchanged) and leave it.
    - `status: "changes"` → rewrite that story following the owner's `note` and `agents/script_writer.md`
-     (keep the same id, slot and file), then update the doc: new `title`, `hook`, `script`, `sources`,
+     (keep the same id, slot, file, language and `opener` block), then update the doc: new `title`, `hook`, `script`, `sources`,
      `status: "pending"`, `note: ""`, `revised: true`.
    - `status: "pending"` → nothing.
 4. Published videos: for every row in `data/published.csv`, if a board doc with that id exists and its status

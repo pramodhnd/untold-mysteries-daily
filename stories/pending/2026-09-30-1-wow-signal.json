@@ -56,5 +56,15 @@
    "mystery shorts"
   ],
   "synthetic": false
+ },
+ "opener": {
+  "file": [
+   "File:Wow signal.jpg"
+  ],
+  "search": "Big Ear radio telescope",
+  "caption": "The Wow! signal, 1977",
+  "captions": {
+   "File:Wow signal.jpg": "The real 1977 printout"
+  }
  }
 }

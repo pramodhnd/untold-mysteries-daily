@@ -34,8 +34,7 @@ def narrate(story):
         s_start = t
         lines = []
         for text in sc["lines"]:
-            audio, sr = k.create(text, voice=story.get("voice", "am_michael"),
-                                 speed=story.get("speed", 1.0), lang=story.get("lang", "en-us"))
+            audio, sr = speak(k, text, story)
             assert sr == SR
             audio = _trim(audio.astype(np.float32))
             dur = len(audio) / SR
@@ -48,6 +47,22 @@ def narrate(story):
         timeline.append({**sc, "start": s_start, "end": t, "lines": lines})
     voice = np.concatenate(chunks)
     return voice, timeline
+
+
+HINDI_VOICE = "hm_omega"
+
+
+def speak(k, text, story):
+    """One narration line. Hindi is phonemized first so English words inside a line are read smoothly."""
+    lang = str(story.get("lang", "en-us")).lower()
+    if lang.startswith("hi"):
+        import re
+        voice = story.get("voice") if str(story.get("voice", "")).startswith("h") else HINDI_VOICE
+        ph = k.tokenizer.phonemize(text.replace("।", "."), lang="hi")
+        ph = re.sub(r"\((?:en|hi)[a-z-]*\)", "", ph)
+        return k.create(ph, voice=voice, speed=story.get("speed", 1.0), is_phonemes=True)
+    return k.create(text, voice=story.get("voice", "am_michael"), speed=story.get("speed", 1.0),
+                    lang=story.get("lang", "en-us"))
 
 
 def _trim(a, thresh=0.01):

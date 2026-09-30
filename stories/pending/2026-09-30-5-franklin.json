@@ -227,5 +227,14 @@
    "history documentary"
   ],
   "synthetic": true
+ },
+ "opener": {
+  "file": [
+   "File:Graves of Franklin's men on Beechey Island.jpg",
+   "File:Beechey Island Graves 2 1997-08-02.jpg",
+   "File:BeecheyIsland Graves.jpg"
+  ],
+  "search": "Beechey Island graves",
+  "caption": "Franklin expedition graves, Beechey Island"
  }
 }

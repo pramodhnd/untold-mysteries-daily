@@ -14,11 +14,13 @@ from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(__file__))
 import audio  # noqa: E402
+import fx  # noqa: E402
+import scenes as SC  # noqa: E402
 from scenes import SCENES, W, H, FONT_BOLD, AMBER  # noqa: E402
 
 FPS = 30
 S = 1.12          # background oversize for camera moves
-FADE = 0.35       # crossfade between scenes
+FADE = 0.4        # transition between scenes
 CAP_FONT = ImageFont.truetype(FONT_BOLD, 86)
 HOOK_FONT = ImageFont.truetype(FONT_BOLD, 118)
 LABEL_FONT = ImageFont.truetype(FONT_BOLD, 38)
@@ -46,6 +48,17 @@ def camera(i, u):
     return Cam(x0, y0, cw)
 
 
+def shot_camera(plan, lt):
+    """Camera for this moment of a scene: a new framing on every line, snap moves, a little handheld shake."""
+    bw, bh = W * S, H * S
+    z, cx, cy, sx, sy = plan.state(lt)
+    cw = bw / (1.02 * z)
+    ch = cw * H / W
+    x0 = min(max(0.0, cx * bw - cw / 2 + sx), bw - cw)
+    y0 = min(max(0.0, cy * bh - ch / 2 + sy), bh - ch)
+    return Cam(x0, y0, cw)
+
+
 def word_times(line):
     words = line["text"].split()
     wts = [len(w) + 2 for w in words]
@@ -67,7 +80,7 @@ def caption_chunks(timeline):
             for w in word_times(ln):
                 cur.append(w)
                 chars = sum(len(x[0]) for x in cur) + len(cur) - 1
-                if len(cur) >= 3 or chars >= 15 or w[0][-1] in ".?!,:":
+                if len(cur) >= 3 or chars >= 15 or w[0][-1] in ".?!,:।":
                     chunks.append(cur)
                     cur = []
             if cur:
@@ -98,18 +111,23 @@ def draw_caption(img, chunk, t):
                 break
         lines = [list(range(split)), list(range(split, len(words)))]
     age = t - chunk["start"]
-    pop = 1.0 + max(0, 0.12 - age) * 1.0
+    # pop in: 0.72 -> 1.12 -> 1.0
+    pop = 0.72 + 0.4 * fx.ease_out(age / 0.09) if age < 0.09 else 1.0 + 0.12 * max(0.0, 1 - (age - 0.09) / 0.14)
     for li, idxs in enumerate(lines):
-        lw = sum(widths[i] for i in idxs) + space * (len(idxs) - 1)
-        x = (W - lw) / 2
-        y = CAP_Y + (li - (len(lines) - 1) / 2) * 104
+        y = CAP_Y + (li - (len(lines) - 1) / 2) * 104 * pop
+        items = []
         for i in idxs:
             w, ws, we = chunk["words"][i]
             active = ws <= t < we
+            f = fx.font(FONT_BOLD, 86 * pop * (1.1 if active else 1.0))
+            items.append((i, active, f, f.getlength(words[i])))
+        gap = space * pop
+        x = (W - sum(it[3] for it in items) - gap * (len(items) - 1)) / 2
+        for i, active, f, wd in items:
             col = AMBER if active else (255, 255, 255)
-            yy = y - (6 if active else 0) * pop
-            d.text((x, yy), words[i], font=CAP_FONT, fill=col, stroke_width=10, stroke_fill=(0, 0, 0), anchor="lm")
-            x += widths[i] + space
+            d.text((x + wd / 2, y - (8 if active else 0)), words[i], font=f, fill=col,
+                   stroke_width=max(4, int(10 * pop)), stroke_fill=(0, 0, 0), anchor="mm")
+            x += wd + gap
 
 
 def draw_hook(img, text, t):
@@ -179,6 +197,7 @@ def main(story_path, out_dir):
     story = json.load(open(story_path))
     os.makedirs(out_dir, exist_ok=True)
     sid = story["id"]
+    SC.FOLLOW_TEXT = fx.word(fx.lang_of(story), "follow")
 
     print("1/4 narrating...", flush=True)
     voice, timeline = audio.narrate(story)
@@ -194,25 +213,34 @@ def main(story_path, out_dir):
     built = []
     for i, sc in enumerate(timeline):
         rng = np.random.default_rng(100 + i)
-        if sc["scene"] == "photo" and sc.get("photo_url"):
-            from render_long import fetch_photo
-            path = fetch_photo(sc["photo_url"], out_dir)
-            bg, ov = (photo_bg(path, sc.get("credit")) if path else SCENES["question"](rng))
+        if sc["scene"] == "photo":
+            spec = {k: sc[k] for k in ("photo_url", "credit") if sc.get(k)}
+            spec.update({k[6:]: sc[k] for k in ("photo_file", "photo_search", "photo_category") if sc.get(k)})
+            ph = fx.resolve_photo(spec, out_dir) if spec else None
+            if ph:
+                fx.record_credit(out_dir, sid, ph["credit"], ph.get("page"))
+            bg, ov = (photo_bg(ph["path"], ph["credit"]) if ph else SCENES["question"](rng))
         else:
             bg, ov = SCENES[sc["scene"]](rng)
         bg = bg.resize((int(W * S), int(H * S)), Image.LANCZOS)
-        ctx = {"lines": [ln["start"] - sc["start"] for ln in sc["lines"]], "dur": sc["end"] - sc["start"]}
-        built.append((sc, bg, ov, ctx))
+        ctx = {"lines": [ln["start"] - sc["start"] for ln in sc["lines"]], "dur": sc["end"] - sc["start"],
+               "last": i == len(timeline) - 1}
+        focal = fx.focal_points(bg, band=(350 / H, 1150 / H))
+        plan = fx.ShotPlan(ctx["lines"], ctx["dur"], focal, seed=i, home=(0.5, 0.5))
+        built.append((sc, bg, ov, ctx, plan))
 
     chunks = caption_chunks(timeline)
     vig, grains = post_fx()
+    atmos = fx.Atmosphere(W, H, seed=len(sid))
+    opener = fx.build_opener(story, out_dir, W, H, vertical=True)
+    t_open = min(5.0, max(2.8, timeline[0]["lines"][0]["end"])) if opener else 0.0
 
     def scene_frame(i, t):
-        sc, bg, ov, ctx = built[i]
+        sc, bg, ov, ctx, plan = built[i]
         dur = sc["end"] - sc["start"] + (FADE if i + 1 < len(built) else 0)
         lt = t - sc["start"]
         u = min(1, max(0, lt / dur))
-        cam = camera(i, u)
+        cam = shot_camera(plan, lt)
         crop = bg.crop((int(cam.x0), int(cam.y0), int(cam.x0 + cam.cw), int(cam.y0 + cam.ch)))
         img = crop.resize((W, H), Image.BILINEAR).convert("RGBA")
         ov(img, None, lt, u, cam, ctx)
@@ -233,18 +261,25 @@ def main(story_path, out_dir):
         t = f / FPS
         while si + 1 < len(built) and t >= built[si + 1][0]["start"]:
             si += 1
-        img = scene_frame(si, t)
-        if si > 0 and t - built[si][0]["start"] < FADE:
-            prev = scene_frame(si - 1, t)
-            a = (t - built[si][0]["start"]) / FADE
-            img = Image.blend(prev, img, a)
+        if t < t_open:
+            img = opener.frame(t, t_open)
+        else:
+            img = scene_frame(si, t)
+            if si > 0 and t - built[si][0]["start"] < FADE:
+                prev = scene_frame(si - 1, t)
+                a = (t - built[si][0]["start"]) / FADE
+                img = fx.transition(fx.KINDS[si % len(fx.KINDS)], prev, img, a)
+            elif opener and t - t_open < FADE:
+                img = fx.transition("flash", opener.frame(t, t_open), img, (t - t_open) / FADE)
         while ci + 1 < len(chunks) and t >= chunks[ci + 1]["start"]:
             ci += 1
         if chunks and chunks[ci]["start"] <= t < chunks[ci]["end"]:
             draw_caption(img, chunks[ci], t)
         draw_hook(img, story.get("hook", ""), t)
         arr = np.asarray(img.convert("RGB"), dtype=np.float32)
-        arr = np.clip(arr * vig + grains[f % 4], 0, 255).astype(np.uint8)
+        arr *= vig
+        atmos.apply(arr, t)
+        arr = np.clip(arr + grains[f % 4], 0, 255).astype(np.uint8)
         ff.stdin.write(arr.tobytes())
         if not cover_saved and t >= 1.2:
             Image.fromarray(arr).save(os.path.join(out_dir, f"{sid}_cover.jpg"), quality=92)

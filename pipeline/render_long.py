@@ -15,6 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(__file__))
 import audio  # noqa: E402
+import fx  # noqa: E402
 import scenes_long as SL  # noqa: E402
 
 W, H, LW, LH = SL.W, SL.H, SL.LW, SL.LH
@@ -31,7 +32,9 @@ class Cam:
         self.cw, self.ch = W / z, H / z
 
     def origin(self, d):
-        return ((LW - self.cw) / 2 + self.pan * d, (LH - self.ch) / 2 + self.vy * d)
+        x = (LW - self.cw) / 2 + self.pan * d
+        y = (LH - self.ch) / 2 + self.vy * d
+        return (min(max(0.0, x), LW - self.cw), min(max(0.0, y), LH - self.ch))
 
     def map(self, x, y, d=1.0):
         x0, y0 = self.origin(d)
@@ -50,6 +53,12 @@ def camera(i, u):
     return Cam(z, pan, vy)
 
 
+def shot_camera(plan, lt):
+    """New framing on every line: snap zooms toward points of interest, slow drift, handheld shake."""
+    z, cx, cy, sx, sy = plan.state(lt)
+    return Cam(z, (cx - 0.5) * LW + sx, (cy - 0.5) * LH + sy)
+
+
 def narrate(story):
     k = audio._tts()
     chunks = [np.zeros(int(0.4 * SR), np.float32)]
@@ -62,7 +71,7 @@ def narrate(story):
             t += CHAPTER_PRE
         lines = []
         for text in sc["lines"]:
-            a, sr = k.create(text, voice=story.get("voice", "am_michael"), speed=story.get("speed", 1.0), lang=story.get("lang", "en-us"))
+            a, sr = audio.speak(k, text, story)
             a = audio._trim(a.astype(np.float32))
             dur = len(a) / SR
             lines.append({"text": text, "start": t, "end": t + dur})
@@ -82,7 +91,7 @@ def subtitle_chunks(timeline):
             groups, cur = [], []
             for w in words:
                 cur.append(w)
-                if len(cur) >= 9 or (len(cur) >= 4 and w[-1] in ".,?!:;"):
+                if len(cur) >= 9 or (len(cur) >= 4 and w[-1] in ".,?!:;।"):
                     groups.append(cur)
                     cur = []
             if cur:
@@ -127,13 +136,16 @@ def pill(img, xy, text, fg, bg, size=28, anchor="left"):
     img.alpha_composite(lay)
 
 
+LANG = "en"
+
+
 def chapter_card(img, n, title, lt):
     if lt > 2.9:
         return
     a = min(1, lt / 0.4) * (1 if lt < 2.4 else max(0, (2.9 - lt) / 0.5))
     lay = Image.new("RGBA", img.size, (0, 0, 0, int(130 * a)))
     d = ImageDraw.Draw(lay)
-    d.text((W / 2, H / 2 - 70), f"CHAPTER {n}", font=ImageFont.truetype(SL.BOLD, 36), fill=SL.AMBER + (int(255 * a),), anchor="mm")
+    d.text((W / 2, H / 2 - 70), f"{fx.word(LANG, 'chapter')} {n}", font=ImageFont.truetype(SL.BOLD, 36), fill=SL.AMBER + (int(255 * a),), anchor="mm")
     d.text((W / 2, H / 2 + 10), title.upper(), font=ImageFont.truetype(SL.BOLD, 92), fill=(245, 238, 222, int(255 * a)), anchor="mm")
     d.line([(W / 2 - 80, H / 2 + 90), (W / 2 + 80, H / 2 + 90)], fill=SL.AMBER + (int(255 * a),), width=4)
     img.alpha_composite(lay)
@@ -178,10 +190,12 @@ def main(story_path, photos_path, out_dir):
     photos = json.load(open(photos_path)) if photos_path and os.path.exists(photos_path) else {}
     os.makedirs(out_dir, exist_ok=True)
     sid = story["id"]
+    global LANG
+    LANG = fx.lang_of(story)
 
     print("1/4 narrating...", flush=True)
     import hashlib
-    key = hashlib.md5(json.dumps([[sc["lines"], bool(sc.get("chapter"))] for sc in story["scenes"]] + [story.get("voice"), story.get("speed"), LINE_GAP, SCENE_GAP, CHAPTER_PRE]).encode()).hexdigest()
+    key = hashlib.md5(json.dumps([[sc["lines"], bool(sc.get("chapter"))] for sc in story["scenes"]] + [story.get("voice"), story.get("speed"), story.get("lang"), LINE_GAP, SCENE_GAP, CHAPTER_PRE]).encode()).hexdigest()
     cache = os.path.join(out_dir, f"{sid}_narration_{key[:10]}.npz")
     if os.path.exists(cache):
         z = np.load(cache, allow_pickle=True)
@@ -211,8 +225,14 @@ def main(story_path, photos_path, out_dir):
             ph = photos.get(sc.get("photo", ""))
             path = ph["path"] if ph else None
             credit = sc.get("credit") or (ph or {}).get("credit")
-            if sc.get("photo_url"):
-                path = fetch_photo(sc["photo_url"], out_dir)
+            spec = {k: sc[k] for k in ("photo_url", "credit") if sc.get(k)}
+            spec.update({k[6:]: sc[k] for k in ("photo_file", "photo_search", "photo_category") if sc.get(k)})
+            if spec:
+                ph = fx.resolve_photo(spec, out_dir)
+                path = ph["path"] if ph else None
+                if ph:
+                    credit = sc.get("credit") or ph["credit"]
+                    fx.record_credit(out_dir, sid, credit, ph.get("page"))
             builder = SL.photo_scene(path, credit) if path and os.path.exists(path) else SL.missing_photo(sc.get("photo"))
             if not (path and os.path.exists(path)):
                 print(f"   (photo for scene {i} unavailable, using illustration)", flush=True)
@@ -224,17 +244,26 @@ def main(story_path, photos_path, out_dir):
         if sc.get("chapter"):
             chap_n += 1
         ctx = {"lines": [ln["start"] - sc["start"] for ln in sc["lines"]], "dur": sc["end"] - sc["start"], "chapter_n": chap_n}
-        built.append((sc, spec, ctx))
+        flat = None
+        for layer, _d in spec["layers"]:
+            flat = layer.copy() if flat is None else Image.alpha_composite(flat, layer)
+        focal = fx.focal_points(flat, band=(0.15, 0.85))
+        lines = ctx["lines"] if not sc.get("chapter") else [2.9] + ctx["lines"][1:]
+        plan = fx.ShotPlan(lines, ctx["dur"], focal, seed=i, zmax=1.32, max_shot=4.5)
+        built.append((sc, spec, ctx, plan))
 
     subs = subtitle_chunks(timeline)
     vig, grains = post_fx()
+    atmos = fx.Atmosphere(W, H, seed=len(sid), n=40, leak=0.11)
+    opener = fx.build_opener(story, out_dir, W, H, vertical=False)
+    t_open = min(7.0, max(3.5, timeline[0]["lines"][0]["end"])) if opener else 0.0
 
     def scene_frame(i, t):
-        sc, spec, ctx = built[i]
+        sc, spec, ctx, plan = built[i]
         dur = sc["end"] - sc["start"] + (FADE if i + 1 < len(built) else 0)
         lt = t - sc["start"]
         u = min(1, max(0, lt / dur))
-        cam = camera(i, u)
+        cam = shot_camera(plan, lt)
         img = None
         for layer, d in spec["layers"]:
             x0, y0 = cam.origin(d)
@@ -246,7 +275,7 @@ def main(story_path, photos_path, out_dir):
         spec["overlay"](img, lt, u, cam, ctx)
         card_on = sc.get("chapter") and lt < 2.9
         if sc.get("recon"):
-            pill(img, (W - 40, 36), "RECONSTRUCTION", SL.AMBER + (255,), (0, 0, 0, 150), 24, anchor="right")
+            pill(img, (W - 40, 36), fx.word(LANG, "recon"), SL.AMBER + (255,), (0, 0, 0, 150), 24, anchor="right")
         if sc.get("label") and not card_on:
             pill(img, (40, 36), sc["label"], (240, 232, 214, 255), (0, 0, 0, 150), 26)
         if sc.get("chapter"):
@@ -266,15 +295,23 @@ def main(story_path, photos_path, out_dir):
         t = f / FPS
         while si + 1 < len(built) and t >= built[si + 1][0]["start"]:
             si += 1
-        img = scene_frame(si, t)
-        if si > 0 and t - built[si][0]["start"] < FADE:
-            img = Image.blend(scene_frame(si - 1, t), img, (t - built[si][0]["start"]) / FADE)
+        if t < t_open:
+            img = opener.frame(t, t_open)
+        else:
+            img = scene_frame(si, t)
+            if si > 0 and t - built[si][0]["start"] < FADE:
+                kind = "flash" if built[si][0].get("chapter") else fx.KINDS[si % len(fx.KINDS)]
+                img = fx.transition(kind, scene_frame(si - 1, t), img, (t - built[si][0]["start"]) / FADE)
+            elif opener and t - t_open < FADE:
+                img = fx.transition("flash", opener.frame(t, t_open), img, (t - t_open) / FADE)
         while ci + 1 < len(subs) and t >= subs[ci + 1]["start"]:
             ci += 1
         if subs and subs[ci]["start"] <= t < subs[ci]["end"]:
             draw_sub(img, subs[ci]["text"])
         arr = np.asarray(img.convert("RGB"), dtype=np.float32)
-        arr = np.clip(arr * vig + grains[f % 4], 0, 255).astype(np.uint8)
+        arr *= vig
+        atmos.apply(arr, t)
+        arr = np.clip(arr + grains[f % 4], 0, 255).astype(np.uint8)
         ff.stdin.write(arr.tobytes())
         if f % 480 == 0:
             print(f"   frame {f}/{nframes}  ({time.time() - t0:.0f}s)", flush=True)

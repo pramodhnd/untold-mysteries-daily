@@ -501,7 +501,7 @@ def question(rng):
         lines = ctx["lines"]
         if len(lines) >= 3 and t >= lines[2]:
             f2 = ImageFont.truetype(FONT_BOLD, 54)
-            txt = "FOLLOW FOR DAILY MYSTERIES"
+            txt = FOLLOW_TEXT
             tw = f2.getlength(txt)
             x0, y0 = (W - tw) / 2 - 36, 870
             d2.rounded_rectangle([x0, y0, x0 + tw + 72, y0 + 96], radius=48, fill=(255, 184, 82, 240))
@@ -742,7 +742,7 @@ def question_lake(rng):
         lines = ctx["lines"]
         if lines and t >= lines[-1]:
             f2 = ImageFont.truetype(FONT_BOLD, 54)
-            txt = "FOLLOW FOR DAILY MYSTERIES"
+            txt = FOLLOW_TEXT
             tw = f2.getlength(txt)
             x0, y0 = (W - tw) / 2 - 36, 840
             d2.rounded_rectangle([x0, y0, x0 + tw + 72, y0 + 96], radius=48, fill=(255, 184, 82, 240))
@@ -754,12 +754,16 @@ SCENES.update({f.__name__: f for f in [himalaya_lake, bones_close, hailstorm, dn
 
 
 # ================= shared helper =================
+FOLLOW_TEXT = "FOLLOW FOR DAILY MYSTERIES"  # the renderer switches this for Hindi videos
+
+
 def follow_pill(d2, ctx, t, y0=880):
     """'Follow' call-to-action pill, shown from the last line of a closing scene (3+ lines)."""
     lines = ctx["lines"]
-    if len(lines) >= 3 and t >= lines[-1]:
+    y0 = min(y0, 1060)  # stay clear of the captions
+    if ctx.get("last", True) and len(lines) >= 3 and t >= lines[-1]:
         f2 = ImageFont.truetype(FONT_BOLD, 54)
-        txt = "FOLLOW FOR DAILY MYSTERIES"
+        txt = FOLLOW_TEXT
         tw = f2.getlength(txt)
         x0 = (W - tw) / 2 - 36
         d2.rounded_rectangle([x0, y0, x0 + tw + 72, y0 + 96], radius=48, fill=(255, 184, 82, 240))

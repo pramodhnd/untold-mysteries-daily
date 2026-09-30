@@ -50,6 +50,22 @@ def main():
         else:
             run(["python3", "pipeline/render.py", path, out])
             video = os.path.join(out, f"{sid}.mp4")
+        # photo credits found at render time (Wikimedia Commons) go into the description
+        cred = os.path.join(out, f"{sid}_credits.txt")
+        if os.path.exists(cred):
+            yt = story.setdefault("youtube", {})
+            desc = yt.get("description", "")
+            new = [ln for ln in dict.fromkeys(open(cred).read().splitlines()) if ln and ln.split(" - ")[0] not in desc]
+            if new:
+                block = "\n".join(new)
+                if "CHAPTERS" in desc:
+                    head, tail = desc.split("CHAPTERS", 1)
+                    yt["description"] = f"{head.rstrip()}\n\nPhoto credits:\n{block}\n\nCHAPTERS{tail}"
+                else:
+                    yt["description"] = f"{desc}\n\nPhoto credits:\n{block}".strip()
+                for loc in (yt.get("localizations") or {}).values():
+                    if loc.get("description"):
+                        loc["description"] = f"{loc['description']}\n\nPhoto credits:\n{block}"
         from youtube_upload import upload
         vid = upload(video, story, thumb)
         print(f"published {sid} -> https://youtu.be/{vid}", flush=True)

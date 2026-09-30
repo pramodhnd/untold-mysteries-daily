@@ -56,7 +56,14 @@ class _Cam:
 
 
 def make(story, out):
-    spec = story.get("thumbnail", {})
+    spec = dict(story.get("thumbnail", {}))
+    if not (spec.get("photo") or spec.get("photo_url")) and story.get("opener"):
+        # use the video's real opener photo: a true photo on the thumbnail tells viewers this really happened
+        import fx
+        ph = fx.resolve_photo(story["opener"], os.path.dirname(os.path.abspath(out)) or ".")
+        if ph:
+            spec["photo"], spec["credit"] = ph["path"], story["opener"].get("credit") or ph["credit"]
+            spec.setdefault("skull", False)
     im = background(spec)
     a = np.asarray(im).astype(np.float32)
     a[..., :3] *= np.clip(np.linspace(0.3, 1.0, W) ** 0.8, 0, 1)[None, :, None]  # darker left side for text

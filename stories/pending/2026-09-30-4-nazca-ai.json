@@ -55,5 +55,18 @@
    "mystery shorts"
   ],
   "synthetic": false
+ },
+ "opener": {
+  "file": [
+   "File:Nazca Lines Hummingbird.jpg",
+   "File:Nazca-lineas-colibri-c01.jpg",
+   "File:Líneas de Nazca, Nazca, Perú, 2015-07-29, DD 51.JPG"
+  ],
+  "search": "Nazca lines",
+  "caption": "The Nazca Lines, Peru",
+  "captions": {
+   "File:Nazca Lines Hummingbird.jpg": "The Hummingbird, Nazca Lines, Peru",
+   "File:Nazca-lineas-colibri-c01.jpg": "The Hummingbird, Nazca Lines, Peru"
+  }
  }
 }

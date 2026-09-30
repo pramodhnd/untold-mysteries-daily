@@ -38,7 +38,13 @@ def metadata(story):
     hashtags = " ".join(meta.get("hashtags", []))
     if hashtags and hashtags not in desc:
         desc = f"{desc}\n\n{hashtags}".strip()
-    return title[:100], desc[:4900], tags
+    out, total = [], 0
+    for t in tags:  # YouTube rejects more than ~500 characters of tags
+        total += len(t) + (2 if " " in t else 0) + 1
+        if total > 480:
+            break
+        out.append(t)
+    return title[:100], desc[:4900], out
 
 
 def upload(path, story, thumb=None):
@@ -47,15 +53,28 @@ def upload(path, story, thumb=None):
         return "DRYRUN"
     yt = client()
     title, desc, tags = metadata(story)
+    meta = story.get("youtube", {})
+    lang = "hi" if str(story.get("lang", "en")).lower().startswith("hi") else "en"
     body = {
-        "snippet": {"title": title, "description": desc, "tags": tags, "categoryId": "27"},  # 27 = Education
+        "snippet": {"title": title, "description": desc, "tags": tags,
+                    "categoryId": str(meta.get("category_id", "27")),  # 27 = Education
+                    "defaultLanguage": lang, "defaultAudioLanguage": lang},
         "status": {
             "privacyStatus": os.environ.get("YT_PRIVACY", "private"),
             "selfDeclaredMadeForKids": False,
-            "containsSyntheticMedia": bool(story.get("youtube", {}).get("synthetic", True)),
+            "containsSyntheticMedia": bool(meta.get("synthetic", True)),
+            "embeddable": True,
+            "publicStatsViewable": True,
         },
     }
-    req = yt.videos().insert(part="snippet,status", body=body,
+    parts = "snippet,status"
+    # translated title/description (e.g. English for a Hindi video) so viewers in the other language find it too
+    loc = {k: {"title": v.get("title", "")[:100], "description": v.get("description", "")[:4900]}
+           for k, v in (meta.get("localizations") or {}).items() if k != lang and v.get("title")}
+    if loc:
+        body["localizations"] = loc
+        parts += ",localizations"
+    req = yt.videos().insert(part=parts, body=body,
                              media_body=MediaFileUpload(path, chunksize=8 * 1024 * 1024, resumable=True))
     resp = None
     while resp is None:
