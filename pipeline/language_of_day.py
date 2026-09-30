@@ -1,15 +1,19 @@
-"""Which language today's videos are in: English and Hindi on alternate India dates.
+"""Which language today's videos are in.
 
-2026-09-30 is English, 2026-10-01 Hindi, 2026-10-02 English, and so on.
+Owner's decision (30 Sep 2026): English only. The Hindi support in the renderer stays available but unused;
+to bring back alternating days, set ALTERNATE = True.
 Usage: python3 pipeline/language_of_day.py [YYYY-MM-DD]   -> prints "en" or "hi"
 """
 import datetime
 import sys
 
 ANCHOR = datetime.date(2026, 9, 30)  # an English day
+ALTERNATE = False
 
 
 def language_for(day):
+    if not ALTERNATE:
+        return "en"
     return "en" if (day - ANCHOR).days % 2 == 0 else "hi"
 
 

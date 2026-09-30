@@ -22,7 +22,7 @@
 
 ## Real photo opener (required on every video)
 Every video opens on one real, open-license photograph of the mystery (the place, the object, the people's
-memorial, the original document), stamped "TRUE STORY" / "सच्ची कहानी", while the first line is spoken.
+memorial, the original document), stamped "TRUE STORY", while the first line is spoken.
 Add an `"opener"` block to every story:
 ```json
 "opener": {
@@ -35,30 +35,15 @@ Add an `"opener"` block to every story:
   `commons.wikimedia.org` (the cloud sandbox cannot open Commons directly). Prefer real photographs over
   drawings, maps or diagrams; no SVG.
 - `search`: a fallback Commons search used only if none of the files qualify.
-- `caption`: what the photo shows, in the video's language, under 40 characters.
+- `caption`: what the photo shows, under 40 characters.
 - The renderer (on GitHub) checks each file's license at render time and only uses CC0, CC BY, CC BY-SA or
   public domain; it writes the credit on screen and adds it to the YouTube description automatically.
   If you already know a direct `upload.wikimedia.org` URL and its license, `"photo_url"` + `"credit"` also work.
 - Documentaries: the opener photo is also used as the thumbnail background when `thumbnail` has no photo.
 - Mid-video photo scenes may use the same fields: `{"scene": "photo", "photo_file": [...], "photo_search": "..."}`.
 
-## Hindi days
-English and Hindi alternate by date: `python3 pipeline/language_of_day.py <YYYY-MM-DD>` prints `en` or `hi`.
-On a Hindi day every story (all 6) is written in Hindi:
-- `"lang": "hi"`, `"voice": "hm_omega"`, `"speed": 1.0`.
-- Narration in simple spoken Hindi (Hindustani, the way a good Hindi news anchor tells a story), in Devanagari.
-  Short sentences. End sentences with "।".
-- Write every number and year as Hindi words ("उन्नीस सौ सतहत्तर", "बहत्तर सेकंड"), and English names
-  in Devanagari ("बिग ईयर", "जेरी ईमन"), so the voice reads them correctly. Scene `label`s and the `hook`
-  may use digits ("72 सेकंड").
-- Shorts end with "रोज़ एक सच्चे रहस्य के लिए फ़ॉलो करें।"; documentaries end with a comment question and
-  "चैनल को सब्सक्राइब करें।"
-- `youtube.title`: Hindi, with one English search phrase, e.g. "72 सेकंड का रहस्यमयी सिग्नल | Wow Signal Mystery in Hindi #shorts".
-  Description in Hindi first, then the sources (source titles may stay in English). Hashtags add `#hindi`
-  and `#रहस्य`; tags add Hindi and English keywords ("rahasya", "mystery in hindi").
-- Add `youtube.localizations.en` with an English `title` and `description`, so English viewers see it too.
-  On English days add `youtube.localizations.hi` with a Hindi title and description.
-- Word counts: Hindi Shorts 120 to 160 words (Hindi words are shorter), documentaries 1,000 to 1,450.
+## Language
+English only (owner's decision, 30 Sep 2026). Do not write Hindi scripts or Hindi titles.
 
 ## Story file format (Short)
 ```json
@@ -75,8 +60,7 @@ On a Hindi day every story (all 6) is written in Hindi:
     "title": "...", "description": "... Sources: ...",
     "hashtags": ["#mystery", "#space", "#shorts"],
     "tags": ["wow signal", "space mystery"],
-    "synthetic": false,
-    "localizations": {"hi": {"title": "...", "description": "..."}}
+    "synthetic": false
   }
 }
 ```

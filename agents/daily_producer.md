@@ -9,8 +9,7 @@ Everything you need is in this repository. Work fully on your own; nobody is wat
    then clone it and `cd` into it.
 2. `pip install --break-system-packages -q kokoro-onnx soundfile scipy numpy pillow` (for still previews only).
 3. Today = the current date in India time (YYYY-MM-DD).
-   **Language of the day:** `python3 pipeline/language_of_day.py <today>` prints `en` or `hi`. English and
-   Hindi alternate daily; on a Hindi day all 6 scripts are in Hindi (see "Hindi days" in `agents/script_writer.md`).
+   **Language:** English only (owner's decision, 30 Sep 2026).
 4. **Resume, don't repeat.** If `stories/pending/`, `stories/approved/` or `stories/published/` already has files
    starting with today's date, or the approval board already has docs for today, only produce the missing slots.
    A previous run may have stopped part-way (for example when usage ran out).
@@ -41,12 +40,12 @@ The `"id"` field inside the file must be `<YYYY-MM-DD>-<slot>-<id>` too.
 **Every video** (Short and documentary) opens on a real open-license photo with a "TRUE STORY" stamp: fill the
 `"opener"` block as described in `agents/script_writer.md`. Write short lines: every line becomes its own shot.
 
-**Shorts** (`pipeline/render.py`, vertical): 110 to 140 words (Hindi 120 to 160), 9 to 14 lines. Reuse scenes from `pipeline/scenes.py` when they
+**Shorts** (`pipeline/render.py`, vertical): 110 to 140 words, 9 to 14 lines. Reuse scenes from `pipeline/scenes.py` when they
 fit; otherwise add at most 2 new scene functions per Short in the same flat, dark, amber-accented style and
 register them in `SCENES`. For real places, prefer a `{"scene": "photo", "photo_url": ..., "credit": ...}` scene
 using a Wikimedia Commons image (see Photos).
 
-**Documentaries** (`pipeline/render_long.py`, `"format": "landscape"`): 900 to 1,300 words (Hindi 1,000 to 1,450), 5 to 8 chapters,
+**Documentaries** (`pipeline/render_long.py`, `"format": "landscape"`): 900 to 1,300 words, 5 to 8 chapters,
 a cold open, a clear twist, a closing comment question. Build them mostly from the reusable scenes in
 `pipeline/scenes_long.py`: `title_card`, `timeline`, `route`, `facts`, `night_sea`, `night_mountains`,
 `desert_night`, `forest_night`, `city_night`, and `photo` with `photo_url`. Write a new scene only for a
@@ -74,7 +73,7 @@ realistic scenes, otherwise false).
 2. Write one document per story to the approval board with the `ArtifactData` tool:
    artifact `https://claude.ai/artifact/Tr1AxrA54U3jaDX4zet3Lk`, collection `scripts`, doc id = the story id,
    using one `batch` of `set` writes. Fields:
-   `date, slot, kind ("short"|"long"), lang ("en"|"hi"), title, hook, script (all narration lines joined with blank lines between scenes),
+   `date, slot, kind ("short"|"long"), title, hook, script (all narration lines joined with blank lines between scenes),
    minutes, publish_time ("21:15" etc.), sources ([{name, url}]), opener_photo (the first Commons file name and its
 caption), status: "pending", file: "stories/pending/<file>.json"`.
 3. Finish with a short summary: the 6 titles, and anything you could not do.
