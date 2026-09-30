@@ -37,6 +37,21 @@ Everything that makes the channel run. Claude writes the stories; GitHub Actions
    (YouTube's rule for new API projects). Until then, publishing is one tap in YouTube Studio.
    After approval, set the repository variable `YT_PRIVACY` to `public`.
 
+## Instagram Reels (optional, owner sets up once)
+
+Every Short is also posted to Instagram as a Reel, right after it goes to YouTube, **once these two
+GitHub secrets exist** (until then nothing is posted and YouTube is unaffected). Documentaries stay YouTube-only.
+
+1. In the Instagram app, create the account (e.g. @untoldmysteriesdaily) and switch it to a
+   **Professional account** (Settings → Account type and tools → Switch to professional → Creator or Business).
+2. At developers.facebook.com, create an app (type "Business"), add the **Instagram** product, choose
+   **"API setup with Instagram business login"**, add the Instagram account, and click **Generate token**
+   (permissions `instagram_business_basic` and `instagram_business_content_publish`).
+3. Paste into GitHub → repo → Settings → Secrets and variables → Actions:
+   `IG_USER_ID` (the account id shown next to the token) and `IG_ACCESS_TOKEN`. Only you handle these values.
+4. The token lasts 60 days: generate a new one in the same place and replace `IG_ACCESS_TOKEN` before it expires.
+   Posted Reels are logged in `data/instagram.csv`; a failed Reel shows as a warning in the Actions run.
+
 ## Testing without uploading
 
 ```

@@ -40,6 +40,8 @@ Add an `"opener"` block to every story:
   public domain; it writes the credit on screen and adds it to the YouTube description automatically.
   If you already know a direct `upload.wikimedia.org` URL and its license, `"photo_url"` + `"credit"` also work.
 - Documentaries: the opener photo is also used as the thumbnail background when `thumbnail` has no photo.
+- In the YouTube description write "Opening photo from Wikimedia Commons (credit below); all other visuals are
+  original illustrations." (never "all visuals are original illustrations"). The credit line is added automatically.
 - Mid-video photo scenes may use the same fields: `{"scene": "photo", "photo_file": [...], "photo_search": "..."}`.
 
 ## Language

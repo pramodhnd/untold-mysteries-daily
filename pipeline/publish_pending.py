@@ -70,6 +70,24 @@ def main():
         vid = upload(video, story, thumb)
         print(f"published {sid} -> https://youtu.be/{vid}", flush=True)
         story.setdefault("youtube", {})["video_id"] = vid
+        # Instagram Reel (Shorts only). Never blocks YouTube: a failure is logged and the story still publishes.
+        import instagram_upload as ig
+        if ig.enabled() and story.get("format") != "landscape" and not story.get("instagram", {}).get("id"):
+            try:
+                cred = os.path.join(out, f"{sid}_credits.txt")
+                credits = "\n".join(ln.split(" - ")[0] for ln in open(cred).read().splitlines()) if os.path.exists(cred) else ""
+                story["instagram"] = ig.post_reel(video, story, credits)
+                print(f"instagram {sid} -> {story['instagram'].get('permalink') or story['instagram']['id']}", flush=True)
+                ig_log = os.path.join(ROOT, "data", "instagram.csv")
+                first = not os.path.exists(ig_log)
+                with open(ig_log, "a", newline="") as fh:
+                    w = csv.writer(fh)
+                    if first:
+                        w.writerow(["date", "id", "media_id", "permalink"])
+                    w.writerow([datetime.date.today().isoformat(), sid, story["instagram"]["id"],
+                                story["instagram"].get("permalink", "")])
+            except Exception as e:  # noqa: BLE001
+                print(f"::warning::Instagram post failed for {sid}: {e}", flush=True)
         dest = os.path.join(ROOT, "stories", "published", os.path.basename(path))
         json.dump(story, open(dest, "w"), indent=1, ensure_ascii=False)
         os.remove(path)
