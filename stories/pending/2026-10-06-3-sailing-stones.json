@@ -1,0 +1,101 @@
+{
+ "id": "2026-10-06-3-sailing-stones",
+ "title": "These rocks move across Death Valley on their own. #shorts",
+ "hook": "ROCKS THAT MOVE",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:Death Valley NP - Racetrack Playa - sailing stone race.JPG",
+   "File:Death Valley NP - Racetrack Playa - sailing stones - chase.JPG"
+  ],
+  "search": "Racetrack Playa sailing stones",
+  "caption": "Racetrack Playa, Death Valley"
+ },
+ "scenes": [
+  {
+   "scene": "playa_stones",
+   "label": "DEATH VALLEY, CALIFORNIA",
+   "lines": [
+    "In Death Valley, rocks slide across a dry lakebed with nobody pushing them.",
+    "They leave trails, some hundreds of meters long."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Death Valley NP - Racetrack Playa - sailing stones - chase.JPG",
+    "File:Racetrack playa 2013-12-20.jpg"
+   ],
+   "photo_search": "Racetrack Playa sliding rocks",
+   "label": "RACETRACK PLAYA",
+   "lines": [
+    "Some of these rocks weigh up to three hundred and twenty kilograms.",
+    "Since the 1940s, people guessed: hurricane winds, dust devils, slippery algae, thick ice.",
+    "But nobody had ever seen one move."
+   ]
+  },
+  {
+   "scene": "playa_stones",
+   "label": "THE EXPERIMENT",
+   "lines": [
+    "So scientists Richard and James Norris fitted fifteen rocks with GPS trackers."
+   ]
+  },
+  {
+   "scene": "playa_stones",
+   "label": "DECEMBER 2013",
+   "lines": [
+    "In December 2013, they were standing on the playa when it finally happened.",
+    "A shallow pond on the playa had frozen into ice just millimeters thin.",
+    "As the sun broke it up, light winds pushed the ice panels, and the panels pushed the rocks."
+   ]
+  },
+  {
+   "scene": "playa_stones",
+   "label": "SOLVED",
+   "lines": [
+    "They crept a few meters a minute, too slow to notice.",
+    "Seventy years of guessing, solved by ice as thin as a windowpane.",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "These rocks move across Death Valley on their own. #shorts",
+  "description": "The 'sailing stones' of Racetrack Playa in Death Valley National Park leave long trails across the dry lakebed, and people had speculated about how they move since the 1940s. In winter 2011, Richard D. Norris and James M. Norris, with Ralph Lorenz and colleagues, set up 15 GPS-tagged rocks, a weather station and time-lapse cameras. In December 2013 they watched rocks move: thin 'windowpane' ice (3 to 6 mm, per the paper) on a shallow pond broke up and was pushed by light winds, shoving the rocks at a few meters per minute. The results were published in PLOS ONE in August 2014. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations.\n\nSources:\n- Norris et al. (2014), Sliding Rocks on Racetrack Playa, Death Valley National Park: First Observation of Rocks in Motion, PLOS ONE: https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0105948\n- Phys.org (Scripps Institution of Oceanography release), Mystery solved: 'Sailing stones' of Death Valley seen in action for the first time: https://phys.org/news/2014-08-mystery-stones-death-valley-action.html\n- Smithsonian Magazine, How Do Death Valley's 'Sailing Stones' Move Themselves Across the Desert?: https://www.smithsonianmag.com/travel/how-do-death-valleys-sailing-stones-move-themselves-across-the-desert-98287558/\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#deathvalley",
+   "#sailingstones",
+   "#shorts"
+  ],
+  "tags": [
+   "sailing stones",
+   "racetrack playa",
+   "death valley",
+   "moving rocks",
+   "science mystery solved",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "Norris et al. (2014), Sliding Rocks on Racetrack Playa, Death Valley National Park: First Observation of Rocks in Motion, PLOS ONE",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0105948"
+  },
+  {
+   "name": "Phys.org (Scripps Institution of Oceanography release), Mystery solved: 'Sailing stones' of Death Valley seen in action for the first time",
+   "url": "https://phys.org/news/2014-08-mystery-stones-death-valley-action.html"
+  },
+  {
+   "name": "Smithsonian Magazine, How Do Death Valley's 'Sailing Stones' Move Themselves Across the Desert?",
+   "url": "https://www.smithsonianmag.com/travel/how-do-death-valleys-sailing-stones-move-themselves-across-the-desert-98287558/"
+  }
+ ]
+}

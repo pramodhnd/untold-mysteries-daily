@@ -1,0 +1,100 @@
+{
+ "id": "2026-10-06-4-meat-shower",
+ "title": "In 1876, meat fell from a clear sky in Kentucky. #shorts",
+ "hook": "IT RAINED MEAT",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:Downtown Owingsville, Kentucky.jpg"
+  ],
+  "search": "Bath County Kentucky",
+  "caption": "Bath County, Kentucky"
+ },
+ "scenes": [
+  {
+   "scene": "meat_sky",
+   "label": "BATH COUNTY, KENTUCKY, 1876",
+   "lines": [
+    "March 3rd, 1876. On a clear day in Kentucky, meat started falling from the sky.",
+    "Mrs. Crouch was making soap outside when chunks began landing around her."
+   ]
+  },
+  {
+   "scene": "meat_sky",
+   "label": "OLYMPIA SPRINGS",
+   "lines": [
+    "Most pieces were about five centimeters square, over a patch a hundred by fifty yards.",
+    "Two men tasted it. They guessed lamb, or deer."
+   ]
+  },
+  {
+   "scene": "specimen_jar",
+   "label": "THE SAMPLES",
+   "lines": [
+    "One writer said it was nostoc, a jelly-like bacterium that swells when wet. But it hadn't rained.",
+    "Under the microscope, samples turned out to be lung tissue, muscle and cartilage."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Black Vulture RWD2013B.jpg",
+    "File:Turkey vulture (Cathartes aura) in flight.JPG"
+   ],
+   "photo_search": "black vulture",
+   "label": "THE SUSPECT",
+   "lines": [
+    "So where did it come from? Louisville doctor, Lewis Kastenbine, had an idea.",
+    "Vultures. When one vomits, the others in the flock tend to follow."
+   ]
+  },
+  {
+   "scene": "meat_sky",
+   "label": "THE ANSWER?",
+   "lines": [
+    "A flock of vultures, throwing up over one farm. It's still the most likely explanation.",
+    "One jar of that meat survives, in a museum in Lexington.",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "In 1876, meat fell from a clear sky in Kentucky. #shorts",
+  "description": "Between 11 a.m. and noon on 3 March 1876, chunks of meat fell from a clear sky over a 100-by-50-yard area near Olympia Springs, Bath County, Kentucky, around Mrs Crouch as she made soap. Two men who tasted it thought it might be lamb or deer. Leopold Brandeis claimed it was Nostoc, but it had not rained. Microscope analysis identified samples as lung tissue, muscle and cartilage. Dr Lewis D. Kastenbine proposed that vultures had disgorged it, still considered the most plausible explanation. A preserved sample is held by the Moosnick Medical and Science Museum at Transylvania University in Lexington. The opening photo shows Owingsville, the Bath County seat, not the farm itself. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations.\n\nSources:\n- Wikipedia, Kentucky meat shower: https://en.wikipedia.org/wiki/Kentucky_meat_shower\n- FOX 56 News, The Great Kentucky Meat Shower: 147 years passed since the Kentucky shower of flesh: https://fox56news.com/news/kentucky/the-great-kentucky-meat-shower-147-years-passed-since-the-kentucky-shower-of-flesh/\n- All That's Interesting, Why Was Rural Kentucky Showered With Meat In March 1876?: https://allthatsinteresting.com/kentucky-meat-shower\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#kentucky",
+   "#weirdhistory",
+   "#shorts"
+  ],
+  "tags": [
+   "kentucky meat shower",
+   "meat rain",
+   "bath county kentucky",
+   "1876",
+   "vultures",
+   "weird history",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Kentucky meat shower",
+   "url": "https://en.wikipedia.org/wiki/Kentucky_meat_shower"
+  },
+  {
+   "name": "FOX 56 News, The Great Kentucky Meat Shower: 147 years passed since the Kentucky shower of flesh",
+   "url": "https://fox56news.com/news/kentucky/the-great-kentucky-meat-shower-147-years-passed-since-the-kentucky-shower-of-flesh/"
+  },
+  {
+   "name": "All That's Interesting, Why Was Rural Kentucky Showered With Meat In March 1876?",
+   "url": "https://allthatsinteresting.com/kentucky-meat-shower"
+  }
+ ]
+}

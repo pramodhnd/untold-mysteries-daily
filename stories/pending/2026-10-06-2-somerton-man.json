@@ -1,0 +1,284 @@
+{
+ "id": "2026-10-06-2-somerton-man",
+ "format": "landscape",
+ "title": "The Somerton Man: 74 Years Without a Name, and the Code No One Can Read",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "opener": {
+  "file": [
+   "File:Actual-tamam-shud.jpg",
+   "File:SomertonManDeathSite.jpg"
+  ],
+  "search": "Somerton Man Tamam Shud",
+  "caption": "The 'Tamam Shud' scrap, 1949"
+ },
+ "thumbnail": {
+  "line1": "TAMAM",
+  "line2": "SHUD",
+  "badge": "ADELAIDE · 1948",
+  "sub": "Who was the man on the beach?",
+  "scene": "night_sea"
+ },
+ "scenes": [
+  {
+   "scene": "night_sea",
+   "recon": true,
+   "label": "SOMERTON PARK, ADELAIDE, 1 DECEMBER 1948",
+   "lines": [
+    "December 1st, 1948. Early morning, on a beach just south-west of Adelaide, in South Australia.",
+    "A man lies against the sea wall, his legs stretched out and his feet crossed, as if resting.",
+    "He is well dressed. He is dead. And the labels have been removed from his clothes.",
+    "Months later, police will find a tiny scrap of paper hidden in his trousers, printed with two words.",
+    "Tamám Shud. It is finished."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "THE SOMERTON MAN",
+   "sub": "Seventy-four years without a name",
+   "lines": [
+    "For more than seventy years, nobody could say who he was.",
+    "Then the answer came from a few strands of hair."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Beach",
+   "title": "In his pockets",
+   "facts": [
+    "Unused rail ticket to Henley Beach",
+    "A bus ticket",
+    "American-made aluminium comb",
+    "Juicy Fruit gum",
+    "Cigarettes and matches"
+   ],
+   "lines": [
+    "He was found at about half past six in the morning, opposite a children's home. Doctors put his death at around two a.m.",
+    "He had no hat, no wallet and nothing to say who he was.",
+    "In his pockets: an unused train ticket from Adelaide to Henley Beach, a bus ticket, an American-made comb, a packet of gum, cigarettes and matches.",
+    "His jacket was cut in an American style. And the labels on his clothes were gone."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Autopsy",
+   "title": "What the doctors found",
+   "facts": [
+    "Congested organs",
+    "Spleen about 3x normal size",
+    "Last meal: a pasty",
+    "No poison detected"
+   ],
+   "lines": [
+    "The autopsy found congested organs, and a spleen about three times its normal size.",
+    "His last meal, a pasty, had been eaten three or four hours before he died.",
+    "Poison was suspected. But no poison was ever found.",
+    "One expert, Professor Cedric Stanton Hicks, suggested drugs like digitalis or ouabain, which were very hard to detect at the time."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "label": "ADELAIDE RAILWAY STATION, 14 JANUARY 1949",
+   "lines": [
+    "Six weeks later, on January 14th, 1949, a suitcase turned up in the cloakroom of Adelaide railway station.",
+    "Inside were clothes, a red checked dressing gown, orange waxed thread, an electrician's screwdriver, a sharpened knife and scissors, and a stencilling brush.",
+    "Three items carried a name. T. Keane on a tie. Keane on a laundry bag. Kean on a singlet.",
+    "For decades, that name led nowhere."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "Tamám Shud",
+   "title": "The hidden scrap",
+   "facts": [
+    "Found June 1949",
+    "In a fob pocket sewn inside",
+    "Torn from the Rubaiyat",
+    "Means 'It is finished'"
+   ],
+   "lines": [
+    "In June 1949, a closer search of his trousers turned up a small fob pocket sewn inside.",
+    "Rolled up in it was the scrap printed with the words Tamám Shud.",
+    "They are the last words of the Rubaiyat of Omar Khayyam, a book of Persian poetry, in Edward FitzGerald's English translation.",
+    "The scrap had been torn from the book's final page."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "recon": true,
+   "label": "GLENELG, JULY 1949",
+   "lines": [
+    "Police went public. On July 22nd, 1949, a man handed in a copy of the Rubaiyat.",
+    "He said he had found it in his car, an open-topped car on Jetty Road, Glenelg. He asked to stay anonymous.",
+    "Accounts differ on when. One newspaper said it was found a week or two before the death. Others say just after.",
+    "Its final page was torn, exactly where the words Tamám Shud should be.",
+    "And pressed faintly into the back cover were five lines of capital letters, and a telephone number."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Code",
+   "title": "The code",
+   "facts": [
+    "Five lines of capitals",
+    "ITTMTSAMSTGAB",
+    "1978: too short to crack",
+    "Maybe first letters of words"
+   ],
+   "lines": [
+    "Here is one of those lines. I, T, T, M, T, S, A, M, S, T, G, A, B.",
+    "In 1978, Australian defence code-breakers said there was too little text to decode.",
+    "Later researchers think the letters are probably the first letters of words. If so, it may never be solved."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "label": "GLENELG",
+   "lines": [
+    "The phone number belonged to a nurse who lived about four hundred metres from where the body was found.",
+    "She told police she did not know the man, and asked them not to record her details.",
+    "Shown a plaster cast of his head and shoulders, she reportedly looked as if she was about to faint.",
+    "She died in 2007. Whether she knew him has never been proven."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "No Name",
+   "title": "An open case",
+   "events": [
+    {
+     "year": "1949",
+     "label": "Inquest adjourned"
+    },
+    {
+     "year": "1949",
+     "label": "Buried, West Terrace"
+    },
+    {
+     "year": "1958",
+     "label": "Inquest reopened"
+    },
+    {
+     "year": "2021",
+     "label": "Exhumed",
+     "key": true
+    }
+   ],
+   "lines": [
+    "The coroner, Thomas Cleland, said he would be prepared to find that the man died from poison, probably a glucoside.",
+    "But he could not say whether the man took it himself, or whether someone gave it to him.",
+    "The unknown man was buried in Adelaide's West Terrace Cemetery in 1949, in a Salvation Army service paid for by a bookmakers' association.",
+    "In May 2021, South Australia Police dug him up again. The work took about twelve hours.",
+    "Detective Superintendent Des Bray said: It's somebody's father or son, perhaps grandfather, uncle or brother."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Hair",
+   "title": "The DNA trail",
+   "facts": [
+    "Hairs in the plaster bust",
+    "Haplogroup H4a1a1a",
+    "Distant cousins traced",
+    "A name: July 2022"
+   ],
+   "lines": [
+    "University of Adelaide professor Derek Abbott had found hairs caught in the plaster bust made of the man.",
+    "From 2017, the DNA in those hairs gave the first clues to his ancestry.",
+    "Abbott and American genealogist Colleen Fitzpatrick then built family trees, matching distant cousins on both sides.",
+    "In July 2022, they announced a name."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "CARL WEBB",
+   "sub": "Born Melbourne, 16 November 1905",
+   "lines": [
+    "Carl Webb, known as Charles. Born in 1905 in Footscray, Melbourne, the youngest of six children of a baker from Hamburg.",
+    "Records describe him as an instrument maker, and elsewhere as an electrical engineer."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "Who Was He?",
+   "title": "Carl 'Charles' Webb",
+   "facts": [
+    "Married Dorothy Robertson, 1941",
+    "She left in 1946",
+    "A sister married a Keane",
+    "Abbott: '99.9 per cent'"
+   ],
+   "lines": [
+    "In 1941 he married Dorothy Robertson. By her account, he became moody and violent, and wrote poems about death.",
+    "In March 1946, by her account, he tried to take his own life. That September, she left him.",
+    "And one of his sisters had married into a family called Keane. That may explain the names in the suitcase.",
+    "Abbott has said he is more than ninety-nine per cent sure."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "chapter": "Still Unsolved",
+   "label": "SOMERTON PARK",
+   "lines": [
+    "But the name is not yet official. As of mid-2026, police said their investigation was ongoing, with a report to the coroner to follow.",
+    "And a name does not answer the biggest questions.",
+    "How did he die? What does the code mean? Why was he in Adelaide? And did he know the nurse?"
+   ]
+  },
+  {
+   "scene": "city_night",
+   "label": "ADELAIDE",
+   "lines": [
+    "Abbott and Fitzpatrick think he probably took his own life with poison.",
+    "Not everyone agrees. One former police officer has argued the DNA evidence is still not strong enough.",
+    "What do you think happened on Somerton beach? Tell me in the comments, and subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "The Somerton Man: 74 Years Without a Name, and the Code No One Can Read",
+  "description": "On 1 December 1948, a well-dressed man was found dead against the sea wall at Somerton Park beach, Adelaide, with the labels removed from his clothes. No poison was ever found. A hidden scrap reading 'Tamam Shud', torn from a copy of the Rubaiyat of Omar Khayyam, led police to a book with a code and a nurse's phone number pressed into its cover. In July 2022, Professor Derek Abbott and genealogist Colleen Fitzpatrick identified him through DNA as Carl 'Charles' Webb, born in Melbourne in 1905. As of mid-2026, South Australia Police had not yet reported to the coroner, so the identification is not yet official.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSOURCES\nWikipedia, Somerton Man: https://en.wikipedia.org/wiki/Somerton_Man\nABC News (2 Aug 2022), The Somerton Man has been named. What do we know about Carl 'Charles' Webb?: https://www.abc.net.au/news/2022-08-02/somerton-man-who-was-carl-charles-webb/101288890\nABC News (2 Sep 2022), Is Carl Webb really the Somerton Man and if so, was he a spy?: https://www.abc.net.au/news/2022-09-02/is-carl-webb-really-the-somerton-man-and-was-he-a-spy/101375542\nABC News (19 May 2021), Somerton Man remains exhumed after dig in Adelaide's West Terrace Cemetery: https://www.abc.net.au/news/2021-05-19/somerton-man-remains-exhumed-from-adelaide-grave/100150216\nABC News (6 Jul 2026), SA Police report to coroner into Somerton Man case complete 'very soon': https://www.abc.net.au/news/2026-07-06/sa-police-report-coroner-into-somerton-man-case-very-soon/106869302\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#SomertonMan",
+   "#TamamShud",
+   "#UnsolvedMysteries",
+   "#Mystery",
+   "#History",
+   "#Documentary"
+  ],
+  "tags": [
+   "somerton man",
+   "tamam shud",
+   "tamam shud case",
+   "carl webb",
+   "adelaide mystery",
+   "rubaiyat code",
+   "unsolved mysteries",
+   "history documentary"
+  ],
+  "synthetic": true
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Somerton Man",
+   "url": "https://en.wikipedia.org/wiki/Somerton_Man"
+  },
+  {
+   "name": "ABC News (2 Aug 2022), The Somerton Man has been named. What do we know about Carl 'Charles' Webb?",
+   "url": "https://www.abc.net.au/news/2022-08-02/somerton-man-who-was-carl-charles-webb/101288890"
+  },
+  {
+   "name": "ABC News (2 Sep 2022), Is Carl Webb really the Somerton Man and if so, was he a spy?",
+   "url": "https://www.abc.net.au/news/2022-09-02/is-carl-webb-really-the-somerton-man-and-was-he-a-spy/101375542"
+  },
+  {
+   "name": "ABC News (19 May 2021), Somerton Man remains exhumed after dig in Adelaide's West Terrace Cemetery",
+   "url": "https://www.abc.net.au/news/2021-05-19/somerton-man-remains-exhumed-from-adelaide-grave/100150216"
+  },
+  {
+   "name": "ABC News (6 Jul 2026), SA Police report to coroner into Somerton Man case complete 'very soon'",
+   "url": "https://www.abc.net.au/news/2026-07-06/sa-police-report-coroner-into-somerton-man-case-very-soon/106869302"
+  }
+ ]
+}

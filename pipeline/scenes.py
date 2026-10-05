@@ -1437,3 +1437,256 @@ def scroll_jar(rng):
 
 
 SCENES.update({f.__name__: f for f in [big_ear, wow_printout, jatinga_fog, nazca_desert, ai_scan, clay_jar, scroll_jar]})
+
+
+# ================= 2026-10-06: dancing plague, sailing stones, meat shower, the Bloop =================
+def _dancer(d, x, y, s, phase, col):
+    """Dancing silhouette; (x, y) = feet level, s = height. Arms up, knees kicking with phase."""
+    hop = abs(math.sin(phase)) * s * 0.08
+    y = y - hop
+    hip = (x, y - s * 0.45)
+    neck = (x + math.sin(phase * 0.5) * s * 0.05, y - s * 0.8)
+    w = max(3, int(s * 0.07))
+    d.line([hip, neck], fill=col, width=w + 2)
+    r = s * 0.1
+    d.ellipse([neck[0] - r, neck[1] - 2 * r, neck[0] + r, neck[1]], fill=col)
+    for sgn in (-1, 1):
+        a = phase + (0 if sgn < 0 else math.pi)
+        hand = (neck[0] + sgn * s * (0.25 + 0.08 * math.sin(a)), neck[1] - s * (0.22 + 0.12 * math.cos(a)))
+        d.line([neck, hand], fill=col, width=w)
+        knee = (hip[0] + sgn * s * 0.12, hip[1] + s * 0.22 - max(0, math.sin(a)) * s * 0.12)
+        foot = (hip[0] + sgn * s * 0.16, y - max(0, math.sin(a)) * s * 0.1)
+        d.line([hip, knee, foot], fill=col, width=w)
+    # skirt
+    d.polygon([(hip[0] - s * 0.13, hip[1] + s * 0.18), (hip[0] + s * 0.13, hip[1] + s * 0.18), (hip[0], hip[1] - s * 0.15)], fill=col)
+
+
+def dancing_street(rng):
+    """Strasbourg street at dusk, cathedral spire behind; one woman dances alone, then dozens join in."""
+    bg = vgrad([(0, (16, 12, 26)), (0.5, (70, 44, 52)), (0.62, (120, 70, 50)), (1, (18, 14, 14))])
+    d = ImageDraw.Draw(bg)
+    # cathedral with its single tall spire
+    sp = (34, 24, 30)
+    d.rectangle([600, 560, 900, 1000], fill=sp)
+    d.rectangle([700, 330, 790, 600], fill=sp)
+    d.polygon([(690, 340), (800, 340), (745, 140)], fill=sp)
+    d.ellipse([705, 640, 795, 730], fill=(150, 90, 50))
+    # timber-framed gabled houses on both sides
+    for x0, w, h in [(-20, 220, 520), (190, 200, 460), (870, 230, 500)]:
+        top = 1180 - h
+        col = (40, 30, 30)
+        d.rectangle([x0, top, x0 + w, 1180], fill=col)
+        d.polygon([(x0 - 10, top), (x0 + w + 10, top), (x0 + w / 2, top - 140)], fill=col)
+        for yy in range(int(top + 40), 1120, 110):
+            d.line([(x0, yy), (x0 + w, yy)], fill=(70, 50, 40), width=6)
+            for xx in range(int(x0 + 30), int(x0 + w - 40), 80):
+                lit = rng.random() < 0.5
+                d.rectangle([xx, yy + 20, xx + 40, yy + 70], fill=(255, 196, 110) if lit else (24, 18, 18))
+    d.rectangle([0, 1180, W, H], fill=(30, 24, 22))
+    for i in range(14):  # cobbles
+        y = 1200 + i * 26
+        for x in range(int(rng.integers(0, 40)), W, 70):
+            d.ellipse([x, y, x + 54, y + 16], fill=(40, 32, 28))
+    bg = radial(bg, 540, 1100, 420, (255, 190, 110), 0.28)
+    spots = [(540, 1150, 260)] + [(float(rng.uniform(90, 990)), float(rng.uniform(1160, 1240)), float(rng.uniform(150, 220))) for _ in range(26)]
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        lines = ctx["lines"]
+        n_on = 1 + sum(10 for s in lines[1:] if t >= s)
+        for i, (x, y, s) in enumerate(spots[:n_on]):
+            ph = t * (5.0 + (i % 5) * 0.6) + i
+            fx_, fy = cam.map(x, y)
+            _dancer(d2, fx_, fy, s * cam.k, ph, (12, 8, 10, 255) if i else (20, 12, 12, 255))
+        follow_pill(d2, ctx, t, y0=1060)
+    return bg, overlay
+
+
+def playa_stones(rng):
+    """Racetrack Playa: a cracked dry lakebed, rocks with long trails; thin ice panels drift and push them."""
+    bg = vgrad([(0, (20, 18, 34)), (0.3, (110, 70, 70)), (0.36, (190, 120, 80)), (0.4, (150, 130, 112)), (1, (96, 86, 76))])
+    d = ImageDraw.Draw(bg)
+    pk = [(0, 700)]
+    for x in range(0, W + 120, 120):
+        pk.append((x, 700 - rng.uniform(40, 200)))
+    pk.append((W, 760))
+    d.polygon(pk + [(W, 770), (0, 770)], fill=(52, 40, 46))
+    d.rectangle([0, 760, W, H], fill=(170, 152, 128))
+    # mud cracks
+    for _ in range(140):
+        x, y = rng.uniform(0, W), rng.uniform(770, H)
+        pts = [(x, y)]
+        for _ in range(3):
+            x += rng.uniform(-60, 60)
+            y += rng.uniform(-20, 20)
+            pts.append((x, y))
+        d.line(pts, fill=(132, 116, 96), width=3)
+    rocks = []
+    for (x, y, s, ang) in [(300, 980, 60, 0.35), (700, 900, 44, 0.2), (560, 1120, 70, 0.5), (860, 1060, 38, 0.3)]:
+        L = rng.uniform(300, 520)
+        x1, y1 = x - L * math.cos(ang), y - L * math.sin(ang) * 0.4
+        d.line([(x1, y1), (x, y)], fill=(104, 88, 70), width=int(s * 0.9))
+        d.line([(x1, y1), (x, y)], fill=(150, 134, 112), width=int(s * 0.5))
+        rocks.append((x, y, s, ang))
+    bg = radial(bg, 540, 720, 500, (255, 170, 110), 0.25)
+    panels = [(rng.uniform(-200, 900), rng.uniform(820, 1180), rng.uniform(160, 300)) for _ in range(7)]
+
+    def overlay(img, draw, t, u, cam, ctx):
+        lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        d2 = ImageDraw.Draw(lay)
+        k = cam.k
+        lines = ctx["lines"]
+        ice = len(lines) > 1 and t >= lines[1]
+        drift = (t - lines[1]) * 14 if ice else 0
+        if ice:
+            for (px, py, s) in panels:
+                pts = [cam.map(px + drift + s * math.cos(a) * 1.3, py + s * 0.35 * math.sin(a)) for a in np.linspace(0, 2 * math.pi, 7)[:-1]]
+                d2.polygon(pts, fill=(190, 225, 240, 70), outline=(230, 245, 255, 150))
+        for (x, y, s, ang) in rocks:
+            mx = x + (drift * 0.6 * math.cos(ang) if ice else 0)
+            my = y + (drift * 0.6 * math.sin(ang) * 0.4 if ice else 0)
+            a, b = cam.map(mx - s, my - s * 0.6)
+            c, e = cam.map(mx + s, my + s * 0.5)
+            d2.ellipse([a, b, c, e], fill=(46, 40, 38, 255))
+            d2.ellipse([a + 6 * k, b + 4 * k, c - s * k, e - s * 0.6 * k], fill=(80, 70, 64, 255))
+        img.alpha_composite(lay)
+        follow_pill(ImageDraw.Draw(img), ctx, t, y0=1060)
+    return bg, overlay
+
+
+def meat_sky(rng):
+    """A Kentucky farmhouse under a clear sky; red flakes flutter down like snow; later, vultures circle above."""
+    bg = vgrad([(0, (22, 34, 56)), (0.55, (70, 96, 120)), (0.7, (120, 110, 96)), (1, (36, 40, 30))])
+    d = ImageDraw.Draw(bg)
+    d.polygon([(0, 1000), (300, 930), (650, 970), (1080, 910), (1080, 1100), (0, 1100)], fill=(40, 56, 40))
+    d.rectangle([0, 1080, W, H], fill=(48, 60, 38))
+    # farmhouse with porch
+    hc = (60, 44, 36)
+    d.rectangle([420, 820, 860, 1120], fill=hc)
+    d.polygon([(400, 830), (880, 830), (640, 660)], fill=(40, 28, 24))
+    d.rectangle([380, 980, 900, 1000], fill=(80, 60, 46))
+    for x in range(400, 900, 80):
+        d.rectangle([x, 1000, x + 10, 1120], fill=(90, 70, 52))
+    for x in (480, 720):
+        d.rectangle([x, 870, x + 70, 950], fill=(255, 200, 120))
+    d.rectangle([600, 1020, 660, 1120], fill=(30, 22, 18))
+    # rail fence
+    for x in range(-20, W, 120):
+        d.line([(x, 1180), (x + 120, 1160)], fill=(110, 90, 70), width=8)
+        d.line([(x, 1220), (x + 120, 1200)], fill=(110, 90, 70), width=8)
+        d.rectangle([x, 1140, x + 10, 1250], fill=(90, 72, 56))
+    # soap kettle in the yard
+    d.ellipse([200, 1150, 310, 1230], fill=(24, 24, 26))
+    bg = radial(bg, 540, 500, 600, (255, 220, 170), 0.18)
+    flakes = [(rng.uniform(0, W), rng.uniform(0, 1), rng.uniform(10, 26), rng.uniform(0, 6)) for _ in range(70)]
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        lines = ctx["lines"]
+        for (x, y0, s, ph) in flakes:
+            y = 380 + ((y0 * 900 + t * 160) % 900)
+            xx = x + math.sin(t * 2 + ph) * 18
+            a, b = cam.map(xx, y)
+            w = s * k * (0.6 + 0.4 * abs(math.sin(t * 3 + ph)))
+            d2.ellipse([a - w, b - s * k * 0.5, a + w, b + s * k * 0.5], fill=(170, 60, 64, 235))
+        if len(lines) >= 2 and t >= lines[-2]:
+            for i in range(3):
+                ang = t * 0.6 + i * 2.1
+                x, y = cam.map(540 + math.cos(ang) * 260, 470 + math.sin(ang) * 60)
+                s = 70 * k
+                d2.line([(x - s, y - s * 0.2), (x - s * 0.4, y), (x, y - s * 0.05), (x + s * 0.4, y), (x + s, y - s * 0.2)],
+                        fill=(12, 12, 14, 255), width=int(10 * k))
+        follow_pill(d2, ctx, t, y0=1060)
+    return bg, overlay
+
+
+def deep_listen(rng):
+    """Deep ocean cross-section: a hydrophone on a mooring line hears a huge rising sound; a spectrogram draws it."""
+    bg = vgrad([(0, (10, 14, 24)), (0.24, (22, 40, 60)), (0.26, (14, 44, 66)), (0.8, (6, 18, 30)), (1, (4, 10, 16))])
+    d = ImageDraw.Draw(bg)
+    d.polygon([(0, 1500), (260, 1440), (520, 1480), (800, 1420), (1080, 1460), (1080, H), (0, H)], fill=(18, 22, 26))
+    # mooring line with hydrophone and float
+    d.line([(760, 1440), (760, 760)], fill=(150, 150, 140), width=4)
+    d.ellipse([730, 700, 790, 760], fill=(230, 150, 60))
+    d.rounded_rectangle([744, 980, 776, 1060], radius=12, fill=(200, 200, 190))
+    d.rectangle([740, 1430, 780, 1460], fill=(60, 60, 60))
+    # iceberg on the far horizon (left)
+    d.polygon([(40, 500), (90, 430), (170, 440), (230, 500)], fill=(210, 228, 236))
+    d.polygon([(30, 500), (240, 500), (200, 640), (70, 620)], fill=(90, 130, 150))
+    # spectrogram panel
+    d.rounded_rectangle([290, 380, 1010, 620], radius=16, fill=(8, 10, 14))
+    d.text((320, 396), "HYDROPHONE  ·  1997", font=ImageFont.truetype(FONT_BOLD, 30), fill=(200, 200, 190))
+    bg = radial(bg, 760, 1020, 380, (120, 200, 230), 0.15)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        d2 = ImageDraw.Draw(lay)
+        k = cam.k
+        lines = ctx["lines"]
+        # rising-pitch trace, drawn over the first ~3 s
+        p = min(1, t / 3.0)
+        pts = []
+        for i in range(int(60 * p) + 1):
+            x = 320 + i * 11
+            y = 590 - (i / 60) ** 1.6 * 150 + math.sin(i * 1.7) * 4
+            pts.append(cam.map(x, y))
+        if len(pts) > 1:
+            d2.line(pts, fill=AMBER + (255,), width=int(8 * k))
+        # sound rings spreading from the ice toward the hydrophone
+        for j in range(4):
+            r = ((t * 260 + j * 220) % 900)
+            a, b = cam.map(130 - r, 560 - r * 0.8)
+            c, e = cam.map(130 + r, 560 + r * 0.8)
+            d2.ellipse([a, b, c, e], outline=(150, 220, 240, int(150 * (1 - r / 900))), width=int(5 * k))
+        if len(lines) >= 2 and t >= lines[-2] and int(t * 6) % 2:
+            x, y = cam.map(135, 470)
+            d2.line([(x, y), (x + 12 * k, y + 50 * k), (x - 8 * k, y + 100 * k), (x + 6 * k, y + 150 * k)], fill=(255, 255, 255, 255), width=int(6 * k))
+        img.alpha_composite(lay)
+        follow_pill(ImageDraw.Draw(img), ctx, t, y0=1060)
+    return bg, overlay
+
+
+SCENES.update({f.__name__: f for f in [dancing_street, playa_stones, meat_sky, deep_listen]})
+
+
+def specimen_jar(rng):
+    """Lamp-lit lab bench: a glass jar of alcohol holding a pink specimen, labelled 'OLYMPIA SPRINGS', beside a brass microscope."""
+    bg = vgrad([(0, (14, 16, 20)), (1, (30, 26, 22))])
+    d = ImageDraw.Draw(bg)
+    d.rectangle([0, 1060, W, 1180], fill=(70, 48, 30))
+    d.rectangle([0, 1180, W, H], fill=(24, 18, 14))
+    # glass jar
+    d.rounded_rectangle([300, 600, 620, 1060], radius=40, fill=(60, 80, 84), outline=(170, 200, 200), width=6)
+    d.rectangle([290, 560, 630, 610], fill=(40, 34, 30))
+    d.rectangle([316, 680, 604, 1044], fill=(110, 130, 110))
+    d.polygon([(400, 820), (470, 780), (540, 830), (520, 920), (430, 940), (380, 880)], fill=(196, 120, 120))
+    d.rectangle([330, 960, 590, 1030], fill=(226, 214, 184))
+    d.text((460, 995), "OLYMPIA SPRINGS", font=ImageFont.truetype(FONT_HAND, 28), fill=(90, 70, 50), anchor="mm")
+    # microscope
+    mc = (150, 110, 60)
+    d.rectangle([720, 1020, 900, 1060], fill=mc)
+    d.rectangle([800, 700, 830, 1020], fill=mc)
+    d.polygon([(760, 600), (800, 590), (860, 820), (820, 830)], fill=mc)
+    d.rectangle([740, 900, 880, 920], fill=mc)
+    bg = radial(bg, 460, 760, 520, (255, 200, 140), 0.25)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        for i in range(6):  # bubbles rising in the alcohol
+            y = 1030 - ((t * 60 + i * 60) % 330)
+            x, yy = cam.map(350 + i * 45, y)
+            d2.ellipse([x - 6 * k, yy - 6 * k, x + 6 * k, yy + 6 * k], outline=(220, 240, 240, 200), width=max(1, int(2 * k)))
+        lines = ctx["lines"]
+        if len(lines) > 1 and t >= lines[1]:
+            fb = ImageFont.truetype(FONT_BOLD, 40)
+            for j, txt in enumerate(["LUNG", "MUSCLE", "CARTILAGE"]):
+                if t >= lines[1] + j * 0.6:
+                    x, y = cam.map(800, 420 + j * 70)
+                    d2.text((x, y), txt, font=fb, fill=AMBER + (255,), anchor="mm")
+        follow_pill(d2, ctx, t, y0=1060)
+    return bg, overlay
+
+
+SCENES.update({"specimen_jar": specimen_jar})

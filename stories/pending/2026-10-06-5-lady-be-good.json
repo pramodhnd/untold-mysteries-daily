@@ -1,0 +1,279 @@
+{
+ "id": "2026-10-06-5-lady-be-good",
+ "format": "landscape",
+ "title": "Lady Be Good: The Bomber Found in the Sahara 15 Years After It Vanished",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "opener": {
+  "file": [
+   "File:Lady Be Good Wreckage Discovery.jpg",
+   "File:Lady Be Good crash photos 1960 -3.jpg"
+  ],
+  "search": "Lady Be Good B-24 wreck",
+  "caption": "The wreck in the Libyan desert"
+ },
+ "thumbnail": {
+  "line1": "LOST IN",
+  "line2": "THE SAHARA",
+  "badge": "B-24 · 1943",
+  "sub": "Where did the crew go?",
+  "scene": "desert_night"
+ },
+ "scenes": [
+  {
+   "scene": "desert_night",
+   "recon": true,
+   "label": "LIBYAN DESERT, 5 APRIL 1943",
+   "lines": [
+    "Two o'clock in the morning, April 5th, 1943. Over the Libyan desert, an American bomber is running out of fuel.",
+    "Nine young airmen jump out into the dark.",
+    "They believe they are close to the Mediterranean coast, and close to home.",
+    "In fact, they are far out over the desert, hundreds of miles south of their base.",
+    "Their plane, the Lady Be Good, flies on without them."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "LADY BE GOOD",
+   "sub": "The bomber the desert kept for fifteen years",
+   "lines": [
+    "For fifteen years, nobody knew where she had gone.",
+    "When she was found, she was almost perfectly preserved. But her crew was not aboard."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "First Mission",
+   "title": "Spring 1943",
+   "events": [
+    {
+     "year": "18 MAR",
+     "label": "Crew arrives in Libya"
+    },
+    {
+     "year": "4 APR",
+     "label": "Raid on Naples"
+    },
+    {
+     "year": "NIGHT",
+     "label": "Flies past its base",
+     "key": true
+    },
+    {
+     "year": "5 APR",
+     "label": "Bail out, about 2 a.m."
+    }
+   ],
+   "lines": [
+    "The Lady Be Good was a B-24D Liberator of the 514th Bomb Squadron, 376th Bomb Group, flying from Soluch, near Benghazi in Libya.",
+    "Her crew had arrived in Libya on March 18th, 1943. The raid of April 4th, on Naples harbour, was their first combat mission.",
+    "Twenty-five B-24s took part. The Lady Be Good flew in the second wave, and turned back before reaching the target.",
+    "That night, twenty-four bombers came home. She did not."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Crew",
+   "title": "Nine men",
+   "facts": [
+    "Pilot: 1st Lt William J. Hatton",
+    "Co-pilot: 2nd Lt Robert F. Toner",
+    "Navigator: 2nd Lt D.P. Hays",
+    "And six more crewmen"
+   ],
+   "lines": [
+    "The pilot was First Lieutenant William Hatton. His co-pilot was Robert Toner, and the navigator was D. P. Hays.",
+    "With them flew bombardier John Woravka, engineer Harold Ripslinger, radio operator Robert LaMotte, and gunners Guy Shelley, Vernon Moore and Samuel Adams.",
+    "Nine men, on their first mission."
+   ]
+  },
+  {
+   "scene": "desert_night",
+   "recon": true,
+   "chapter": "Overshoot",
+   "label": "OVER SOLUCH, NIGHT",
+   "lines": [
+    "Coming home in the dark, the bomber flew right over its own base. Flares were fired. Nobody aboard saw them.",
+    "The base's radio direction finder gave them a bearing that seemed to say they were still on course for home.",
+    "But that equipment could not tell whether a plane was flying toward the base or away from it. The bearing looked the same."
+   ]
+  },
+  {
+   "scene": "desert_night",
+   "recon": true,
+   "label": "SOUTH, INTO THE DESERT",
+   "lines": [
+    "So instead of approaching the coast, they were flying south, deeper and deeper into the desert.",
+    "Toner's diary suggests they never realised they had crossed the coast. They thought they were still about a hundred miles from base.",
+    "At about two in the morning, out of fuel, they jumped."
+   ]
+  },
+  {
+   "scene": "route",
+   "from": "SOLUCH",
+   "to": "WRECK SITE",
+   "note": "About 400 to 440 miles into the desert",
+   "lines": [
+    "Without a crew, the Lady Be Good flew on for about sixteen miles.",
+    "She came down on her belly, skidded nearly seven hundred yards, and broke in two behind the wings.",
+    "There she lay, roughly four hundred miles south of her base."
+   ]
+  },
+  {
+   "scene": "photo",
+   "chapter": "Found",
+   "photo_file": [
+    "File:Lady Be Good Wreckage Discovery.jpg",
+    "File:Lady Be Good crash photos 1960 -3.jpg"
+   ],
+   "photo_search": "Lady Be Good wreck",
+   "lines": [
+    "On November 9th, 1958, a British Petroleum oil exploration team spotted the wreck from the air.",
+    "In early 1959, a team reached her on the ground.",
+    "She was astonishingly well preserved. A machine gun fired when its trigger was pulled. The radio still worked.",
+    "There was water aboard, and a thermos of tea that was still drinkable.",
+    "But there were no bodies, and no sign of the crew. In March 1960, Life magazine told her story to America."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Search",
+   "title": "Looking for nine men",
+   "events": [
+    {
+     "year": "1959",
+     "label": "Parachute arrows found"
+    },
+    {
+     "year": "FEB 1960",
+     "label": "Five men found",
+     "key": true
+    },
+    {
+     "year": "MAY 1960",
+     "label": "Shelley and Ripslinger"
+    },
+    {
+     "year": "AUG 1960",
+     "label": "Woravka found"
+    }
+   ],
+   "lines": [
+    "From May to August 1959, Captain Myron Fuller and anthropologist Wesley Neep searched the area.",
+    "They found parachutes and flight boots laid out as arrows, pointing north. A trail left by the crew. But no remains.",
+    "Then, on February 11th, 1960, oil workers found five of the men together on a plateau, about eighty miles from the wreck.",
+    "Hatton, Toner, Hays, LaMotte and Adams.",
+    "With them was co-pilot Robert Toner's diary."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Diary",
+   "title": "Robert Toner's diary",
+   "facts": [
+    "'Can't find John'",
+    "Half a canteen of water",
+    "9 April: three go for help",
+    "Last entry: 12 April"
+   ],
+   "lines": [
+    "The first entry tells the story in one breath. Out of gas, jumped, landed in the desert at two in the morning. No one badly hurt. Can't find John.",
+    "John was Woravka, the bombardier. His parachute had not opened properly. He was found in August 1960, about twelve miles from the wreck.",
+    "The others started walking north-west, with a few rations and half a canteen of water.",
+    "April 7th. Everyone getting weak, can't get very far, prayers all the time."
+   ]
+  },
+  {
+   "scene": "desert_night",
+   "recon": true,
+   "label": "CALANSCIO SAND SEA",
+   "lines": [
+    "On April 9th, Shelley, Ripslinger and Moore went on ahead, to try to bring help.",
+    "The others waited, and grew weaker. The last entry is dated Monday, April 12th, 1943.",
+    "Experts had expected men in that heat to walk perhaps twenty-five or thirty miles, and to live about two days.",
+    "They lasted eight days, on almost no water, in midday heat up to about one hundred and thirty degrees Fahrenheit."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Walkers",
+   "title": "How far they got",
+   "facts": [
+    "Group of five: about 80 miles",
+    "Shelley: over 20 miles further",
+    "Ripslinger: further still",
+    "Moore: never found"
+   ],
+   "lines": [
+    "In May 1960, a larger search, Operation Climax, set out with nineteen men, six vehicles and two helicopters.",
+    "On May 12th, they found Guy Shelley, more than twenty miles beyond the others.",
+    "Days later, a helicopter crew spotted Harold Ripslinger on the slope of a dune, even further on. By one count, he had walked about a hundred and nine miles.",
+    "Shelley and Ripslinger had kept diaries too.",
+    "Vernon Moore has never been found, despite a search of about six thousand three hundred square miles."
+   ]
+  },
+  {
+   "scene": "desert_night",
+   "chapter": "Afterward",
+   "label": "THE LEGEND",
+   "lines": [
+    "Parts of the bomber were taken away and fitted to other aircraft. A legend grew that they were cursed.",
+    "A transport plane carrying her radio receiver ditched in the Mediterranean. Another aircraft, carrying one of her armrests, crashed in the Gulf of Sidra.",
+    "That's a legend, not proof of anything. But it became part of her story.",
+    "A stained-glass window for the crew, first dedicated in Libya in 1961, now hangs at the National Museum of the US Air Force.",
+    "In 1994, a Libyan team recovered what was left of the wreck. It is now stored at a Libyan air base."
+   ]
+  },
+  {
+   "scene": "desert_night",
+   "label": "LIBYAN DESERT",
+   "lines": [
+    "Nine men, on their first mission, lost because of a radio bearing that pointed both ways.",
+    "Eight of them have been found. One is still out there, somewhere in the sand.",
+    "If they had known where the plane came down, could they have survived? Tell me in the comments, and subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Lady Be Good: The Bomber Found in the Sahara 15 Years After It Vanished",
+  "description": "On 4 April 1943, the B-24D 'Lady Be Good' of the 376th Bomb Group flew its crew's first mission, a raid on Naples, and never returned to its base at Soluch, Libya. In the dark it overflew the base; its single-loop radio direction finder could not show whether the plane was inbound or outbound, and the crew flew deep into the Libyan desert before bailing out at about 2 a.m. on 5 April. The plane was spotted by a BP oil exploration team on 9 November 1958, remarkably intact. In 1960, eight of the nine crew were found, along with co-pilot Robert Toner's diary; Vernon Moore has never been found. Distances walked differ between sources; we give approximate figures.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSOURCES\nWikipedia, Lady Be Good (aircraft): https://en.wikipedia.org/wiki/Lady_Be_Good_(aircraft)\nNational Museum of the US Air Force, Lady Be Good fact sheet: https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/196178/lady-be-good/\nUS Army Quartermaster Museum, The 'Lady Be Good' Story: https://qmmuseum.army.mil/research/history-heritage/mortuary-affairs/The-Lady-Be-Good-Story.html\nNational Archives, The Unwritten Record: Lost and Found, The Story of 'Lady Be Good' and Her Crew (2017): https://unwritten-record.blogs.archives.gov/2017/06/16/lost-and-found-the-story-of-lady-be-good-and-her-crew/\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#LadyBeGood",
+   "#WW2",
+   "#UnsolvedMysteries",
+   "#Mystery",
+   "#History",
+   "#Documentary"
+  ],
+  "tags": [
+   "lady be good",
+   "b-24 liberator",
+   "lady be good bomber",
+   "ww2 mystery",
+   "libyan desert",
+   "sahara",
+   "376th bomb group",
+   "history documentary"
+  ],
+  "synthetic": true
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Lady Be Good (aircraft)",
+   "url": "https://en.wikipedia.org/wiki/Lady_Be_Good_(aircraft)"
+  },
+  {
+   "name": "National Museum of the US Air Force, Lady Be Good fact sheet",
+   "url": "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/196178/lady-be-good/"
+  },
+  {
+   "name": "US Army Quartermaster Museum, The 'Lady Be Good' Story",
+   "url": "https://qmmuseum.army.mil/research/history-heritage/mortuary-affairs/The-Lady-Be-Good-Story.html"
+  },
+  {
+   "name": "National Archives, The Unwritten Record: Lost and Found, The Story of 'Lady Be Good' and Her Crew (2017)",
+   "url": "https://unwritten-record.blogs.archives.gov/2017/06/16/lost-and-found-the-story-of-lady-be-good-and-her-crew/"
+  }
+ ]
+}

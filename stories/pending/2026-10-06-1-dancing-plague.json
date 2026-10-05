@@ -1,0 +1,107 @@
+{
+ "id": "2026-10-06-1-dancing-plague",
+ "title": "In 1518, a whole city couldn't stop dancing. #shorts",
+ "hook": "DANCED TO DEATH?",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:Die Wallfahrt der Fallsuechtigen nach Meulebeeck.jpg",
+   "File:The Dance epidemic in Meulebeeck.jpg",
+   "File:Dance at Molenbeek.jpg"
+  ],
+  "search": "dancing mania Molenbeek Bruegel",
+  "caption": "Dancing pilgrims, after Bruegel"
+ },
+ "scenes": [
+  {
+   "scene": "dancing_street",
+   "label": "STRASBOURG, JULY 1518",
+   "lines": [
+    "July 1518. In Strasbourg, a woman named Frau Troffea starts dancing in the street.",
+    "There is no music, and no reason. She keeps going for days."
+   ]
+  },
+  {
+   "scene": "dancing_street",
+   "label": "WITHIN A WEEK",
+   "lines": [
+    "Within a week, more than thirty people have joined her.",
+    "By some accounts, as many as four hundred are dancing within a month."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:The Dance epidemic in Meulebeeck.jpg",
+    "File:Dance at Molenbeek.jpg"
+   ],
+   "photo_search": "dancing mania Bruegel",
+   "label": "THE CURE",
+   "lines": [
+    "Doctors blamed hot blood. Their cure? More dancing.",
+    "The city opened guildhalls, built stages and hired musicians to keep the dancers moving.",
+    "It made things worse. Some accounts claim dancers died of exhaustion."
+   ]
+  },
+  {
+   "scene": "dancing_street",
+   "label": "SHRINE OF ST VITUS",
+   "lines": [
+    "Finally, the dancers were taken to a mountaintop shrine of Saint Vitus.",
+    "Priests gave them red shoes, and the outbreak faded."
+   ]
+  },
+  {
+   "scene": "dancing_street",
+   "label": "WHY?",
+   "lines": [
+    "Poisoned bread? Historians doubt it. Ergot poisoning causes convulsions, not days of dancing.",
+    "The leading theory is mass psychogenic illness, driven by famine, disease and fear of a saint's curse.",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "In 1518, a whole city couldn't stop dancing. #shorts",
+  "description": "In July 1518, Frau Troffea began dancing in the streets of Strasbourg. Within a week more than 30 people had joined her, and by some accounts as many as 400 within a month. Physicians blamed 'hot blood'; the city set aside guildhalls, built stages and hired musicians, which made it worse. Dancers were later taken to a shrine of St Vitus near Saverne. Reports of deaths come from later accounts and are disputed. Historian John Waller argues it was mass psychogenic illness amid famine and disease; ergot poisoning is widely doubted. The opening picture shows the dancing pilgrimage at Molenbeek after Pieter Bruegel the Elder (1564), not Strasbourg itself. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations.\n\nSources:\n- Encyclopaedia Britannica, Dancing plague of 1518: https://www.britannica.com/event/dancing-plague-of-1518\n- The Public Domain Review, The Dancing Plague of 1518: https://publicdomainreview.org/essay/the-dancing-plague-of-1518/\n- History.com, What Was the Dancing Plague of 1518?: https://www.history.com/articles/what-was-the-dancing-plague-of-1518\n- Wikipedia, Dancing plague of 1518: https://en.wikipedia.org/wiki/Dancing_plague_of_1518\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#dancingplague",
+   "#strasbourg",
+   "#shorts"
+  ],
+  "tags": [
+   "dancing plague",
+   "dancing plague of 1518",
+   "strasbourg",
+   "dancing mania",
+   "mass hysteria",
+   "history mystery",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "Encyclopaedia Britannica, Dancing plague of 1518",
+   "url": "https://www.britannica.com/event/dancing-plague-of-1518"
+  },
+  {
+   "name": "The Public Domain Review, The Dancing Plague of 1518",
+   "url": "https://publicdomainreview.org/essay/the-dancing-plague-of-1518/"
+  },
+  {
+   "name": "History.com, What Was the Dancing Plague of 1518?",
+   "url": "https://www.history.com/articles/what-was-the-dancing-plague-of-1518"
+  },
+  {
+   "name": "Wikipedia, Dancing plague of 1518",
+   "url": "https://en.wikipedia.org/wiki/Dancing_plague_of_1518"
+  }
+ ]
+}

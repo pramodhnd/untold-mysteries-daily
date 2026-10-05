@@ -1,0 +1,110 @@
+{
+ "id": "2026-10-06-6-bloop",
+ "title": "The ocean made a sound louder than any animal. Then they found the source. #shorts",
+ "hook": "THE BLOOP",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:Bloop.jpg"
+  ],
+  "search": "Bloop spectrogram NOAA",
+  "caption": "The 1997 'Bloop' recording"
+ },
+ "scenes": [
+  {
+   "scene": "deep_listen",
+   "label": "PACIFIC OCEAN, 1997",
+   "lines": [
+    "In 1997, underwater microphones in the Pacific picked up a sound nobody could explain.",
+    "It rose in pitch for about a minute, like the call of a living thing."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Bloop.jpg"
+   ],
+   "photo_search": "Bloop sound",
+   "label": "THE BLOOP",
+   "lines": [
+    "It got a name: the Bloop.",
+    "It was heard by hydrophones thousands of kilometers apart.",
+    "Far louder than any whale. Louder than any animal known."
+   ]
+  },
+  {
+   "scene": "deep_listen",
+   "label": "A SEA MONSTER?",
+   "lines": [
+    "Fans of horror writer H. P. Lovecraft joked that his sea monster, Cthulhu, had woken up.",
+    "Was something enormous living in the deep?"
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Iceberg - NOAA.jpg",
+    "File:Antarctic Iceberg (11010187683).jpg"
+   ],
+   "photo_search": "Antarctic iceberg",
+   "label": "ANTARCTICA",
+   "lines": [
+    "To find out, scientists put hydrophones closer to Antarctica.",
+    "The answer was an icequake: a giant iceberg cracking and breaking apart."
+   ]
+  },
+  {
+   "scene": "deep_listen",
+   "label": "SOLVED",
+   "lines": [
+    "NOAA traced it to Antarctic ice, and published the explanation in 2012.",
+    "And as the planet warms, NOAA says, more icequakes happen every year.",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "The ocean made a sound louder than any animal. Then they found the source. #shorts",
+  "description": "In the summer of 1997, NOAA's autonomous hydrophones in the Pacific recorded an ultra-low-frequency sound, later nicknamed the Bloop, heard by sensors thousands of kilometers apart. It rose rapidly in frequency, like some animal calls, but was far louder than any known animal. After placing hydrophones closer to Antarctica from 2005, NOAA's Pacific Marine Environmental Laboratory concluded it was an icequake, the sound of a large iceberg cracking and breaking away, and publicly described it that way in 2012. The Cthulhu link is a fan joke, not science. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations.\n\nSources:\n- NOAA Ocean Service, What is the bloop?: https://oceanservice.noaa.gov/facts/bloop.html\n- NOAA PMEL Acoustics Program, Icequakes (Bloop): https://www.pmel.noaa.gov/acoustics/sounds/bloop.html\n- Wikipedia, Bloop: https://en.wikipedia.org/wiki/Bloop\n- ScienceAlert, Listen to The Pacific 'Bloop' Sound That Flummoxed Scientists For 8 Years (2022): https://www.sciencealert.com/listen-to-the-pacific-bloop-sound-that-flummoxed-scientists-for-8-years\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#ocean",
+   "#bloop",
+   "#shorts"
+  ],
+  "tags": [
+   "bloop",
+   "the bloop",
+   "noaa",
+   "underwater sound",
+   "icequake",
+   "ocean mystery",
+   "cthulhu",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "NOAA Ocean Service, What is the bloop?",
+   "url": "https://oceanservice.noaa.gov/facts/bloop.html"
+  },
+  {
+   "name": "NOAA PMEL Acoustics Program, Icequakes (Bloop)",
+   "url": "https://www.pmel.noaa.gov/acoustics/sounds/bloop.html"
+  },
+  {
+   "name": "Wikipedia, Bloop",
+   "url": "https://en.wikipedia.org/wiki/Bloop"
+  },
+  {
+   "name": "ScienceAlert, Listen to The Pacific 'Bloop' Sound That Flummoxed Scientists For 8 Years (2022)",
+   "url": "https://www.sciencealert.com/listen-to-the-pacific-bloop-sound-that-flummoxed-scientists-for-8-years"
+  }
+ ]
+}
