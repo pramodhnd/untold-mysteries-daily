@@ -1,0 +1,103 @@
+{
+ "id": "2026-10-07-3-phaistos-disc",
+ "title": "This 3,600-year-old disc was printed with stamps. Nobody can read it. #shorts",
+ "hook": "NOBODY CAN READ IT",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:Phaistos Disc - Heraklion Archaeological Museum by Joy of Museums.jpg",
+   "File:Crete - Phaistos disk - side A.JPG"
+  ],
+  "search": "Phaistos disc",
+  "caption": "The Phaistos Disc, Heraklion"
+ },
+ "scenes": [
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Phaistos 01.jpg",
+    "File:Faistos Palace.jpg"
+   ],
+   "photo_search": "Phaistos palace ruins",
+   "label": "PHAISTOS, CRETE, 1908",
+   "lines": [
+    "In 1908, a clay disc turned up in the ruins of a palace on Crete.",
+    "Italian archaeologist Luigi Pernier found it on July 3rd, at Phaistos."
+   ]
+  },
+  {
+   "scene": "clay_disc",
+   "label": "THE DISC",
+   "lines": [
+    "It's about sixteen centimetres across, with writing spiralling over both sides.",
+    "Over 240 signs, made from 45 different symbols."
+   ]
+  },
+  {
+   "scene": "clay_disc",
+   "label": "STAMPED, NOT SCRATCHED",
+   "lines": [
+    "And they weren't scratched in. Each sign was pressed into the soft clay with a stamp.",
+    "That's printing, thousands of years before Gutenberg."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Crete -Phaistos disk - side B.JPG",
+    "File:Phaistos disk A.jpg"
+   ],
+   "photo_search": "Phaistos disc side B",
+   "label": "UNREADABLE",
+   "lines": [
+    "There is no other text like it, so nobody has ever been able to read it.",
+    "Its age has never been tested scientifically. In 2008, one expert even suggested it could be a fake."
+   ]
+  },
+  {
+   "scene": "clay_disc",
+   "label": "HERAKLION MUSEUM",
+   "lines": [
+    "Most archaeologists believe it's real. Today it sits in the Heraklion Archaeological Museum.",
+    "So what does it say?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "This 3,600-year-old disc was printed with stamps. Nobody can read it. #shorts",
+  "description": "On 3 July 1908 the Italian archaeologist Luigi Pernier found a fired-clay disc, about 16 cm across, at the Minoan palace of Phaistos on Crete. Its two sides carry a spiral of over 240 sign tokens (sources give 241 or 242) made from 45 distinct signs, each pressed into the soft clay with a stamp before firing, an early form of movable-type printing. Its date is disputed, with most estimates in the Minoan Bronze Age. With no comparable text, it remains undeciphered. In 2008 Jerome Eisenberg suggested it might be a forgery, noting it has never been dated by thermoluminescence; most archaeologists accept it as authentic. It is kept in the Heraklion Archaeological Museum. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSources:\n- Wikipedia, Phaistos Disc: https://en.wikipedia.org/wiki/Phaistos_Disc\n- Swansea University, Ancient World: The Phaistos Disc: https://ancient-world.swansea.ac.uk/?p=1614\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#crete",
+   "#archaeology",
+   "#phaistosdisc",
+   "#shorts"
+  ],
+  "tags": [
+   "phaistos disc",
+   "crete",
+   "minoan",
+   "undeciphered script",
+   "ancient mystery",
+   "archaeology",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Phaistos Disc",
+   "url": "https://en.wikipedia.org/wiki/Phaistos_Disc"
+  },
+  {
+   "name": "Swansea University, Ancient World: The Phaistos Disc",
+   "url": "https://ancient-world.swansea.ac.uk/?p=1614"
+  }
+ ]
+}

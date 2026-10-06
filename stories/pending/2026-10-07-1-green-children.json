@@ -1,0 +1,104 @@
+{
+ "id": "2026-10-07-1-green-children",
+ "title": "Two children walked out of an English wolf pit. Their skin was green. #shorts",
+ "hook": "GREEN SKIN",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:The \"green children\" of Woolpit on the village sign - geograph.org.uk - 1161413.jpg",
+   "File:WoolpitSign.jpg"
+  ],
+  "search": "Woolpit village sign",
+  "caption": "Woolpit village sign, Suffolk"
+ },
+ "scenes": [
+  {
+   "scene": "wolf_pit",
+   "label": "WOOLPIT, SUFFOLK, 1100s",
+   "lines": [
+    "Medieval England. Two children are found beside a wolf pit. Their skin is green.",
+    "It's harvest time in Woolpit, a Suffolk village named after its old wolf traps."
+   ]
+  },
+  {
+   "scene": "wolf_pit",
+   "label": "THE STRANGERS",
+   "lines": [
+    "They speak a language nobody knows, and wear clothes nobody recognises.",
+    "For days they refuse all food, until they find raw beans."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Woolpit village, Suffolk - geograph.org.uk - 237120.jpg"
+   ],
+   "photo_search": "Woolpit Suffolk",
+   "label": "THE GIRL'S STORY",
+   "lines": [
+    "The boy grew sick and died. The girl survived, and learned English.",
+    "She said they came from St Martin's Land, where the sun never shone.",
+    "Everything there, one chronicler wrote, was green."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_category": "Woolpit",
+   "photo_search": "Woolpit church",
+   "label": "AN ANSWER?",
+   "lines": [
+    "Two medieval writers recorded the story. Most historians treat it as a legend.",
+    "But in 1998, historian Paul Harris offered an explanation."
+   ]
+  },
+  {
+   "scene": "wolf_pit",
+   "label": "FORNHAM ST MARTIN?",
+   "lines": [
+    "Maybe they were Flemish orphans from nearby Fornham St Martin, turned green by a starvation diet.",
+    "Or maybe they really came from somewhere else. What do you think?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Two children walked out of an English wolf pit. Their skin was green. #shorts",
+  "description": "Sometime in the 12th century, possibly in the reign of King Stephen, two children with green skin were found at harvest time beside one of the wolf pits that gave Woolpit in Suffolk its name, according to the chroniclers William of Newburgh and Ralph of Coggeshall. They spoke an unknown language and would eat only raw beans. The boy died; the girl learned English and said they came from 'St Martin's Land', a twilight country. This is told as a legend. In 1998 Paul Harris suggested they were Flemish children from Fornham St Martin, and that their colour came from hypochromic anaemia (chlorosis) caused by poor diet. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSources:\n- Wikipedia, Green children of Woolpit: https://en.wikipedia.org/wiki/Green_children_of_Woolpit\n- Historic UK, The Green Children of Woolpit: https://www.historic-uk.com/CultureUK/The-Green-Children-of-Woolpit/\n- Medievalists.net, The Green Children of Woolpit: https://www.medievalists.net/2018/08/green-children-woolpit/\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#woolpit",
+   "#medieval",
+   "#legend",
+   "#shorts"
+  ],
+  "tags": [
+   "green children of woolpit",
+   "woolpit",
+   "suffolk legend",
+   "medieval mystery",
+   "st martin's land",
+   "english folklore",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Green children of Woolpit",
+   "url": "https://en.wikipedia.org/wiki/Green_children_of_Woolpit"
+  },
+  {
+   "name": "Historic UK, The Green Children of Woolpit",
+   "url": "https://www.historic-uk.com/CultureUK/The-Green-Children-of-Woolpit/"
+  },
+  {
+   "name": "Medievalists.net, The Green Children of Woolpit",
+   "url": "https://www.medievalists.net/2018/08/green-children-woolpit/"
+  }
+ ]
+}

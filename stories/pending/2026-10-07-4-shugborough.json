@@ -1,0 +1,111 @@
+{
+ "id": "2026-10-07-4-shugborough",
+ "title": "Ten letters carved in an English garden have beaten codebreakers for 250 years. #shorts",
+ "hook": "UNCRACKED",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:Shugborough inscription.jpg",
+   "File:Shugborough shepherds monument.JPG"
+  ],
+  "search": "Shugborough Shepherd's Monument",
+  "caption": "Shepherd's Monument, Shugborough"
+ },
+ "scenes": [
+  {
+   "scene": "carved_letters",
+   "label": "SHUGBOROUGH, ENGLAND",
+   "lines": [
+    "Ten letters on an English garden monument have beaten codebreakers for over 250 years.",
+    "O, U, O, S, V, A, V, V. And below them, D and M."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Shepherd's Monument, Shugborough Estate - Staffordshire, England - DSC00182.jpg",
+    "File:Shugborough shepherds monument.JPG"
+   ],
+   "photo_search": "Shepherd's Monument Shugborough",
+   "label": "THE SHEPHERD'S MONUMENT",
+   "lines": [
+    "The Shepherd's Monument was commissioned by Thomas Anson, on his Staffordshire estate, from 1748.",
+    "Above the letters is a mirror-image copy of a famous painting by Poussin."
+   ]
+  },
+  {
+   "scene": "carved_letters",
+   "label": "THE CODE",
+   "lines": [
+    "D M probably stands for Dis Manibus, Latin for 'to the spirits of the dead'.",
+    "But the other eight letters? Nobody knows.",
+    "Legend says even Charles Darwin and Charles Dickens tried."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Shugborough Hall 01.jpg"
+   ],
+   "photo_search": "Shugborough Hall",
+   "label": "2004",
+   "lines": [
+    "In 2004, two Second World War codebreakers from Bletchley Park came to try.",
+    "Oliver and Sheila Lawn studied the letters. No answer has ever been accepted."
+   ]
+  },
+  {
+   "scene": "carved_letters",
+   "label": "STILL UNSOLVED",
+   "lines": [
+    "Theories range from a love letter to the Holy Grail. New solutions arrive every week.",
+    "What do you think it says?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Ten letters carved in an English garden have beaten codebreakers for 250 years. #shorts",
+  "description": "The Shepherd's Monument on the Shugborough estate in Staffordshire was commissioned by Thomas Anson; sources date its construction to between 1748 and the 1750s or 1760s. Its relief, by Peter Scheemakers, is a mirror-image copy of Poussin's 'Shepherds of Arcadia'. Below it are the letters O U O S V A V V, with D M (usually read as 'Dis Manibus') beneath. In May 2004 the Bletchley Park veterans Oliver and Sheila Lawn were invited to examine it; no solution has been accepted. Claims that Darwin and Dickens tried to solve it are legend, and Holy Grail theories are speculation. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSources:\n- Wikipedia, Shugborough inscription: https://en.wikipedia.org/wiki/Shugborough_inscription\n- NPR, Code Veterans Try to Crack Ancient Carving (2004): https://www.npr.org/2004/05/13/1895692/code-veterans-try-to-crack-ancient-carving\n- Lawrence Journal-World, Codebreakers tackle 18th-century puzzle (2004): https://www2.ljworld.com/news/2004/may/13/codebreakers_tackle_18thcentury/\n- StaffordshireLive, The mysterious 'Da Vinci code' in Staffordshire: https://www.staffordshire-live.co.uk/news/local-news/mysterious-da-vinci-code-staffordshire-6787014\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#shugborough",
+   "#codebreaking",
+   "#cipher",
+   "#shorts"
+  ],
+  "tags": [
+   "shugborough inscription",
+   "shepherd's monument",
+   "unsolved code",
+   "bletchley park",
+   "staffordshire",
+   "cipher mystery",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Shugborough inscription",
+   "url": "https://en.wikipedia.org/wiki/Shugborough_inscription"
+  },
+  {
+   "name": "NPR, Code Veterans Try to Crack Ancient Carving (2004)",
+   "url": "https://www.npr.org/2004/05/13/1895692/code-veterans-try-to-crack-ancient-carving"
+  },
+  {
+   "name": "Lawrence Journal-World, Codebreakers tackle 18th-century puzzle (2004)",
+   "url": "https://www2.ljworld.com/news/2004/may/13/codebreakers_tackle_18thcentury/"
+  },
+  {
+   "name": "StaffordshireLive, The mysterious 'Da Vinci code' in Staffordshire",
+   "url": "https://www.staffordshire-live.co.uk/news/local-news/mysterious-da-vinci-code-staffordshire-6787014"
+  }
+ ]
+}

@@ -1,0 +1,295 @@
+{
+ "id": "2026-10-07-5-kaspar-hauser",
+ "format": "landscape",
+ "title": "Kaspar Hauser: The Boy From Nowhere, and What His DNA Finally Revealed",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "opener": {
+  "file": [
+   "File:Kaspar_hauser_grab.jpg"
+  ],
+  "search": "Kaspar Hauser Ansbach",
+  "caption": "Kaspar Hauser's grave, Ansbach"
+ },
+ "thumbnail": {
+  "line1": "THE BOY",
+  "line2": "FROM NOWHERE",
+  "badge": "NUREMBERG · 1828",
+  "sub": "A lost prince?",
+  "scene": "city_night"
+ },
+ "scenes": [
+  {
+   "scene": "city_night",
+   "recon": true,
+   "label": "NUREMBERG, 26 MAY 1828",
+   "lines": [
+    "Nuremberg, Germany. May 26th, 1828. A teenage boy appears in the streets, unsteady and bewildered.",
+    "He carries two letters. One is addressed to a cavalry captain.",
+    "He can barely speak. But he can write one thing: his name. Kaspar Hauser."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "KASPAR HAUSER",
+   "sub": "The riddle of his time",
+   "lines": [
+    "For five years, Europe argued about who he was. A wild child? A fraud? Or a stolen prince?",
+    "Then he was stabbed in a park, and took his secret to the grave.",
+    "Nearly two hundred years later, DNA has finally answered one part of the riddle."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Boy With Two Letters",
+   "title": "The letters",
+   "facts": [
+    "Unsigned, from 'the Bavarian border'",
+    "Boy handed over on 7 October 1812",
+    "Second note: born 30 April 1812",
+    "At least one was a crude forgery"
+   ],
+   "lines": [
+    "A shoemaker took him to the captain's house. From there he went to a police station, where he wrote his name.",
+    "The first letter, unsigned, said the boy had been left with the writer on October 7th, 1812, and never allowed to take a step outside the house.",
+    "A second note, supposedly from his mother, said he was born on April 30th, 1812, and that his late father had been a cavalryman.",
+    "He seemed about sixteen. He refused all food except bread and water."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "THE DARK CELL",
+   "sub": "Kaspar's own account",
+   "lines": [
+    "Once he learned to talk, Kaspar told an extraordinary story.",
+    "He said he had spent his whole life alone in a dark cell, living on rye bread and water.",
+    "A man he never properly saw taught him to write his name, and one sentence: 'I want to be a cavalryman, as my father was.'",
+    "Yet when he arrived, he was in good physical condition, with a healthy complexion. Not what a life in the dark should look like."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "chapter": "The Wild Child of Nuremberg",
+   "label": "NUREMBERG, 1828-1830",
+   "lines": [
+    "He became a sensation. A schoolmaster, Friedrich Daumer, took him in, and found he had a gift for drawing.",
+    "Then, on October 17th, 1829, Kaspar was found bleeding from a wound to his forehead in Daumer's cellar.",
+    "He said a hooded man had attacked him. Skeptics suspected he had done it himself.",
+    "In April 1830, a pistol went off in his room. He said it was an accident. The wound was too shallow for a gunshot."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The Prince Rumour",
+   "title": "A stolen prince?",
+   "events": [
+    {
+     "year": "29 SEP 1812",
+     "label": "Baden prince born"
+    },
+    {
+     "year": "16 OCT 1812",
+     "label": "The prince dies"
+    },
+    {
+     "year": "1829",
+     "label": "Rumour spreads",
+     "key": true
+    },
+    {
+     "year": "1876",
+     "label": "Records published"
+    }
+   ],
+   "lines": [
+    "By then, a rumour was spreading.",
+    "In September 1812, the Grand Duke of Baden and his wife, Stéphanie de Beauharnais, Napoleon's adopted daughter, had a son. He died seventeen days later.",
+    "What if he hadn't died? What if a dying baby had been swapped in, and the real prince hidden away?",
+    "Some even accused Countess Louise Caroline of Hochberg, of the Baden court, of switching the babies."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "label": "BADEN, 1812",
+   "lines": [
+    "Kaspar, people whispered, was the lost heir of Baden.",
+    "It was a perfect story: a prince, a wicked plot, and a boy locked away in the dark.",
+    "But in 1876, a writer named Otto Mittelstädt published the official records of the baby prince's baptism, autopsy and burial. They went against the theory."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "chapter": "Ansbach",
+   "label": "ANSBACH, 1831-1833",
+   "lines": [
+    "In late 1831, a British nobleman, Lord Stanhope, took custody of him, and spent a great deal trying to trace his origins.",
+    "He even took Kaspar to Hungary, twice. Kaspar recognised nothing.",
+    "Stanhope moved him to the town of Ansbach, to live with a schoolmaster named Johann Georg Meyer.",
+    "Stanhope last saw him in January 1832, but kept paying for his care."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "Ansbach",
+   "facts": [
+    "Guardian: Johann Georg Meyer",
+    "Patron: judge Anselm von Feuerbach",
+    "1832: Feuerbach's book on Kaspar",
+    "May 1833: Feuerbach dies"
+   ],
+   "lines": [
+    "His great champion was the judge Anselm von Feuerbach, who in 1832 published the first book about the case.",
+    "In Ansbach, Kaspar worked as a clerk, and lived in Meyer's house.",
+    "In May 1833, Feuerbach died. Kaspar had lost his most powerful protector."
+   ]
+  },
+  {
+   "scene": "forest_night",
+   "recon": true,
+   "chapter": "The Court Garden",
+   "label": "ANSBACH, 14 DECEMBER 1833",
+   "lines": [
+    "December 14th, 1833. Kaspar returns to Meyer's house with a deep wound in his chest.",
+    "He says a stranger approached him in the Court Garden, handed him a purse, and stabbed him.",
+    "Police found the purse. Inside was a note, written in pencil, in mirror writing."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "The note",
+   "facts": [
+    "Pencil, written in mirror writing",
+    "'I come from ... the Bavarian border'",
+    "Initials: M. L. Ö.",
+    "Errors typical of Kaspar himself"
+   ],
+   "lines": [
+    "It said Hauser could describe exactly what the writer looked like, and where he came from. It ended with three initials: M. L. Ö.",
+    "But the note had spelling and grammar mistakes typical of Kaspar himself. And it was folded in his own triangular way.",
+    "The court in Ansbach suspected the wound was self-inflicted.",
+    "Three days later, on December 17th, 1833, Kaspar Hauser died."
+   ]
+  },
+  {
+   "scene": "photo",
+   "chapter": "The Riddle of His Time",
+   "photo_category": "Kaspar Hauser",
+   "photo_search": "Kaspar Hauser Ansbach",
+   "label": "ANSBACH",
+   "lines": [
+    "His gravestone in Ansbach calls him the riddle of his time. His birth unknown, his death mysterious.",
+    "In the Court Garden, a memorial reads: here a mysterious one was killed in a mysterious way.",
+    "For almost two centuries, the prince theory refused to die."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "chapter": "The DNA",
+   "title": "Testing the legend",
+   "events": [
+    {
+     "year": "1996",
+     "label": "Blood stain: no match"
+    },
+    {
+     "year": "2001-02",
+     "label": "Hair: close match"
+    },
+    {
+     "year": "2024",
+     "label": "New hair tests",
+     "key": true
+    }
+   ],
+   "lines": [
+    "In 1996, a blood stain on underwear said to be his was tested. It did not match the Baden family.",
+    "But in the early 2000s, tests on hair suggested a close match. The legend came back to life.",
+    "And there was a problem with the blood: museum staff had reportedly touched up the stains over the years, with blood from other sources."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "label": "INNSBRUCK AND POTSDAM, 2019-2024",
+   "lines": [
+    "In 2024, scientists tried one more time, with three locks of Kaspar's hair from private collections.",
+    "The hair was sequenced in Innsbruck, and checked blind by a second lab at the University of Potsdam.",
+    "They also re-tested the hair from the early 2000s, and the old blood stain."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "2024: the verdict",
+   "facts": [
+    "Every sample: mtDNA type W",
+    "Baden family line: type H1bs",
+    "Maternal link ruled out: 99.9994%"
+   ],
+   "lines": [
+    "The team, led by Walther Parson of the Medical University of Innsbruck, used modern sequencing on every sample.",
+    "Every sample, hair and blood, carried the same mitochondrial DNA type: W. So the samples really were his.",
+    "The Baden line carries a different type, H1bs. A maternal link to the House of Baden was ruled out with 99.9994 percent certainty.",
+    "Kaspar Hauser was not the lost prince."
+   ]
+  },
+  {
+   "scene": "city_night",
+   "label": "WHO WAS HE?",
+   "lines": [
+    "So who was he? The DNA only places him in a Western European family line.",
+    "Many historians now think he may have been troubled, and perhaps a fantasist. His drawings and watercolours still survive.",
+    "Was he a prisoner, a dreamer, or a brilliant fraud? And whose hand held the knife?",
+    "Tell us what you think in the comments, and subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Kaspar Hauser: The Boy From Nowhere, and What His DNA Finally Revealed",
+  "description": "On 26 May 1828 a youth of about 16 appeared in Nuremberg carrying two letters and able to write little more than his name, Kaspar Hauser. He later said he had spent his life in a dark cell. After an injury in October 1829 and a pistol incident in April 1830, he was taken under the protection of Lord Stanhope and moved to Ansbach, where on 14 December 1833 he came home with a chest wound, saying a stranger had stabbed him in the Court Garden; he died on 17 December 1833. A rumour that he was the hereditary prince of Baden, born 29 September 1812, persisted for nearly two centuries. DNA tests in 1996 and the early 2000s disagreed; a 2024 study in iScience led by Walther Parson (Medical University of Innsbruck) found all hair and blood samples share mitochondrial haplotype W, unlike the Baden line (H1bs), ruling out a maternal link with 99.9994 percent certainty. Some details of his life are disputed between sources.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSOURCES\nWikipedia, Kaspar Hauser: https://en.wikipedia.org/wiki/Kaspar_Hauser\nEncyclopaedia Britannica, Kaspar Hauser: https://www.britannica.com/print/article/257129\nCNN, New DNA analysis unravels the mystery of 'lost prince' Kaspar Hauser (2024): https://edition.cnn.com/2024/09/21/science/kaspar-hauser-new-dna-analysis\nMedical University of Innsbruck press release via idw (6 Aug 2024): https://idw-online.de/en/news837922\nParson et al., iScience (2024), Kaspar Hauser's alleged noble origin: https://doi.org/10.1016/j.isci.2024.110539\nLive Science, The Mystery of Kaspar Hauser: https://www.livescience.com/44375-the-mystery-of-kaspar-hauser.html\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#KasparHauser",
+   "#UnsolvedMysteries",
+   "#Mystery",
+   "#History",
+   "#Germany",
+   "#Documentary"
+  ],
+  "tags": [
+   "kaspar hauser",
+   "nuremberg 1828",
+   "lost prince of baden",
+   "kaspar hauser dna",
+   "feral child",
+   "german history mystery",
+   "history documentary",
+   "unsolved mysteries"
+  ],
+  "synthetic": true
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Kaspar Hauser",
+   "url": "https://en.wikipedia.org/wiki/Kaspar_Hauser"
+  },
+  {
+   "name": "Encyclopaedia Britannica, Kaspar Hauser",
+   "url": "https://www.britannica.com/print/article/257129"
+  },
+  {
+   "name": "CNN, New DNA analysis unravels the mystery of 'lost prince' Kaspar Hauser (2024)",
+   "url": "https://edition.cnn.com/2024/09/21/science/kaspar-hauser-new-dna-analysis"
+  },
+  {
+   "name": "Medical University of Innsbruck press release via idw (6 Aug 2024)",
+   "url": "https://idw-online.de/en/news837922"
+  },
+  {
+   "name": "Parson et al., iScience (2024), Kaspar Hauser's alleged noble origin",
+   "url": "https://doi.org/10.1016/j.isci.2024.110539"
+  },
+  {
+   "name": "Live Science, The Mystery of Kaspar Hauser",
+   "url": "https://www.livescience.com/44375-the-mystery-of-kaspar-hauser.html"
+  }
+ ]
+}

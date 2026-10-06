@@ -1,0 +1,105 @@
+{
+ "id": "2026-10-07-6-hessdalen-lights",
+ "title": "Balls of light have haunted this Norwegian valley since 1981. #shorts",
+ "hook": "LIGHTS IN THE VALLEY",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.07,
+ "opener": {
+  "file": [
+   "File:Elv Hessdalen.jpg",
+   "File:Hessdalen kirke (01).JPG"
+  ],
+  "search": "Hessdalen",
+  "caption": "Hessdalen valley, Norway"
+ },
+ "scenes": [
+  {
+   "scene": "valley_lights",
+   "label": "HESSDALEN, NORWAY, 1981",
+   "lines": [
+    "In late 1981, glowing balls of light began appearing over a remote Norwegian valley.",
+    "Hessdalen, about 120 kilometres south of Trondheim."
+   ]
+  },
+  {
+   "scene": "valley_lights",
+   "label": "1981 TO 1984",
+   "lines": [
+    "For about three years, people saw them fifteen to twenty times a week.",
+    "Some lasted seconds. Others hung over the valley for hours."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Hessdalen kirke (01).JPG"
+   ],
+   "photo_search": "Hessdalen church",
+   "label": "PROJECT HESSDALEN",
+   "lines": [
+    "In 1983, investigators launched Project Hessdalen to measure them.",
+    "Since 1998, an automatic station has watched the valley day and night."
+   ]
+  },
+  {
+   "scene": "valley_lights",
+   "label": "THE THEORIES",
+   "lines": [
+    "Burning dust. Air charged by radioactive radon. Quartz in the rocks.",
+    "One idea says the whole valley acts like a giant battery, with the river in the middle."
+   ]
+  },
+  {
+   "scene": "valley_lights",
+   "label": "STILL HAPPENING",
+   "lines": [
+    "No theory explains everything. And the lights still appear, about ten to twenty times a year.",
+    "What do you think they are?",
+    "Follow for one mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Balls of light have haunted this Norwegian valley since 1981. #shorts",
+  "description": "Unexplained lights have been reported along the Hessdalen valley in central Norway since late 1981. From 1981 to 1984 they were seen 15 to 20 times a week; today they are reported roughly 10 to 20 times a year. Project Hessdalen began in 1983, and an automatic measurement station has run since 1998, with engineers from Østfold University College and Italian research partners. Proposed explanations include burning dust clouds, dusty plasma ionised by radon decay, piezoelectric quartz, and a 2014 'giant battery' idea in which the valley sides act as electrodes and the river Hesja as electrolyte. None explains all observations. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSources:\n- Wikipedia, Hessdalen lights: https://en.wikipedia.org/wiki/Hessdalen_lights\n- Frontiers in Earth Science (2016), Hessdalen lights study: https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2016.00017/pdf\n- Erling Strand, GEIPAN workshop abstract: https://www.geipan.fr/sites/default/files/23_STRAND_abs.pdf\n- ScienceNorway, Little valley, a giant battery?: https://sciencenorway.no/electricity-forskningno-geology/little-valley--a-giant-battery/1401223\n\nNew true mystery every day - subscribe.",
+  "hashtags": [
+   "#mystery",
+   "#unsolvedmysteries",
+   "#history",
+   "#norway",
+   "#hessdalen",
+   "#unexplained",
+   "#shorts"
+  ],
+  "tags": [
+   "hessdalen lights",
+   "hessdalen",
+   "norway mystery",
+   "unexplained lights",
+   "earth lights",
+   "science mystery",
+   "unsolved mysteries",
+   "mystery shorts"
+  ],
+  "synthetic": false
+ },
+ "sources": [
+  {
+   "name": "Wikipedia, Hessdalen lights",
+   "url": "https://en.wikipedia.org/wiki/Hessdalen_lights"
+  },
+  {
+   "name": "Frontiers in Earth Science (2016), Hessdalen lights study",
+   "url": "https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2016.00017/pdf"
+  },
+  {
+   "name": "Erling Strand, GEIPAN workshop abstract",
+   "url": "https://www.geipan.fr/sites/default/files/23_STRAND_abs.pdf"
+  },
+  {
+   "name": "ScienceNorway, Little valley, a giant battery?",
+   "url": "https://sciencenorway.no/electricity-forskningno-geology/little-valley--a-giant-battery/1401223"
+  }
+ ]
+}

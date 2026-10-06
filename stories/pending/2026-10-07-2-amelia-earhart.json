@@ -1,0 +1,332 @@
+{
+ "id": "2026-10-07-2-amelia-earhart",
+ "format": "landscape",
+ "title": "Amelia Earhart: The Last Radio Calls, and the Search That Still Hasn't Ended",
+ "voice": "am_michael",
+ "lang": "en-us",
+ "speed": 1.0,
+ "opener": {
+  "file": [
+   "File:Amelia_Earhart_standing_under_nose_of_her_Lockheed_Model_10-E_Electra.jpg",
+   "File:Amelia_Earhart_and_Fred_Noonan.jpg"
+  ],
+  "search": "Amelia Earhart Electra 1937",
+  "caption": "Amelia Earhart and her Electra"
+ },
+ "thumbnail": {
+  "line1": "SHE NEVER",
+  "line2": "LANDED",
+  "badge": "PACIFIC · 1937",
+  "sub": "Where is Amelia Earhart?",
+  "scene": "night_sea"
+ },
+ "scenes": [
+  {
+   "scene": "night_sea",
+   "recon": true,
+   "label": "CENTRAL PACIFIC, 2 JULY 1937",
+   "lines": [
+    "Morning, July 2nd, 1937. Somewhere near a tiny island in the middle of the Pacific, a silver plane is running low on fuel.",
+    "On a Coast Guard ship below, radio operators can hear the pilot's voice, loud and clear.",
+    "'We must be on you,' she says, 'but we cannot see you.'",
+    "An hour later, there is silence."
+   ]
+  },
+  {
+   "scene": "title_card",
+   "text": "AMELIA EARHART",
+   "sub": "The flight that never landed",
+   "lines": [
+    "The pilot was Amelia Earhart, the most famous woman flyer in the world. Her navigator was Fred Noonan.",
+    "Almost ninety years later, nobody knows where they went down.",
+    "And right now, a new expedition is heading for the place some believe holds the answer."
+   ]
+  },
+  {
+   "scene": "photo",
+   "chapter": "Around the World",
+   "photo_file": [
+    "File:Amelia_Earhart_with_the_new_Electra_1936.jpg",
+    "File:Earhart-electra_10.jpg"
+   ],
+   "photo_search": "Amelia Earhart Electra",
+   "label": "THE ELECTRA",
+   "lines": [
+    "In 1937, Earhart set out to fly around the world in a twin-engine Lockheed Electra 10E.",
+    "Fred Noonan was an experienced Pan Am navigator. He had set the course for the China Clipper's flights across the Pacific.",
+    "Their first attempt, starting from Oakland in March, went wrong. So they tried again, this time flying east.",
+    "On June 1st, 1937, they left Miami."
+   ]
+  },
+  {
+   "scene": "timeline",
+   "title": "1937",
+   "events": [
+    {
+     "year": "1 JUN",
+     "label": "Leave Miami"
+    },
+    {
+     "year": "28 JUN",
+     "label": "Darwin, Australia"
+    },
+    {
+     "year": "29 JUN",
+     "label": "Reach Lae, New Guinea"
+    },
+    {
+     "year": "2 JUL",
+     "label": "Take off for Howland",
+     "key": true
+    }
+   ],
+   "lines": [
+    "Across South America, Africa and Asia, they covered about 22,000 miles in four weeks.",
+    "On June 29th they reached Lae, in New Guinea. About 7,000 miles remained, all of it over the Pacific.",
+    "The next leg was the hardest of all: 2,556 miles to Howland Island."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Amelia_Earhart_in_Darwin_on_28_June_1937.jpg"
+   ],
+   "photo_search": "Amelia Earhart Darwin 1937",
+   "label": "DARWIN, 28 JUNE 1937",
+   "lines": [
+    "On June 28th, she was photographed in Darwin, Australia, one of the last stops before New Guinea.",
+    "In the air, Noonan worked out their position and passed notes forward to Earhart, on a fishing line.",
+    "So far, the plan had worked. Now came open ocean, with no landmarks at all."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Hardest Leg",
+   "title": "Howland Island",
+   "facts": [
+    "About 3 km long, 1.6 km wide",
+    "Lae to Howland: 2,556 miles",
+    "About 1,100 gallons of fuel",
+    "Cutter Itasca waiting offshore"
+   ],
+   "lines": [
+    "Howland is a speck of land, about three kilometres long and less than two wide.",
+    "Finding it after some eighteen hours over open ocean would take near-perfect navigation.",
+    "The Coast Guard cutter Itasca waited offshore, ready to guide them in by radio."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Howland_island_nasa.jpg",
+    "File:Howland_Island_NWR.jpg"
+   ],
+   "photo_search": "Howland Island",
+   "label": "HOWLAND ISLAND",
+   "lines": [
+    "They took off from Lae at ten in the morning, local time, on July 2nd, with about 1,100 gallons of fuel.",
+    "Through the night and into the morning, Itasca's radio operators heard her calls.",
+    "But it was never a proper conversation. Again and again, she could not hear them."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "recon": true,
+   "chapter": "Last Words",
+   "label": "ITASCA RADIO ROOM, MORNING",
+   "lines": [
+    "At 7:42 a.m., her voice came in: 'We must be on you, but we cannot see you. Fuel is running low.'",
+    "At 7:58, her signal was the strongest yet. She had to be close.",
+    "At 8:43, the last message: 'We are on the line 157 337.'",
+    "A line of position, running north-northwest to south-southeast. After that, nothing more was heard."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "The radio log",
+   "facts": [
+    "Call sign: KHAQQ",
+    "Operator: Leo G. Bellarts",
+    "7:58 a.m.: strongest signal",
+    "8:43 a.m.: last message"
+   ],
+   "lines": [
+    "Every call was written down in Itasca's radio log, kept by operator Leo Bellarts. The plane's call sign was KHAQQ.",
+    "That log survives today in the US National Archives.",
+    "It shows a plane that could be heard clearly, but could not find the island, or the ship."
+   ]
+  },
+  {
+   "scene": "facts",
+   "chapter": "The Search",
+   "title": "The search",
+   "facts": [
+    "July 1937: Navy and Coast Guard",
+    "Cost: about $4 million",
+    "Largest search of its kind to that time",
+    "Declared dead: 5 January 1939"
+   ],
+   "lines": [
+    "The Navy and Coast Guard launched what was then the largest search of its kind.",
+    "It cost about four million dollars, and was called off in mid-July. Nothing was found.",
+    "On January 5th, 1939, Amelia Earhart was declared legally dead."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "chapter": "Three Theories",
+   "label": "THEORY 1: OUT OF FUEL",
+   "lines": [
+    "The official view, from the Navy and Coast Guard: they ran out of fuel near Howland, and the plane sank into the deep ocean.",
+    "In January 2024, a company called Deep Sea Vision announced a sonar image of a plane-shaped object, about 100 miles from Howland.",
+    "That November, closer images showed it was a natural rock formation.",
+    "The company's chief, Tony Romeo, called it the cruelest formation ever created by nature."
+   ]
+  },
+  {
+   "scene": "photo",
+   "photo_file": [
+    "File:Nikumaroro_from_sea_AKK.jpg"
+   ],
+   "photo_search": "Nikumaroro",
+   "label": "THEORY 2: NIKUMARORO",
+   "lines": [
+    "The second theory points about 350 nautical miles south-southeast, to an uninhabited atoll then called Gardner Island. Today it's Nikumaroro.",
+    "In 1940, a British colonial officer, Gerald Gallagher, recovered human bones there, along with a sextant box.",
+    "A doctor in Fiji judged the bones to be male. Later, they were lost.",
+    "In 2018, anthropologist Richard Jantz re-examined the measurements. He said they were more like Earhart than 99 percent of people in a large reference sample."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "label": "THE CASTAWAY THEORY",
+   "lines": [
+    "About a week after the disappearance, Navy planes flying over the island reported signs of recent habitation.",
+    "A research group called TIGHAR has made fourteen expeditions there over three decades.",
+    "They found what may be a castaway's campsite, and 1930s objects, including glass that some think came from a jar of freckle cream.",
+    "But nothing has ever definitively linked the island to Earhart."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "Theory 3: captured?",
+   "facts": [
+    "Forced down in the Marshall Islands?",
+    "2017: a 'proof' photo on TV",
+    "The photo was published in 1935"
+   ],
+   "lines": [
+    "The third theory says they came down in the Japanese-held Marshall Islands, and were taken prisoner.",
+    "In 2017, a TV documentary showed a photo said to show them there.",
+    "Then a Japanese blogger found the same photo in a travel book published in 1935, two years before they vanished."
+   ]
+  },
+  {
+   "scene": "photo",
+   "chapter": "The Taraia Object",
+   "photo_file": [
+    "File:Nikumaroro_Lagoon_Entrance_AKK.jpg"
+   ],
+   "photo_search": "Nikumaroro lagoon",
+   "label": "NIKUMARORO LAGOON",
+   "lines": [
+    "Now there is a new lead. On satellite images, a shape lies in the lagoon at Nikumaroro, off Taraia Point.",
+    "A team led by Purdue University and the Archaeological Legacy Institute set this month to sail from Kiribati to scan it with sonar and a magnetometer.",
+    "Skeptics say the shape is too small to be the Electra. Even the man who first spotted it now calls his find debunked."
+   ]
+  },
+  {
+   "scene": "facts",
+   "title": "The government files",
+   "facts": [
+    "Sept 2025: release ordered",
+    "Nov 2025 to Jan 2026: files published",
+    "About 10,000 pages",
+    "No answer to where she went down"
+   ],
+   "lines": [
+    "In September 2025, President Trump ordered the release of all US government records about Earhart.",
+    "Between November 2025 and January 2026, the National Archives published about ten thousand pages: search records, cables and oral histories.",
+    "They added detail. They did not reveal where she came down."
+   ]
+  },
+  {
+   "scene": "night_sea",
+   "label": "STILL MISSING",
+   "lines": [
+    "So where are Amelia Earhart and Fred Noonan? Deep under the sea near Howland? On a lonely atoll? Or somewhere else?",
+    "Tell us your theory in the comments.",
+    "And subscribe for a new true mystery every day."
+   ]
+  }
+ ],
+ "youtube": {
+  "title": "Amelia Earhart: The Last Radio Calls, and the Search That Still Hasn't Ended",
+  "description": "On 2 July 1937, Amelia Earhart and navigator Fred Noonan took off from Lae, New Guinea, in their Lockheed Electra 10E for Howland Island, 2,556 miles away, on the longest leg of their round-the-world flight. The Coast Guard cutter Itasca heard her radio calls that morning, including 'We must be on you, but we cannot see you. Fuel is running low' at 7:42 a.m. and her last message at 8:43 a.m.: 'We are on the line 157 337.' The search, the largest of its kind to that date, found nothing, and she was declared legally dead on 5 January 1939. We cover the three main theories: crash and sink near Howland; a castaway end on Nikumaroro (Gardner Island), where bones were found in 1940 and re-analysed by Richard Jantz in 2018; and Japanese capture, including the 1935 origin of the photo shown in 2017. In January 2024 a sonar 'plane' turned out to be rock (confirmed November 2024). In October 2026 a Purdue-led expedition was scheduled to examine the 'Taraia object' in the Nikumaroro lagoon; results were not known when this video was made. Exact wordings of radio messages vary slightly between transcriptions.\n\nScenes marked RECONSTRUCTION are illustrated dramatizations based on historical accounts. Opening photo from Wikimedia Commons (credit below); all other visuals are original illustrations, except photo scenes credited on screen.\n\nSOURCES\nSmithsonian National Air and Space Museum, Amelia Earhart: Missing 80 Years, Not Forgotten: https://airandspace.si.edu/stories/editorial/amelia-earhart-missing-80-years-not-forgotten\nNational Archives, Itasca radio log: https://www.archives.gov/college-park/highlights/earhart-log\nNational Archives DocsTeach, Earhart radio log: https://docsteach.org/document/earhart-radio-log/\nNational Archives, Amelia Earhart records release: https://www.archives.gov/research/ameliaearhart\nWikipedia, Amelia Earhart: https://en.wikipedia.org/wiki/Amelia_Earhart\nWikipedia, Speculation on the disappearance of Amelia Earhart and Fred Noonan: https://en.wikipedia.org/wiki/Speculation_on_the_disappearance_of_Amelia_Earhart_and_Fred_Noonan\nNPR, Amelia Earhart 'plane' was a rock formation (2024): https://www.npr.org/2024/11/25/nx-s1-5205033/amelia-earhart-plane-rock-formation\nCBS News, Bones found in 1940 belong to Earhart, researcher claims (2018): https://www.cbsnews.com/amp/news/amelia-earhart-bones-found-in-1940-belong-to-pilot-researcher-claims\nHistory.com, Amelia Earhart disappearance theories: https://www.history.com/articles/amelia-earhart-disappearance-theories\nPurdue University, Countdown to the search for Amelia Earhart's plane (Sept 2026): https://www.purdue.edu/newsroom/2026/Q3/1-week-out-countdown-to-the-search-for-amelia-earharts-plane-begins/\nNational Geographic, The Taraia object expedition (Oct 2026): https://www.nationalgeographic.com/adventure/article/amelia-earhart-plane-taraia-object-expedition\n\nSubscribe for a new true mystery every day.",
+  "hashtags": [
+   "#AmeliaEarhart",
+   "#UnsolvedMysteries",
+   "#Mystery",
+   "#History",
+   "#Aviation",
+   "#Documentary"
+  ],
+  "tags": [
+   "amelia earhart",
+   "fred noonan",
+   "earhart disappearance",
+   "howland island",
+   "nikumaroro",
+   "taraia object",
+   "aviation mystery",
+   "history documentary"
+  ],
+  "synthetic": true
+ },
+ "sources": [
+  {
+   "name": "Smithsonian National Air and Space Museum, Amelia Earhart: Missing 80 Years, Not Forgotten",
+   "url": "https://airandspace.si.edu/stories/editorial/amelia-earhart-missing-80-years-not-forgotten"
+  },
+  {
+   "name": "National Archives, Itasca radio log",
+   "url": "https://www.archives.gov/college-park/highlights/earhart-log"
+  },
+  {
+   "name": "National Archives DocsTeach, Earhart radio log",
+   "url": "https://docsteach.org/document/earhart-radio-log/"
+  },
+  {
+   "name": "National Archives, Amelia Earhart records release",
+   "url": "https://www.archives.gov/research/ameliaearhart"
+  },
+  {
+   "name": "Wikipedia, Amelia Earhart",
+   "url": "https://en.wikipedia.org/wiki/Amelia_Earhart"
+  },
+  {
+   "name": "Wikipedia, Speculation on the disappearance of Amelia Earhart and Fred Noonan",
+   "url": "https://en.wikipedia.org/wiki/Speculation_on_the_disappearance_of_Amelia_Earhart_and_Fred_Noonan"
+  },
+  {
+   "name": "NPR, Amelia Earhart 'plane' was a rock formation (2024)",
+   "url": "https://www.npr.org/2024/11/25/nx-s1-5205033/amelia-earhart-plane-rock-formation"
+  },
+  {
+   "name": "CBS News, Bones found in 1940 belong to Earhart, researcher claims (2018)",
+   "url": "https://www.cbsnews.com/amp/news/amelia-earhart-bones-found-in-1940-belong-to-pilot-researcher-claims"
+  },
+  {
+   "name": "History.com, Amelia Earhart disappearance theories",
+   "url": "https://www.history.com/articles/amelia-earhart-disappearance-theories"
+  },
+  {
+   "name": "Purdue University, Countdown to the search for Amelia Earhart's plane (Sept 2026)",
+   "url": "https://www.purdue.edu/newsroom/2026/Q3/1-week-out-countdown-to-the-search-for-amelia-earharts-plane-begins/"
+  },
+  {
+   "name": "National Geographic, The Taraia object expedition (Oct 2026)",
+   "url": "https://www.nationalgeographic.com/adventure/article/amelia-earhart-plane-taraia-object-expedition"
+  }
+ ]
+}

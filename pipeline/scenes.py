@@ -1690,3 +1690,210 @@ def specimen_jar(rng):
 
 
 SCENES.update({"specimen_jar": specimen_jar})
+
+
+# ================= 2026-10-07 scenes =================
+def wolf_pit(rng):
+    """Suffolk harvest field at dusk: wheat stooks, a church tower, and a deep pit; two small green-tinged figures climb out."""
+    bg = vgrad([(0, (20, 18, 34)), (0.32, (96, 64, 70)), (0.42, (200, 130, 80)), (0.46, (120, 96, 60)), (1, (40, 34, 20))])
+    d = ImageDraw.Draw(bg)
+    # distant tree line and church tower with spire
+    pts = [(0, 830)]
+    for x in range(0, W + 60, 60):
+        pts.append((x, 830 - rng.uniform(10, 60)))
+    pts += [(W, 900), (0, 900)]
+    d.polygon(pts, fill=(36, 30, 30))
+    d.rectangle([760, 620, 830, 860], fill=(40, 32, 32))
+    d.polygon([(755, 625), (835, 625), (795, 470)], fill=(40, 32, 32))
+    d.rectangle([785, 680, 805, 720], fill=(255, 200, 120))
+    # field with wheat rows
+    d.rectangle([0, 880, W, H], fill=(150, 112, 52))
+    for i in range(18):
+        y = 900 + i * 40
+        d.line([(0, y), (W, y + rng.uniform(-6, 6))], fill=(170, 130, 64), width=4)
+    for (x, y, s) in [(140, 960, 70), (330, 930, 52), (930, 990, 80), (620, 920, 46)]:
+        d.polygon([(x - s * 0.5, y + s), (x, y - s * 0.6), (x + s * 0.5, y + s)], fill=(196, 150, 70))
+        d.line([(x - s * 0.35, y + s * 0.3), (x + s * 0.35, y + s * 0.3)], fill=(130, 96, 40), width=6)
+    # the pit
+    d.ellipse([290, 1000, 790, 1160], fill=(20, 14, 10))
+    d.ellipse([320, 1010, 760, 1130], fill=(8, 6, 4))
+    bg = radial(bg, 540, 820, 600, (255, 190, 120), 0.2)
+    GREEN = (110, 170, 90)
+
+    def overlay(img, draw, t, u, cam, ctx):
+        lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        d2 = ImageDraw.Draw(lay)
+        k = cam.k
+        for (x, s, lag) in [(470, 190, 0.0), (610, 160, 0.4)]:
+            r = max(0.0, min(1.0, (t - lag) / 2.2))
+            fx_, fy = cam.map(x, 1080 - r * 90)
+            gx, gy = cam.map(x, 1000)
+            a = int(255 * r)
+            d2.ellipse([gx - 80 * k, gy - 160 * k, gx + 80 * k, gy + 20 * k], fill=(140, 220, 120, int(40 * r)))
+            figure_stand(d2, fx_, fy, s * k, GREEN + (a,))
+        # pit rim drawn over the figures' legs
+        a, b = cam.map(290, 1060)
+        c, e = cam.map(790, 1170)
+        d2.chord([a, b, c, e], 0, 180, fill=(150, 112, 52, 255))
+        lines = ctx["lines"]
+        if len(lines) > 1 and t >= lines[1]:  # broad beans appear
+            for j in range(4):
+                x, y = cam.map(840 + j * 44, 1120 + (j % 2) * 16)
+                d2.ellipse([x - 26 * k, y - 10 * k, x + 26 * k, y + 10 * k], fill=(120, 170, 80, 255))
+        img.alpha_composite(lay)
+        follow_pill(ImageDraw.Draw(img), ctx, t, y0=1060)
+    return bg, overlay
+
+
+def clay_disc(rng):
+    """Museum case: a round fired-clay disc; stamped signs appear one by one along a spiral, a seal presses the next one."""
+    bg = vgrad([(0, (10, 12, 18)), (1, (26, 20, 16))])
+    d = ImageDraw.Draw(bg)
+    d.rectangle([140, 1110, 940, 1150], fill=(60, 48, 38))
+    bg = radial(bg, 540, 760, 560, (255, 196, 130), 0.26)
+    d = ImageDraw.Draw(bg)
+    cx, cy, R = 540, 760, 330
+    d.ellipse([cx - R - 14, cy - R + 4, cx + R + 18, cy + R + 22], fill=(40, 26, 18))
+    d.ellipse([cx - R, cy - R, cx + R, cy + R], fill=(176, 132, 86))
+    d.ellipse([cx - R + 16, cy - R + 16, cx + R - 16, cy + R - 16], outline=(146, 104, 64), width=6)
+    # spiral guide line
+    sp = []
+    for i in range(400):
+        a = i / 400 * 4.2 * 2 * math.pi
+        r = R - 30 - i / 400 * (R - 70)
+        sp.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+    d.line(sp, fill=(140, 98, 60), width=4)
+    # radial dividers between "words"
+    for i in range(0, 400, 23):
+        x, y = sp[i]
+        a = math.atan2(y - cy, x - cx)
+        d.line([(x, y), (x + 34 * math.cos(a), y + 34 * math.sin(a))], fill=(140, 98, 60), width=3)
+    slots = []
+    for i in range(6, 396, 9):
+        x, y = sp[i]
+        a = math.atan2(y - cy, x - cx)
+        slots.append((x, y, int(rng.integers(6)), a))
+    order = list(range(len(slots)))
+
+    def overlay(img, draw, t, u, cam, ctx):
+        lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        d2 = ImageDraw.Draw(lay)
+        k = cam.k
+        n = min(len(slots), int(t * 7))
+        g = np.random.default_rng(5)
+        for j in order[:n]:
+            x, y, kind, a = slots[j]
+            px, py = cam.map(x - 14 * math.cos(a), y - 14 * math.sin(a))
+            _glyph(d2, px - 12 * k, py - 12 * k, 24 * k, g, col=(92, 58, 30, 255))
+        if n < len(slots):  # the seal pressing the next sign
+            x, y, kind, a = slots[n]
+            px, py = cam.map(x, y)
+            lift = abs(math.sin(t * 7 * math.pi)) * 40 * k
+            d2.rectangle([px - 14 * k, py - 120 * k - lift, px + 14 * k, py - 20 * k - lift], fill=(200, 190, 170, 255))
+            d2.ellipse([px - 20 * k, py - 30 * k - lift, px + 20 * k, py - 10 * k - lift], fill=(170, 160, 140, 255))
+        lines = ctx["lines"]
+        if len(lines) > 1 and t >= lines[1]:
+            fb = ImageFont.truetype(FONT_BOLD, int(44 * k))
+            x, y = cam.map(540, 380)
+            d2.text((x, y), "45 SIGNS  ·  241+ STAMPS", font=fb, fill=AMBER + (255,), anchor="mm")
+        img.alpha_composite(lay)
+        follow_pill(ImageDraw.Draw(img), ctx, t, y0=1060)
+    return bg, overlay
+
+
+def carved_letters(rng):
+    """An 18th-century stone monument in a garden at dusk; the letters O U O S V A V V and D M light up one by one."""
+    bg = vgrad([(0, (14, 18, 28)), (0.5, (44, 52, 60)), (1, (20, 26, 20))])
+    bg = stars(bg, rng, 50, 380)
+    d = ImageDraw.Draw(bg)
+    # yew hedge and trees
+    for x in range(-40, W + 80, 110):
+        d.ellipse([x - 90, 380 + rng.uniform(-40, 30), x + 90, 760], fill=(18, 30, 22))
+    d.rectangle([0, 700, W, H], fill=(24, 36, 24))
+    # rustic arch
+    st = (120, 116, 104)
+    d.rectangle([150, 380, 930, 1130], fill=(96, 92, 82))
+    d.rectangle([150, 340, 930, 400], fill=st)
+    d.rectangle([150, 400, 230, 1130], fill=st)
+    d.rectangle([850, 400, 930, 1130], fill=st)
+    for _ in range(60):
+        x, y = rng.uniform(150, 930), rng.uniform(340, 1130)
+        d.ellipse([x - 8, y - 5, x + 8, y + 5], fill=(84, 82, 74))
+    # relief panel: three shepherds around a tomb (simple silhouettes)
+    d.rectangle([270, 440, 810, 820], fill=(206, 200, 184))
+    d.rectangle([360, 690, 720, 800], fill=(186, 180, 164))
+    for (x, s) in [(330, 220), (450, 200), (760, 230)]:
+        figure_stand(d, x, 800, s, (170, 164, 148))
+    d.rectangle([270, 840, 810, 1010], fill=(188, 182, 166))
+    bg = radial(bg, 540, 800, 520, (255, 200, 140), 0.18)
+    letters = ["O", "U", "O", "S", "V", "A", "V", "V"]
+
+    def overlay(img, draw, t, u, cam, ctx):
+        d2 = ImageDraw.Draw(img)
+        k = cam.k
+        f = ImageFont.truetype(FONT_BOLD, max(8, int(58 * k)))
+        n = int(t * 4)
+        for i, ch in enumerate(letters):
+            x, y = cam.map(318 + i * 63, 885)
+            col = AMBER + (255,) if i < n else (120, 116, 102, 255)
+            d2.text((x, y), ch, font=f, fill=col, anchor="mm")
+        for i, ch in enumerate(["D", "M"]):
+            x, y = cam.map(330 + i * 420, 965)
+            col = AMBER + (255,) if n > 8 + i else (120, 116, 102, 255)
+            d2.text((x, y), ch, font=f, fill=col, anchor="mm")
+        follow_pill(d2, ctx, t, y0=1060)
+    return bg, overlay
+
+
+def valley_lights(rng):
+    """A remote Norwegian valley at night: snowy slopes, a river, a few farm windows; glowing balls of light drift and pulse."""
+    bg = vgrad([(0, (6, 10, 22)), (0.5, (18, 26, 44)), (1, (10, 14, 20))])
+    bg = stars(bg, rng, 140, 700)
+    d = ImageDraw.Draw(bg)
+    for (col, base, amp, snow) in [((30, 38, 54), 820, 260, True), ((20, 26, 36), 1000, 200, False)]:
+        pts = [(0, H)]
+        for x in range(0, W + 60, 60):
+            pts.append((x, base - amp * (0.5 + 0.5 * math.cos(x / W * math.pi * 2)) + rng.uniform(-20, 20)))
+        pts.append((W, H))
+        d.polygon(pts, fill=col)
+        if snow:
+            for x in range(0, W, 30):
+                y = base - amp * (0.5 + 0.5 * math.cos(x / W * math.pi * 2))
+                d.line([(x, y), (x + 30, y + 14)], fill=(150, 160, 176), width=4)
+    # pine trees
+    for _ in range(40):
+        x, y, s = rng.uniform(0, W), rng.uniform(1000, 1250), rng.uniform(40, 90)
+        d.polygon([(x, y - s), (x - s * 0.35, y), (x + s * 0.35, y)], fill=(10, 16, 16))
+    # river
+    d.polygon([(380, 1300), (700, 1300), (620, 1120), (520, 1120)], fill=(40, 56, 74))
+    # farmhouses with lit windows
+    for (x, y) in [(200, 1150), (860, 1180)]:
+        d.rectangle([x - 50, y - 40, x + 50, y + 20], fill=(30, 20, 18))
+        d.polygon([(x - 60, y - 40), (x + 60, y - 40), (x, y - 90)], fill=(50, 26, 22))
+        d.rectangle([x - 20, y - 20, x, y], fill=(255, 200, 120))
+    orbs = [(rng.uniform(150, 930), rng.uniform(560, 900), rng.uniform(0, 6), rng.uniform(22, 44)) for _ in range(4)]
+
+    def overlay(img, draw, t, u, cam, ctx):
+        lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        d2 = ImageDraw.Draw(lay)
+        k = cam.k
+        lines = ctx["lines"]
+        for i, (x0, y0, ph, s) in enumerate(orbs):
+            if t < i * 0.8:
+                continue
+            x = x0 + math.sin(t * 0.5 + ph) * 120
+            y = y0 + math.cos(t * 0.35 + ph) * 50
+            pulse = 0.7 + 0.3 * math.sin(t * 3 + ph)
+            a, b = cam.map(x, y)
+            col = (255, 236, 190) if i % 2 == 0 else (190, 220, 255)
+            for (rr, al) in [(4.0, 30), (2.5, 60), (1.6, 120), (1.0, 255)]:
+                r = s * rr * pulse * k
+                d2.ellipse([a - r, b - r, a + r, b + r], fill=col + (al,))
+        if len(lines) >= 2 and t >= lines[-2] and int(t * 5) % 7 == 0:
+            d2.rectangle([0, 0, img.size[0], img.size[1]], fill=(255, 255, 255, 40))
+        img.alpha_composite(lay)
+        follow_pill(ImageDraw.Draw(img), ctx, t, y0=1060)
+    return bg, overlay
+
+
+SCENES.update({f.__name__: f for f in [wolf_pit, clay_disc, carved_letters, valley_lights]})
